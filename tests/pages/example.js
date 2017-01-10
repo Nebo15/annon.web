@@ -8,7 +8,7 @@ module.exports = {
     },
   },
   commands: [{
-    searchMain() {
+    ssr() {
       return this.waitForElementPresent('@main').assert.visible('@main');
     },
   }],
