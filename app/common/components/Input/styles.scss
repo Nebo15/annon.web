@@ -1,0 +1,117 @@
+
+$label: #3d3d3d;
+$default: #8f8f8f;
+$disabled: #dadcde;
+$focused: #11d8fb;
+$errored: #ff1f44;
+
+.label-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.group-input {
+  position: relative;
+  display: flex;
+  width: 100%;
+  background-color: #fefefe;
+  border: 1px solid $default;
+
+  &.error {
+    border-color: $errored;
+
+    .prefix-wrapper,
+    .postfix-wrapper {
+      color: $errored;
+    }
+
+    .required-label {
+      border-bottom-color: $errored;
+    }
+  }
+
+  &.active {
+    border-color: $focused;
+
+    .prefix-wrapper,
+    .postfix-wrapper {
+      color: $focused;
+    }
+
+    .required-label {
+      border-bottom-color: $focused;
+    }
+  }
+
+  &.disabled {
+    border-color: $disabled;
+  }
+
+  &.theme-light {
+    border-color: #dadcde;
+  }
+}
+
+.input {
+  height: 35px;
+  padding: 11px 10px 12px;
+  color: #3d3d3d;
+  font-size: 14px;
+  width: 100%;
+  background-color: transparent;
+
+  &::placeholder {
+    color: rgba(61, 61, 61, 0.5);
+  }
+}
+
+.prefix-wrapper {
+  position: relative;
+  padding: 0 11px;
+  padding-right: 0;
+  line-height: 32px;
+  color: rgba(61, 61, 61, 0.5);
+  border-right: none;
+  font-size: 16px;
+}
+
+.postfix-wrapper {
+  height: 35px;
+  padding: 0 11px;
+  padding-left: 0;
+  line-height: 32px;
+  color: rgba(61, 61, 61, 0.5);
+  border-left: none;
+  font-size: 16px;
+}
+
+.label-text {
+  margin-bottom: 15px;
+  color: $label;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.required-label {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 0;
+  height: 0;
+  transform: rotate(45deg);
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid $default;
+  border-left: 5px solid transparent;
+}
+
+.error-label {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 8px 15px 7px 13px;
+  color: #fff;
+  background-color: $errored;
+  font-size: 10px;
+  line-height: 1.4;
+}

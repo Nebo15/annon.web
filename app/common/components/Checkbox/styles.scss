@@ -1,0 +1,52 @@
+$errored: #ff1f44;
+
+.wrap {
+  line-height: 1;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    display: none;
+  }
+}
+
+.view {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 16px;
+  background-color: #fff;
+  border: 1px solid #c9c9c9;
+  text-align: center;
+
+  i {
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0;
+    width: 18px;
+    font-size: 10px;
+    color: #11d8fb;
+    transition: opacity 0.05s ease-in-out;
+  }
+
+  input:disabled + & {
+    opacity: 0.5;
+  }
+
+  input:checked + & {
+    i {
+      opacity: 1;
+    }
+  }
+}
+
+.isError {
+  .view {
+    border-color: $errored;
+  }
+
+  i {
+    color: $errored;
+  }
+}

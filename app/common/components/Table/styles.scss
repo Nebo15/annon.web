@@ -1,0 +1,100 @@
+$border-color: #e0e0e0;
+$header-bg: #f5f7f9;
+$header-color: #929499;
+$zebra-bg: #fcfcfc;
+$hovered-bg: #f3fdff;
+$text-color: #3d3d3d;
+
+.table {
+  box-shadow: 0 0 0 1px $border-color;
+  font-size: 12px;
+  line-height: 20px;
+  color: $text-color;
+
+  thead {
+    background-color: $header-bg;
+    user-select: none;
+    font-size: 10px;
+
+    th {
+      padding: 16px 20px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: $header-color;
+      text-shadow: 1px 1px 2px #fff, 0 0 0 $header-color;
+      cursor: default;
+    }
+  }
+
+  tbody {
+    background-color: #fff;
+  }
+
+  td,
+  th {
+    padding: 10px 20px;
+    text-align: left;
+    vertical-align: middle;
+    box-shadow: 0 -1px 0 $border-color;
+
+    &.left {
+      text-align: left;
+    }
+
+    &.center {
+      text-align: center;
+    }
+
+    &.right {
+      text-align: right;
+    }
+
+    &:first-child {
+      padding-left: 30px;
+    }
+
+    &:last-child {
+      padding-right: 30px;
+    }
+  }
+
+  &.zebra tbody tr:nth-child(2n),
+  &.zebra tbody + tbody:nth-child(2n - 1) {
+    background-color: $zebra-bg;
+  }
+
+  &.hovered tbody tr:hover {
+    background-color: $hovered-bg;
+  }
+
+  .placeholder {
+    td {
+      padding: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #ababab;
+      font-size: 10px;
+    }
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+
+  td table {
+    box-shadow: none;
+
+    tbody,
+    tr {
+      background-color: inherit !important;
+    }
+
+    td {
+      box-shadow: none;
+
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+}

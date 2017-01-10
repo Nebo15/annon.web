@@ -1,0 +1,154 @@
+/* stylelint-disable */
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200;
+  src: url('/fonts/montserratultralight.eot');
+  src: url('/fonts/montserratultralight.eot') format('embedded-opentype'),
+  url('/fonts/montserratultralight.woff2') format('woff2'),
+  url('/fonts/montserratultralight.woff') format('woff'),
+  url('/fonts/montserratultralight.ttf') format('truetype'),
+  url('/fonts/montserratultralight.svg#Montserrat') format('svg');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/montserratlight.eot');
+  src: url('/fonts/montserratlight.eot') format('embedded-opentype'),
+  url('/fonts/montserratlight.woff2') format('woff2'),
+  url('/fonts/montserratlight.woff') format('woff'),
+  url('/fonts/montserratlight.ttf') format('truetype'),
+  url('/fonts/montserratlight.svg#Montserrat') format('svg');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/montserratregular.eot');
+  src: url('/fonts/montserratregular.eot') format('embedded-opentype'),
+  url('/fonts/montserratregular.woff2') format('woff2'),
+  url('/fonts/montserratregular.woff') format('woff'),
+  url('/fonts/montserratregular.ttf') format('truetype'),
+  url('/fonts/montserratregular.svg#Montserrat') format('svg');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/montserratbold.eot');
+  src: url('/fonts/montserratbold.eot') format('embedded-opentype'),
+  url('/fonts/montserratbold.woff2') format('woff2'),
+  url('/fonts/montserratbold.woff') format('woff'),
+  url('/fonts/montserratbold.ttf') format('truetype'),
+  url('/fonts/montserratbold.svg#Montserrat') format('svg');
+}
+
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5,
+h6, p, blockquote, pre,a, abbr, acronym, address, big,
+cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small,
+strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt,
+dd, ol, ul, li,fieldset, form, label, legend,table, caption,
+tbody, tfoot, thead, tr, th, td,article, aside, canvas, details,
+embed, figure, figcaption, footer, header, hgroup, menu, nav,
+output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline
+}
+
+html {
+  background: #353e64;
+}
+
+body {
+  background: white;
+}
+
+textarea, input, body {
+  font: normal 14px 'Montserrat', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,fieldset, a img {
+  border: none;
+}
+
+input,
+textarea {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+input,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+input[type="submit"],
+button {
+  cursor: pointer
+}
+
+button {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-appearance: none;
+  background: none;
+  display: inline-block;
+  color: inherit;
+  font-size: inherit;
+}
+
+div, input, textarea, select,button,
+h1,h2,h3,h4,h5,h6,a,span,a:focus {
+  outline: none;
+}
+ul,ol {
+  list-style-type: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+/* stylelint-enable */
+
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 100vh;
+  background: white;
+
+  main {
+    display: block;
+    flex: 1 1 auto;
+  }
+
+  & > header {
+    flex: 0 0 auto;
+  }
+
+  & > footer {
+    flex: 0 0 auto;
+  }
+}

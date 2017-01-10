@@ -1,0 +1,35 @@
+language: node_js
+services:
+  - docker
+cache:
+  directories:
+    - ~/.nvm
+    - node_modules
+env:
+  global:
+    - RELEASE_BRANCH="master"
+    - DOCKER_HUB_ACCOUNT=nebo15
+    - MAIN_BRANCHES="master develop"
+    - secure: "wl23+6wt0J/akhwfFN53eaF/kKCOuTF8KdcpDb4DQuuhwMlwax7K58xc352XpyNSNzxpUI+/068BuyFF1ffOSn1Cxu2t0dBRFb5+VB99hgtXq2UVRMaBXVd88R9uawddMStIkDrYBu5KZo8GMJr9+26ViaQunomZVbBr3I71H2KRzCpjCoB3cskBcI72eD6HzUiZaRQVw2T9sF1KAJ/jLG0YpQUSoIxSrltm2O/kWmhv1CqenZkPTiv5LrWoBVmK1yl1whrGKhHkO6pr7uBUUK9D44J6ExoCIu0chfhimJSe0s0TMALJWYEDqMyDcgs7g+Pj3vjwtfaPvZB7q6XtbrswMjAaWlmjOsdF2sGvmAzA+SuDNV6TUQLhH8WTSQWSBAw4cOzyDCnTgq3Xs361FjdmGYk1r0zMOEzE3ve5qLqKaj58oaSONO0s7X19DmiSTkk1dQWCvleMo90vkjRXH9h80lnzv7tAPVcLv2nCk2KH+wzf2GI6R6uzwasSKXKnGWwKXxa19+rV9vLv+3n3kpknEg1ZghhROEqwITkZALTWvVleaMOIPXIXWUbklEBHP4xBPjHY0CkvmMO9WlLZiZzxj61WAMWZJMRk0WW2IfaUprg/r2FdRk4gT70PC0RGYiQ4wkz5bvxl0T+wbPfzgu0D/xa+EDeQ+qJaAOArtZU="
+node_js:
+  - "6.9.1"
+before_install:
+  - sh ./bin/install-docker-travis.sh
+  - npm run docker:up
+  - chmod -R +x bin
+script:
+  - npm run test
+  - npm run lint
+  - ./bin/version-increment.sh
+  - ./bin/build.sh
+  - ./bin/start.sh
+  - sleep 5
+  - npm run nightwatch -- -e travis
+  - sleep 5
+  - docker ps
+  - RUNNING_CONTAINERS=`docker ps | wc -l`;
+  - if [ "${RUNNING_CONTAINERS//[[:space:]]/}" == "1" ]; then echo "[E] Container is not started!" && false; fi;
+after_success:
+  - "npm run report-coverage && rm -rf coverage"
+  # Submit Docker container to Docker Hub and create GitHub Release by pushing tag with changelog
+  - ./bin/ci/push.sh

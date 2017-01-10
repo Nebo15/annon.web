@@ -1,0 +1,14 @@
+
+.main {
+  position: relative;
+}
+
+.form {
+  margin-top: 43px;
+  max-width: 400px;
+
+  &__error {
+    color: #ff1f44;
+    margin-bottom: 15px;
+  }
+}

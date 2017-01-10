@@ -1,0 +1,6 @@
+# Browsers that we support
+
+defaults
+> 1%
+iOS >= 7
+Safari >= 7

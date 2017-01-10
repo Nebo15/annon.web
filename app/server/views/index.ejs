@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>API Gateway</title>
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#fff">
+
+  <meta name="keywords"
+        content="api gateway, validation, proxy">
+  <meta name="description"
+        content="Proxy server, what can validate request, control access and more.">
+
+  <meta property="og:title" content="API Gateway"/>
+  <meta property="og:site_name" content="API Gateway"/>
+  <meta property="og:description"
+        content="Proxy server, what can validate request, control access and more."/>
+
+  <% resources.css.forEach(function(src){ %>
+  <link rel="stylesheet" href="<%= src %>">
+  <% }) %>
+  <% if (inlineCss) { %>
+  <style type="text/css"><%- inlineCss %></style>
+  <% } %>
+</head>
+<body>
+<div id="root"><%- html %></div>
+
+<% if (reduxState) { %>
+<script type="text/javascript" charset="utf-8">
+  window.__REDUX_STATE__ = '<%= reduxState %>';
+</script>
+<% } %>
+<% if (CONFIG) { %>
+<script type="text/javascript" charset="utf-8">
+  window.__CONFIG__ = '<%= CONFIG %>';
+</script>
+<% } %>
+
+<% resources.js.forEach(function(src){ %>
+<script src="<%= src %>"></script>
+<% }) %>
+
+</body>
+</html>

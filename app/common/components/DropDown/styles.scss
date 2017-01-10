@@ -1,0 +1,71 @@
+$hovered-bg: #f5f5f5;
+$border-color: #dadcde;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  color: #374168;
+
+  ul {
+    display: none;
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 0 0 1px $border-color;
+
+    li:first-child {
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: -7px;
+        right: 10px;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #fff;
+        z-index: 2;
+      }
+
+      &::after {
+        top: -8px;
+        border-bottom-color: $border-color;
+        z-index: 1;
+      }
+
+      &:hover::before {
+        border-bottom-color: $hovered-bg;
+      }
+    }
+  }
+}
+
+.control {
+  cursor: pointer;
+  user-select: none;
+}
+
+.item {
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hovered-bg;
+  }
+
+  &.separate {
+    box-shadow: 0 -1px 0 $border-color;
+  }
+}
+
+.active {
+  ul {
+    display: block;
+  }
+}

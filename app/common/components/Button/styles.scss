@@ -1,0 +1,263 @@
+$orange-bg-color: #ff5a00;
+$orange-bg-gradient-from: #ff5a00;
+$orange-bg-gradient-to: #f8752e;
+$orange-border-color: #ff1800;
+
+$blue-bg-color: #22adf1;
+$blue-bg-gradient-from: #1ba4f7;
+$blue-bg-gradient-to: #41d3d7;
+$blue-border-color: #1582c9;
+
+$green-bg-color: #55eb3f;
+$green-bg-gradient-from: #4de936;
+$green-bg-gradient-to: #7ef36d;
+$green-border-color: #47c132;
+
+$red-bg-color: #f65082;
+$red-bg-gradient-from: #f5477c;
+$red-bg-gradient-to: #f86995;
+$red-border-color: #d74472;
+
+.button {
+  display: inline-block;
+  padding: 18px 28px;
+  line-height: 1.2;
+  color: #fff;
+  background: $orange-bg-color linear-gradient(0deg, $orange-bg-gradient-from 0%, $orange-bg-gradient-to 100%);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 0 $orange-border-color, inset 0 1px 0 rgba(255, 255, 255, 0.11);
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    background-image: linear-gradient(180deg, $orange-bg-gradient-from 0%, $orange-bg-gradient-to 100%);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    box-shadow: inset 0 2px 0 0 $orange-border-color, inset 0 1px 0 rgba(255, 255, 255, 0.11);
+  }
+
+  &:disabled,
+  &.disabled {
+    background-image: none;
+    box-shadow: inset 0 2px 0 0 $orange-border-color;
+  }
+
+  &.theme-border {
+    color: #3d3d3d;
+    background: #fff;
+    box-shadow: inset 0 0 0 2px $orange-border-color;
+
+    &.inherit-color {
+      color: $orange-bg-color;
+    }
+
+    &:hover {
+      color: #fff;
+      background-color: rgba(255, 90, 0, 0.8);
+      box-shadow: inset 0 0 0 2px $orange-bg-color;
+    }
+
+    &:active,
+    &.active {
+      color: #fff;
+      background-color: $orange-bg-color;
+      box-shadow: none;
+    }
+  }
+
+  &.color-blue {
+    background: $blue-bg-color linear-gradient(0deg, $blue-bg-gradient-from 0%, $blue-bg-gradient-to 100%);
+    box-shadow: inset 0 -2px 0 0 $blue-border-color;
+
+    &:hover {
+      background-image: linear-gradient(180deg, $blue-bg-gradient-from 0%, $blue-bg-gradient-to 100%);
+    }
+
+    &:active,
+    &.active {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $blue-border-color;
+    }
+
+    &:disabled,
+    &.disabled {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $blue-border-color;
+    }
+
+    &.theme-border {
+      background: #fff;
+      box-shadow: inset 0 0 0 2px $blue-bg-color;
+
+      &.inherit-color {
+        color: $blue-bg-color;
+      }
+
+      &:hover {
+        background: rgba(34, 173, 241, 0.8);
+      }
+
+      &:active,
+      &.active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.color-green {
+    background: $green-bg-color linear-gradient(0deg, $green-bg-gradient-from 0%, $green-bg-gradient-to 100%);
+    box-shadow: inset 0 -2px 0 0 $green-border-color;
+
+    &:hover {
+      background-image: linear-gradient(180deg, $green-bg-gradient-from 0%, $green-bg-gradient-to 100%);
+    }
+
+    &:active,
+    &.active {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $green-border-color;
+    }
+
+    &:disabled,
+    &.disabled {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $green-border-color;
+    }
+
+    &.theme-border {
+      background: #fff;
+      box-shadow: inset 0 0 0 2px $green-bg-color;
+
+      &.inherit-color {
+        color: $green-bg-color;
+      }
+
+      &:hover {
+        background: rgba(85, 235, 63, 0.8);
+      }
+
+      &:active,
+      &.active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.color-red {
+    background: $red-bg-color linear-gradient(0deg, $red-bg-gradient-from 0%, $red-bg-gradient-to 100%);
+    box-shadow: inset 0 -2px 0 0 $red-border-color;
+
+    &:hover {
+      background-image: linear-gradient(180deg, $red-bg-gradient-from 0%, $red-bg-gradient-to 100%);
+    }
+
+    &:active,
+    &.active {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $red-border-color;
+    }
+
+    &:disabled,
+    &.disabled {
+      background-image: none;
+      box-shadow: inset 0 2px 0 0 $red-border-color;
+    }
+
+    &.theme-border {
+      background: #fff;
+      box-shadow: inset 0 0 0 2px $red-bg-color;
+
+      &.inherit-color {
+        color: $red-bg-color;
+      }
+
+      &:hover {
+        background: rgba(245, 71, 124, 0.8);
+      }
+
+      &:active,
+      &.active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.size-small {
+    padding: 12px 20px;
+    font-size: 10px;
+
+    &.theme-fill {
+      box-shadow: none;
+    }
+
+    &:active,
+    &.active {
+      box-shadow: none;
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.5;
+    background-image: none;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &.theme-link {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    text-transform: none;
+    font-weight: 400;
+    color: #11d8fb;
+
+    &:hover,
+    &.hover,
+    &.active {
+      text-decoration: underline;
+    }
+
+    &:disabled,
+    &.disabled {
+      opacity: 1;
+      color: #c6d1d7;
+    }
+
+    &.size-small {
+      font-size: 10px;
+    }
+  }
+
+  &.block {
+    width: 100%;
+  }
+
+  .icon {
+    margin-right: 5px;
+
+    i {
+      vertical-align: middle;
+    }
+  }
+}
+
+.buttonsGroup {
+  margin-left: -40px;
+  margin-top: -20px;
+
+  .buttonsGroupItem {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+}

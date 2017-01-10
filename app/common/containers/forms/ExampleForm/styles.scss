@@ -1,0 +1,11 @@
+
+.submit {
+  margin: 25px 0;
+  text-align: right;
+
+  &__button {
+    display: inline-block;
+    width: 170px;
+    max-width: 100%;
+  }
+}

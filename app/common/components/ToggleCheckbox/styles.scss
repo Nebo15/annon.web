@@ -1,0 +1,77 @@
+$width: 48px;
+$height: 24px;
+
+$blue-color: #11d8fb;
+$green-color: #55eb3f;
+$orange-color: #ff5a00;
+$red-color: #f65082;
+
+$unactive-color: #829ca9;
+
+.wrap {
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    display: none;
+
+    &:checked + .view {
+      box-shadow: 0 0 0 1px $blue-color;
+      opacity: 1;
+
+      .circle {
+        background-color: $blue-color;
+        transform: translateX(calc($width / 2));
+      }
+    }
+  }
+
+  &.color-green input:checked + .view {
+    box-shadow: 0 0 0 1px $green-color;
+
+    .circle {
+      background-color: $green-color;
+    }
+  }
+
+  &.color-orange input:checked + .view {
+    box-shadow: 0 0 0 1px $orange-color;
+
+    .circle {
+      background-color: $orange-color;
+    }
+  }
+
+  &.color-red input:checked + .view {
+    box-shadow: 0 0 0 1px $red-color;
+
+    .circle {
+      background-color: $red-color;
+    }
+  }
+}
+
+.view {
+  display: inline-block;
+  position: relative;
+  width: $width;
+  height: $height;
+  border-radius: $height;
+  box-shadow: 0 0 0 1px $unactive-color;
+  transition: all 0.2s ease;
+  opacity: 0.5;
+}
+
+.circle {
+  display: inline-block;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  bottom: 1px;
+  width: calc($height - 2px);
+  height: calc($height - 2px);
+  background-color: $unactive-color;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
