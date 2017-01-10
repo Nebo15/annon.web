@@ -1,35 +1,35 @@
 language: node_js
 services:
-  - docker
+- docker
 cache:
   directories:
-    - ~/.nvm
-    - node_modules
+  - ~/.nvm
+  - node_modules
 env:
   global:
-    - RELEASE_BRANCH="master"
-    - DOCKER_HUB_ACCOUNT=nebo15
-    - MAIN_BRANCHES="master develop"
-    - secure: "wl23+6wt0J/akhwfFN53eaF/kKCOuTF8KdcpDb4DQuuhwMlwax7K58xc352XpyNSNzxpUI+/068BuyFF1ffOSn1Cxu2t0dBRFb5+VB99hgtXq2UVRMaBXVd88R9uawddMStIkDrYBu5KZo8GMJr9+26ViaQunomZVbBr3I71H2KRzCpjCoB3cskBcI72eD6HzUiZaRQVw2T9sF1KAJ/jLG0YpQUSoIxSrltm2O/kWmhv1CqenZkPTiv5LrWoBVmK1yl1whrGKhHkO6pr7uBUUK9D44J6ExoCIu0chfhimJSe0s0TMALJWYEDqMyDcgs7g+Pj3vjwtfaPvZB7q6XtbrswMjAaWlmjOsdF2sGvmAzA+SuDNV6TUQLhH8WTSQWSBAw4cOzyDCnTgq3Xs361FjdmGYk1r0zMOEzE3ve5qLqKaj58oaSONO0s7X19DmiSTkk1dQWCvleMo90vkjRXH9h80lnzv7tAPVcLv2nCk2KH+wzf2GI6R6uzwasSKXKnGWwKXxa19+rV9vLv+3n3kpknEg1ZghhROEqwITkZALTWvVleaMOIPXIXWUbklEBHP4xBPjHY0CkvmMO9WlLZiZzxj61WAMWZJMRk0WW2IfaUprg/r2FdRk4gT70PC0RGYiQ4wkz5bvxl0T+wbPfzgu0D/xa+EDeQ+qJaAOArtZU="
+  - RELEASE_BRANCH="master"
+  - DOCKER_HUB_ACCOUNT=nebo15
+  - MAIN_BRANCHES="master develop"
+  - secure: qYRV+E6m4OOLyPdJrp8Q1z8aGWyEsCQJzSzyqbGg/g8frbYT6SC0xKwld3WQrtp0qbXskUnpeDpvXkr5U8zeSXToMe9TNLLkCXC28xuL3Bt6APrhYk1nuyx2Da73rUTNaVZrn0IRWsgxb+cLm+ukBolQ1u3arrzBi2nPrRixN4MebIRJQfAYdmkbFS9MjpyRcrK0b6JzhD2P5s1LXYNqtIIAx4TYk0oMn5qVH+HG7kyjI73Xev4OUsQuHtPyDmJrXcToB95YXm4zRaZTYDYmrfvLLsmMLQawD9B+GD3O8/4KjXEyp0qIloxXR8F6WMK2+46kVrClqBcrkjFmW/prOJySDr9H3+4guSu7ICnKn4OZCOMnKU9l89BWBfmORPbZXSjld0pWJstRnl+3H1doeHdt5mWW9AqwO/hmFJw2NzzJHbr2LPMZwe7zdXSwhsmIMIh5ywio3Fh64KEq8BxSPlBJ/uzhPNm0jQHiTkllK0eQPWJaxQvy23IYiovbluZKG8IRDcl2Svz2HFZ24kZez6QaUbN9waPREMuR6vrYh0dIGvh5f3cciVH9IwSC0fh9PmSxwPpDDP9KzB9It8/Ayb2sn5W6Bfi0f56LHdbcL1WWe4bD8UiG83iWyJeI+wkeqthDb7Ts6w/ccEJRyEjWUXG4zEn/ZUqCCfjCgxX5DpU=
 node_js:
-  - "6.9.1"
+- 6.9.1
 before_install:
-  - sh ./bin/install-docker-travis.sh
-  - npm run docker:up
-  - chmod -R +x bin
+- sh ./bin/install-docker-travis.sh
+- npm run docker:up
+- chmod -R +x bin
 script:
-  - npm run test
-  - npm run lint
-  - ./bin/version-increment.sh
-  - ./bin/build.sh
-  - ./bin/start.sh
-  - sleep 5
-  - npm run nightwatch -- -e travis
-  - sleep 5
-  - docker ps
-  - RUNNING_CONTAINERS=`docker ps | wc -l`;
-  - if [ "${RUNNING_CONTAINERS//[[:space:]]/}" == "1" ]; then echo "[E] Container is not started!" && false; fi;
+- npm run test
+- npm run lint
+- ./bin/version-increment.sh
+- ./bin/build.sh
+- ./bin/start.sh
+- sleep 5
+- npm run nightwatch -- -e travis
+- sleep 5
+- docker ps
+- RUNNING_CONTAINERS=`docker ps | wc -l`;
+- if [ "${RUNNING_CONTAINERS//[[:space:]]/}" == "1" ]; then echo "[E] Container is
+  not started!" && false; fi;
 after_success:
-  - "npm run report-coverage && rm -rf coverage"
-  # Submit Docker container to Docker Hub and create GitHub Release by pushing tag with changelog
-  - ./bin/ci/push.sh
+- npm run report-coverage && rm -rf coverage
+- ./bin/ci/push.sh
