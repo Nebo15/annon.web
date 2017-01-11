@@ -31,6 +31,13 @@ So, after failure of first time up process, exec `docker-compose up` one more ti
 
 After `docker-compose down` you need to repeat `docker-compose up` twice too.
 
+API is running at:
+
+```
+http://localhost:4000 - public api
+http://localhost:4001 - management api
+```
+
 ## Workflow
 
 ### Git flow
