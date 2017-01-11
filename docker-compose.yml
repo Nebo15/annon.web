@@ -1,11 +1,5 @@
 version: '2'
 services:
-  web:
-    image: "gateway.web:1.0.0"
-    ports:
-     - "8080:8080"
-    depends_on:
-      - api
   api:
     restart: "always"
     image: "nebo15/gateway:latest"
