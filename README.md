@@ -2,7 +2,7 @@
 
 API Gateway Frontend project.
 
-Sandbox: https://nebo-gateway.herokuapp.com/
+Demo: https://nebo-gateway.herokuapp.com/
 
 ## Technologies
 
