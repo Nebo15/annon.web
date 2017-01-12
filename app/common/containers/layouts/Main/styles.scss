@@ -62,11 +62,11 @@ output, ruby, section, summary, time, mark, audio, video {
 }
 
 html {
-  background: #353e64;
+  background: #2d2b4a;
 }
 
 body {
-  background: white;
+  background-image: linear-gradient(-30deg,#3d72b4 -10%, #2d2b4a 50%);
 }
 
 textarea, input, body {
@@ -135,13 +135,24 @@ html {
   display: flex;
   flex-flow: column nowrap;
   width: 100vw;
-  min-width: 1024px;
   min-height: 100vh;
-  background: white;
+  padding: 30px;
+  background-image: linear-gradient(-30deg, #3d72b4 -10%, #2d2b4a 50%);
 
   main {
-    display: block;
+    display: flex;
+    flex-flow: row nowrap;
     flex: 1 1 auto;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  .content {
+    flex: 1 1 auto;
+    padding: 60px 50px;
   }
 
   & > header {

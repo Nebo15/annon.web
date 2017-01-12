@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { H2 } from 'components/Title';
-import Container from 'components/Container';
+import { H1 } from 'components/Title';
 
 import styles from './styles.scss';
 
@@ -12,9 +11,9 @@ import styles from './styles.scss';
 export default class ExamplePage extends React.Component {
   render() {
     return (
-      <Container id="example-page">
-        <H2>Example page</H2>
-      </Container>
+      <div id="example-page">
+        <H1>Example page</H1>
+      </div>
     );
   }
 }
