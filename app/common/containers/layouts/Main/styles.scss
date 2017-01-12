@@ -135,13 +135,23 @@ html {
   display: flex;
   flex-flow: column nowrap;
   width: 100vw;
-  min-width: 1024px;
   min-height: 100vh;
-  background: white;
+  padding: 30px;
+  background-image: linear-gradient(to left, rgb(82, 82, 82), rgb(61, 114, 180));
 
   main {
-    display: block;
+    display: flex;
+    flex-flow: row nowrap;
     flex: 1 1 auto;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+
+  .content {
+    flex: 1 1 auto;
+    padding: 60px 50px;
   }
 
   & > header {
