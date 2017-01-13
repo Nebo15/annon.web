@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { Link } from 'react-router';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
@@ -9,8 +10,10 @@ import styles from './styles.scss';
 @withStyles(styles)
 export default class Nav extends React.Component {
   render() {
+    const { isOpen } = this.props;
+
     return (
-      <nav className={styles.nav}>
+      <nav className={classnames(styles.nav, isOpen && styles.open)}>
         <ul>
           <li className={styles.active}>
             <Link to="/api">API’s</Link>
