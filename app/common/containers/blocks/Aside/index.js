@@ -5,11 +5,20 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import Icon from 'components/Icon';
 
 import Nav from 'containers/blocks/Nav';
+import Gamburger from 'containers/blocks/Gamburger';
 
 import styles from './styles.scss';
 
 @withStyles(styles)
 export default class Aside extends React.Component {
+  state = {
+    isMenuOpen: false,
+  };
+
+  onShowMenu() {
+    this.setState({ isMenuOpen: !this.state.isMenuOpen });
+  }
+
   render() {
     return (
       <aside className={styles.aside}>
@@ -24,7 +33,11 @@ export default class Aside extends React.Component {
 
         <hr className={styles.line} />
 
-        <Nav />
+        <Nav isOpen={this.state.isMenuOpen} />
+
+        <div className={styles['menu-control']}>
+          <Gamburger isOpen={this.state.isMenuOpen} onToggle={() => this.onShowMenu()} />
+        </div>
       </aside>
     );
   }

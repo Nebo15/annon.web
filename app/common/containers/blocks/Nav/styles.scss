@@ -2,6 +2,61 @@
   padding: 47px 0 0 37px;
   font-weight: 300;
 
+  @media (max-width: 860px) {
+    position: fixed;
+    top: 84px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 0 0;
+    opacity: 0;
+    background-color: #2b4060;
+    text-align: center;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    will-change: opacity;
+
+    &.open {
+      opacity: 0.9;
+      visibility: visible;
+    }
+
+    .down {
+      margin: 0;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 60px;
+        height: 1px;
+        background-color: #2d294c;
+        border: none;
+        margin: 0;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    li {
+      padding: 0;
+
+      a {
+        width: 100%;
+      }
+
+      &::before {
+        display: none;
+      }
+
+      ul {
+        margin: 0;
+      }
+
+      i {
+        display: none;
+      }
+    }
+  }
+
   .down {
     margin-top: 20px;
 
