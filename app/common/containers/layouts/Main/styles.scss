@@ -156,7 +156,6 @@ html {
     flex-flow: row nowrap;
     flex: 1 1 auto;
     width: 100%;
-    max-width: 960px;
     margin: 0 auto;
     background-color: #fff;
     box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.3);
@@ -165,6 +164,7 @@ html {
   .content {
     flex: 1 1 auto;
     padding: 60px 50px;
+    max-width: 1040px;
   }
 
   & > header {

@@ -1,5 +1,5 @@
 .control {
-  display: block;
+  display: inline-block;
   width: 21px;
   height: 14px;
 
@@ -21,11 +21,11 @@
 
   &.active {
     &::after {
-      transform: rotate(-45deg) translate(0, -7px);
+      transform: rotate(-45deg) translate(2px, -6px);
     }
 
     &::before {
-      transform: rotate(45deg) translate(2px, 8px);
+      transform: rotate(45deg) translate(3px, 6px);
     }
 
     span {
