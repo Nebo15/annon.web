@@ -1,6 +1,6 @@
 module.exports = {
   url() {
-    return `${this.api.launchUrl}/`;
+    return `${this.api.launchUrl}/example`;
   },
   elements: {
     main: {
