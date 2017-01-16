@@ -12,3 +12,4 @@ tests_output
 !icon
 browserstack.err
 yarn.lock
+.postgres
