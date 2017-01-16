@@ -3,6 +3,14 @@
   "scripts": {
   },
   "env": {
+    "ADMIN_API_HOST": {
+      "description": "Admin api hostname",
+      "value": "http://37.139.11.82:4001"
+    },
+    "PUBLIC_API_HOST": {
+      "description": "Public api hostname",
+      "value": "http://37.139.11.82:4000"
+    }
   },
   "formation": {
     "web": {

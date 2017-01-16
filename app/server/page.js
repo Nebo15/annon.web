@@ -1,3 +1,5 @@
+import { trigger } from 'redial';
+import Helmet from 'react-helmet';
 
 import Cookies from 'cookies';
 import Set from 'core-js/library/fn/set';
@@ -24,10 +26,12 @@ import WithStylesContext from '../common/WithStylesContext';
 
 export default () => (req, res, next) => {
   if (__DEV__) {
+    const head = Helmet.rewind();
     return res.render('index', {
       html: null,
       reduxState: null,
       inlineCss: null,
+      head,
     });
   }
 
@@ -36,26 +40,46 @@ export default () => (req, res, next) => {
     history: memoryHistory,
     cookies: new Cookies(req, res),
   });
+  const { dispatch, getState } = store;
   const history = syncHistoryWithStore(memoryHistory, store);
   const routes = configureRoutes({
     store,
   });
   const router = <Router history={history}>{ routes }</Router>;
-  const location = req.url;
+  const historyLocation = history.createLocation(req.url);
 
-  return match({ routes: router, location }, (error, redirectLocation, renderProps) => {
+  return match({
+    routes: router, location: historyLocation,
+  }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
-      res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+      return res.redirect(301, redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(`Router Math error ${error.message}`);
     } else if (renderProps == null) {
-      res.status(404).send('Not found');
-    } else {
-      const [getCurrentUrl, unsubscribe] = subscribeUrl();
-      const reqUrl = location.pathname + location.search;
-      getReduxPromise().then(() => {
-        const reduxState = escape(JSON.stringify(store.getState()));
-        const css = new Set(); // CSS for all rendered React components
+      return res.status(404).send('Not found');
+    }
+
+    // Get array of route handler components:
+    const { components } = renderProps;
+
+    // Define locals to be provided to all lifecycle hooks:
+    const locals = {
+      path: renderProps.location.pathname,
+      query: renderProps.location.query,
+      params: renderProps.params,
+
+      // Allow lifecycle hooks to dispatch Redux actions:
+      dispatch,
+      getState,
+    };
+    // Wait for async data fetching to complete, then render:
+    return Promise.all([
+      trigger('fetch', components, locals),
+      trigger('server', components, locals),
+    ])
+      .then(() => {
+        const reduxState = escape(JSON.stringify(getState()));
+        const css = new Set();
         /* eslint-disable no-underscore-dangle */
         const html = ReactDOMServer.renderToString(
           <WithStylesContext onInsertCss={(styles) => { css.add(styles._getCss()); }}>
@@ -64,42 +88,14 @@ export default () => (req, res, next) => {
             </Provider>
           </WithStylesContext>
         );
-
-        if (getCurrentUrl() === reqUrl) {
-          res.render('index', { html, reduxState, inlineCss: arrayFrom(css).join('') });
-        } else {
-          res.redirect(302, getCurrentUrl());
-        }
-        unsubscribe();
-      }).catch((err) => {
-        unsubscribe();
-        next(err);
-      });
-
-      function getReduxPromise() {
-        const { query, params } = renderProps;
-
-        const comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-        const promise = (comp && comp.fetchData && comp.fetchData({
-          query, params, store, history,
-        })) || Promise.resolve();
-
-        return promise;
-      }
-    }
+        const head = Helmet.rewind();
+        res.render('index', {
+          html,
+          reduxState,
+          inlineCss: arrayFrom(css).join(''),
+          head,
+        });
+      })
+      .catch(err => next(err));
   });
-
-  function subscribeUrl() {
-    let currentUrl = location.pathname + location.search;
-    const unsubscribe = history.listen((newLoc) => {
-      if (newLoc && newLoc.action === 'PUSH') {
-        currentUrl = newLoc.pathname + newLoc.search;
-      }
-    });
-
-    return [
-      () => currentUrl,
-      unsubscribe,
-    ];
-  }
 };
