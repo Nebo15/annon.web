@@ -34,8 +34,8 @@ server.locals.CONFIG = escape(JSON.stringify(config));
 
 server.use(cookieParser());
 
-server.use('/api.auth', proxy(`https://${config.AUTH0_DOMAIN}`));
 server.use('/api', proxy(config.API_HOST));
+server.use('/admin/api', proxy(config.ADMIN_API_HOST));
 server.use('/static', Express.static(path.join(__dirname, '../../static')));
 server.use('/fonts', Express.static(path.join(__dirname, '../../assets/fonts')));
 server.get('*', page());
