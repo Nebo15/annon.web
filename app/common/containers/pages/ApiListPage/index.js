@@ -5,6 +5,7 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { H1 } from 'components/Title';
 import Table from 'components/Table';
 import Button from 'components/Button';
+// import Pagination from 'components/Pagination';
 
 import { getApis } from 'reducers';
 
@@ -41,6 +42,15 @@ export default class ApiListPage extends React.Component {
               action: (<Button theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
             }))}
           />
+          {
+            // <div className={styles.pagination}>
+            //   <Pagination
+            //     count={20}
+            //     current={5}
+            //     formatter={v => `/apis?page=${v}`}
+            //   />
+            // </div>
+          }
         </div>
       </div>
     );

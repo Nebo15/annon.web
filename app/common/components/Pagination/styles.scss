@@ -1,0 +1,65 @@
+$border-color: #dfdede;
+
+.pagin {
+  position: relative;
+  font-size: 0;
+  user-select: none;
+  vertical-align: top;
+  border-radius: 0;
+  border: 1px solid $border-color;
+  display: inline-block;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 10px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 12px;
+    text-align: center;
+    vertical-align: top;
+    display: inline-block;
+
+    &.is-disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      border-radius: 16px 0 0 16px;
+      border-right: 1px solid $border-color;
+    }
+
+    &:last-child {
+      border-radius: 0 16px 16px 0;
+      border-left: 1px solid $border-color;
+    }
+
+    &:first-child,
+    &:last-child {
+      width: 38px;
+
+      a {
+        color: $border-color;
+        transition: color 0.2s;
+        border: none;
+        display: block;
+      }
+    }
+
+    &.is-active {
+      font-weight: bold;
+      pointer-events: none;
+    }
+  }
+
+  a {
+    color: $black;
+    transition: border-color 0.2s;
+    border-bottom: 1px solid transparent;
+  }
+}
