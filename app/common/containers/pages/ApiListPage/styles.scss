@@ -1,11 +1,6 @@
 
-.main {
-  position: relative;
-}
-
-.form {
-  &__error {
-    color: #ff1f44;
-    margin-bottom: 15px;
-  }
+.table {
+  margin-top: 30px;
+  overflow: auto;
+  padding: 2px;
 }
