@@ -9,10 +9,10 @@ import styles from './styles.scss';
 
 @withStyles(styles)
 @connect(null)
-export default class CreateApi extends React.Component {
+export default class ApiCreatePage extends React.Component {
   render() {
     return (
-      <div id="create-api">
+      <div id="api-create-page">
         <H1>Create API</H1>
 
         <ApiForm />

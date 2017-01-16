@@ -71,7 +71,7 @@ export const Component = ({ handleSubmit = () => {}, onSubmit = () => {} }) => (
 
 export default withStyles(styles)(
   reduxForm({
-    form: 'create-api',
+    form: 'api-create',
     initialValues: {
       scheme: 'http',
     },

@@ -5,8 +5,7 @@ import App from 'containers/layouts/App';
 import MainLayout from 'containers/layouts/Main';
 
 import ExamplePage from 'containers/pages/ExamplePage';
-import CreateApi from 'containers/pages/CreateApi';
-
+import ApiCreatePage from 'containers/pages/ApiCreatePage';
 
 export const configureRoutes = ({ store }) => { // eslint-disable-line
   return (
@@ -14,7 +13,9 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
       <Route component={MainLayout}>
         <IndexRoute component={ExamplePage} />
 
-        <Route path="create-api" component={CreateApi} />
+        <Route path="/apis">
+          <Route path="create" component={ApiCreatePage} />
+        </Route>
       </Route>
     </Route>
   );

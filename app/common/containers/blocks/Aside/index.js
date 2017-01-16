@@ -26,7 +26,7 @@ export default class Aside extends React.Component {
         <Link className={styles.logo} to="/" />
         <hr className={styles.line} />
 
-        <Link to="/create-api" className={styles.add}>
+        <Link to="/apis/create" className={styles.add}>
           <Icon name="add" />
           Create API
         </Link>
