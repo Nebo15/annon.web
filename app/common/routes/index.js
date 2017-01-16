@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRedirect } from 'react-router';
 
-import ExamplePage from 'containers/pages/ExamplePage';
+import ApiListPage from 'containers/pages/ApiListPage';
+
 import App from 'containers/layouts/App';
 import MainLayout from 'containers/layouts/Main';
 
@@ -9,7 +10,8 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
   return (
     <Route path="/" component={App}>
       <Route component={MainLayout}>
-        <IndexRoute component={ExamplePage} />
+        <IndexRedirect to="apis" />
+        <Route path="apis" component={ApiListPage} />
       </Route>
     </Route>
   );
