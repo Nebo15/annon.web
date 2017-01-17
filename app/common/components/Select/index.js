@@ -37,6 +37,14 @@ class Select extends React.Component {
     active: (() => this.props.options.filter(item => item.name === this.props.active)[0])(),
   };
 
+  componentWillReceiveProps(props) {
+    if (props.active) {
+      this.setState({
+        active: this.props.options.filter(item => item.name === props.active)[0],
+      });
+    }
+  }
+
   onSelect(item = {}) {
     this.setState({ active: item, open: false });
     this.props.onChange && this.props.onChange(item.name);

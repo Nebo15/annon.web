@@ -14,81 +14,84 @@ import validate from 'modules/validate';
 
 import styles from './styles.scss';
 
-export const Component = ({ handleSubmit = () => {}, onSubmit = () => {} }) => (
-  <form onSubmit={handleSubmit(onSubmit)}>
-    <Line width="280" />
-
-    <div style={{ maxWidth: '280px' }} className={styles.row}>
-      <Field name="name" labelText="Name" component={FieldInput} />
-    </div>
-
-    <H3>Request</H3>
-
-    <Line width="280" />
-
-    <div style={{ marginBottom: 10 }}>
-      Methods
-    </div>
-
-    <FormSection name="request">
-      <div className={styles.row}>
-        <Field labelText="Put" name="methods[put]" component={FieldCheckbox} />
-        <Field labelText="Post" name="methods[post]" component={FieldCheckbox} />
-        <Field labelText="Get" name="methods[get]" component={FieldCheckbox} />
-      </div>
-
-      <div className={styles.columns}>
-        <div>
-          <Field
-            labelText="Scheme"
-            name="scheme"
-            component={FiledSelect}
-            value="http"
-            options={[
-              { name: 'http', title: 'http' },
-              { name: 'https', title: 'https' },
-            ]}
-          />
-        </div>
-        <div>
-          <Field labelText="Host" name="host" component={FieldInput} />
-        </div>
-      </div>
-
-      <div className={styles.columns}>
-        <div>
-          <Field labelText="Port" name="port" component={FieldInput} />
-        </div>
-        <div>
-          <Field labelText="Path" name="path" component={FieldInput} />
-        </div>
-      </div>
-    </FormSection>
-
-    <Button type="submit">
-      Create API
-    </Button>
-  </form>
-);
-
-export default withStyles(styles)(
-  reduxForm({
-    form: 'api-create',
-    initialValues: {
-      request: {
-        scheme: 'http',
-      },
+@withStyles(styles)
+@reduxForm({
+  form: 'api-form',
+  initialValues: {
+    request: {
+      scheme: 'http',
     },
-    validate: validate({
-      name: {
-        required: true,
-      },
-      'request.host': {
-        required: true,
-      },
-      'request.path': {
-        required: true,
-      },
-    }),
-  })(Component)
-);
+  },
+  validate: validate({
+    name: {
+      required: true,
+    },
+    'request.host': {
+      required: true,
+    },
+    'request.path': {
+      required: true,
+    },
+  }),
+})
+export default class ApiForm extends React.Component {
+  render() {
+    const { handleSubmit, onSubmit, isEdit } = this.props;
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Line width="280" />
+
+        <div style={{ maxWidth: '280px' }} className={styles.row}>
+          <Field name="name" labelText="Name" component={FieldInput} />
+        </div>
+
+        <H3>Request</H3>
+
+        <Line width="280" />
+
+        <div style={{ marginBottom: 10 }}>
+          Methods
+        </div>
+
+        <FormSection name="request">
+          <div className={styles.row}>
+            <Field labelText="Put" name="methods[put]" component={FieldCheckbox} />
+            <Field labelText="Post" name="methods[post]" component={FieldCheckbox} />
+            <Field labelText="Get" name="methods[get]" component={FieldCheckbox} />
+          </div>
+
+          <div className={styles.columns}>
+            <div>
+              <Field
+                labelText="Scheme"
+                name="scheme"
+                component={FiledSelect}
+                options={[
+                  { name: 'http', title: 'http' },
+                  { name: 'https', title: 'https' },
+                ]}
+              />
+            </div>
+            <div>
+              <Field labelText="Host" name="host" component={FieldInput} />
+            </div>
+          </div>
+
+          <div className={styles.columns}>
+            <div>
+              <Field labelText="Port" name="port" component={FieldInput} />
+            </div>
+            <div>
+              <Field labelText="Path" name="path" component={FieldInput} />
+            </div>
+          </div>
+        </FormSection>
+
+        <Button type="submit">
+          {isEdit ? 'Edit API' : 'Create API'}
+        </Button>
+      </form>
+    );
+  }
+}

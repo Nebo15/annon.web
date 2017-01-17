@@ -4,6 +4,7 @@ import { routerReducer } from 'react-router-redux';
 
 import ApiListPage from 'containers/pages/ApiListPage/redux';
 import ApiCreatePage from 'containers/pages/ApiCreatePage/redux';
+import ApiEditPage from 'containers/pages/ApiEditPage/redux';
 
 import apis from 'redux/apis';
 
@@ -13,6 +14,7 @@ const data = combineReducers({
 const pages = combineReducers({
   ApiListPage,
   ApiCreatePage,
+  ApiEditPage,
 });
 
 export default combineReducers({
