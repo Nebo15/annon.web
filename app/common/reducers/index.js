@@ -5,10 +5,13 @@ import { routerReducer } from 'react-router-redux';
 import ApiListPage from 'containers/pages/ApiListPage/redux';
 
 import apis from 'redux/apis';
+import requests from 'redux/requests';
 
 const data = combineReducers({
   apis,
+  requests,
 });
+
 const pages = combineReducers({
   ApiListPage,
 });
