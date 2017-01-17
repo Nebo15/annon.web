@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 $border-color: #e0e0e0;
 $header-bg: #f5f7f9;
 $header-color: #929499;
@@ -17,7 +19,7 @@ $text-color: #3d3d3d;
     font-size: 10px;
 
     th {
-      padding: 16px 20px;
+      padding: 14px 20px;
       text-transform: uppercase;
       font-weight: 700;
       color: $header-color;
@@ -32,7 +34,7 @@ $text-color: #3d3d3d;
 
   td,
   th {
-    padding: 10px 20px;
+    padding: 16px 20px;
     text-align: left;
     vertical-align: middle;
     box-shadow: 0 -1px 0 $border-color;
@@ -50,11 +52,11 @@ $text-color: #3d3d3d;
     }
 
     &:first-child {
-      padding-left: 30px;
+      padding-left: 35px;
     }
 
     &:last-child {
-      padding-right: 30px;
+      padding-right: 35px;
     }
   }
 
@@ -95,6 +97,47 @@ $text-color: #3d3d3d;
       &:first-child {
         padding-left: 0;
       }
+    }
+  }
+}
+
+.table.responsive {
+  @media screen and (max-width: $breakpoint-mobile-max) {
+    display: block;
+    box-shadow: none;
+
+    thead,
+    tfoot {
+      display: none;
+    }
+
+    tbody,
+    tr,
+    td,
+    th {
+      display: block;
+    }
+
+    td,
+    th {
+      box-shadow: -1px 0 0 $border-color, 0 -1px 0 $border-color, 1px 0 0 $border-color;
+
+      &:first-child {
+        padding-left: 20px;
+      }
+
+      &:last-child {
+        box-shadow: -1px 0 0 $border-color, 0 -1px 0 $border-color, 0 1px 0 $border-color, 1px 0 0 $border-color;
+      }
+
+      &::before {
+        content: attr(data-title) ": ";
+        font-weight: 600;
+      }
+    }
+
+    tr + tr {
+      margin-top: 10px;
     }
   }
 }
