@@ -8,8 +8,14 @@ const DEFAULT_PLACEHOLDER = 'No data';
 
 const TableRowComponent = ({ columns = [], data = {} }) => (
   <tr>
-    {columns.map(({ key, align, colspan, width }) => (
-      <td width={width} colSpan={colspan} className={align && styles[align]} key={key}>
+    {columns.map(({ key, title, align, colspan, width }) => (
+      <td
+        data-title={title}
+        width={width}
+        colSpan={colspan}
+        className={align && styles[align]}
+        key={key}
+      >
         { typeof data[key] === 'string' || React.isValidElement(data[key]) ? data[key] : 'Invalid data'}
       </td>
     ))}
@@ -41,6 +47,7 @@ const Table = (props) => {
     data = [],
     placeholder = DEFAULT_PLACEHOLDER,
     zebra = true,
+    responsive = true,
     hovered = true,
     head = true,
     tbody = true,
@@ -55,6 +62,7 @@ const Table = (props) => {
     styles.table,
     zebra && styles.zebra,
     hovered && styles.hovered,
+    responsive && styles.responsive
   );
 
   let rows = [];
