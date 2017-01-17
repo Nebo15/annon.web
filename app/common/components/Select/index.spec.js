@@ -30,7 +30,7 @@ describe('Select', () => {
     });
 
     it('active', () => {
-      expect(elem.find('div span').last().text()).to.equal('Item 2');
+      expect(elem.find('div span').at(1).text()).to.equal('Item 2');
       expect(elem.find(`.${styles.active}`)).to.have.length(1);
     });
 
@@ -39,7 +39,7 @@ describe('Select', () => {
 
       elem.setProps({ onChange });
       elem.find('li').first().simulate('click');
-      expect(onChange).to.have.been.called.with({ name: 'item1', title: 'Item 1' });
+      expect(onChange).to.have.been.called.with('item1');
     });
   });
 });

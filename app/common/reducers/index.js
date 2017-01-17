@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 
 import ApiListPage from 'containers/pages/ApiListPage/redux';
+import ApiCreatePage from 'containers/pages/ApiCreatePage/redux';
 import RequestListPage from 'containers/pages/RequestListPage/redux';
 
 import apis from 'redux/apis';
@@ -15,6 +16,7 @@ const data = combineReducers({
 
 const pages = combineReducers({
   ApiListPage,
+  ApiCreatePage,
   RequestListPage,
 });
 

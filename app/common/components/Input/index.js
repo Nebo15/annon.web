@@ -22,7 +22,7 @@ export const Component = ({
   postfix,
   prefix,
   disabled,
-  required,
+  required, // eslint-disable-line
   active,
   value,
   error,
@@ -84,14 +84,6 @@ export const Component = ({
           <div className={styles['error-label']}>
             { typeof error === 'string' ? error : <ErrorMessages error={error}>{children}</ErrorMessages> }
           </div>
-        }
-        { required &&
-          <div
-            className={classnames(
-              styles['required-label'],
-              error && styles['required-label--error'],
-            )}
-          />
         }
       </span>
     </label>
