@@ -17,14 +17,6 @@ export default class Nav extends React.Component {
         <ul>
           <li className={styles.active}>
             <Link to="/api">API’s</Link>
-            <ul>
-              <li className={styles.active}>
-                <Link to="/api/plugins">Plugins</Link>
-              </li>
-              <li>
-                <Link to="/api/plugins">Plugins</Link>
-              </li>
-            </ul>
           </li>
           <li>
             <Link to="/requests">Requests</Link>

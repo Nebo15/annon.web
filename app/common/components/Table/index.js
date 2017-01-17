@@ -16,7 +16,7 @@ const TableRowComponent = ({ columns = [], data = {} }) => (
         className={align && styles[align]}
         key={key}
       >
-        { typeof data[key] === 'string' || React.isValidElement(data[key]) ? data[key] : 'Invalid data'}
+        { typeof data[key] !== 'undefined' || React.isValidElement(data[key]) ? data[key] : '' }
       </td>
     ))}
   </tr>
