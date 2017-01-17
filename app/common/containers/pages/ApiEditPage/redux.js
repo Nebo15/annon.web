@@ -1,0 +1,55 @@
+import { combineReducers } from 'redux';
+import { handleAction, createAction } from 'redux-actions';
+import { push } from 'react-router-redux';
+import { SubmissionError, initialize } from 'redux-form';
+import { updateApi, fetchApi } from 'redux/apis';
+
+import { mapServerErrorsToClient } from 'services/validate';
+
+export const onSubmitEdit = (apiId, { name, request: { methods, ...req } }) => dispatch => dispatch(
+  updateApi(apiId, {
+    name,
+    request: {
+      methods: Object.keys(methods).reduce((target, name) => {
+        methods[name] && target.push(name);
+        return target;
+      }, []),
+      ...req,
+    },
+  })
+).then((action) => {
+  if (action.error) {
+    const errors = mapServerErrorsToClient(action.payload.response.error);
+    throw new SubmissionError(errors);
+  }
+
+  return dispatch(push('/apis'));
+});
+
+export const setApi = createAction('apiEditPage/SET_API');
+
+export const fetch = apiId => dispatch =>
+  dispatch(fetchApi(apiId))
+    .then((action) => {
+      const apiId = action.payload.result;
+      const api = action.payload.entities.apis[apiId];
+      return dispatch([
+        initialize('api-form', {
+          name: api.name,
+          request: {
+            ...api.request,
+            methods: api.request.methods.reduce((target, item) => {
+              target[item] = true; // eslint-disable-line
+              return target;
+            }, {}),
+          },
+        }, true),
+        setApi(action.payload.result),
+      ]);
+    });
+
+const api = handleAction(setApi, (state, action) => action.payload, {});
+
+export default combineReducers({
+  api,
+});
