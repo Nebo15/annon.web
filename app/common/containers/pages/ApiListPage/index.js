@@ -22,7 +22,7 @@ import styles from './styles.scss';
 }))
 export default class ApiListPage extends React.Component {
   render() {
-    const { apis } = this.props;
+    const { apis = [] } = this.props;
     return (
       <div id="api-list-page">
         <H1>API's</H1>

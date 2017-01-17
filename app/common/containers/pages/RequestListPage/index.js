@@ -23,7 +23,7 @@ import styles from './styles.scss';
 }))
 export default class RequestListPage extends React.Component {
   render() {
-    const { requests } = this.props;
+    const { requests = [] } = this.props;
     return (
       <div id="request-list-page">
         <H1>Requests</H1>

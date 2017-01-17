@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { handleAction, createAction } from 'redux-actions';
 import * as fromRequests from 'redux/requests';
 
-export const showRequests = createAction('apiListPage/SHOW_APIS');
+export const showRequests = createAction('requestListPage/SHOW_REQUESTS');
 
 export const fetchRequests = () => dispatch =>
   dispatch(fromRequests.fetchRequests({ limit: 100 }))
