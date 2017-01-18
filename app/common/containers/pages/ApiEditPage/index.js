@@ -4,11 +4,12 @@ import { provideHooks } from 'redial';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { H1 } from 'components/Title';
+import { Confirm } from 'components/Popup';
 import ApiForm from 'containers/forms/ApiForm';
 
 import { getApi } from 'reducers';
 
-import { onSubmitEdit, fetch } from './redux';
+import { onSubmitEdit, fetch, onDelete } from './redux';
 
 import styles from './styles.scss';
 
@@ -19,8 +20,17 @@ import styles from './styles.scss';
 @connect(state => ({
   ...state.pages.ApiEditPage,
   api: getApi(state, state.pages.ApiEditPage.api) || {},
-}), { onSubmitEdit })
+}), { onSubmitEdit, onDelete })
 export default class ApiCreatePage extends React.Component {
+  state = {
+    showConfirm: false,
+  };
+
+  onDelete() {
+    this.setState({ showConfirm: false });
+    this.props.onDelete(this.props.params.apiId);
+  }
+
   render() {
     const { name, id } = this.props.api;
 
@@ -31,6 +41,15 @@ export default class ApiCreatePage extends React.Component {
         <ApiForm
           isEdit
           onSubmit={values => this.props.onSubmitEdit(id, values)}
+          onDelete={() => this.setState({ showConfirm: true })}
+        />
+
+        <Confirm
+          title={`Delete ${name} API?`}
+          active={this.state.showConfirm}
+          theme="error"
+          onCancel={() => this.setState({ showConfirm: false })}
+          onConfirm={() => this.onDelete()}
         />
       </div>
     );

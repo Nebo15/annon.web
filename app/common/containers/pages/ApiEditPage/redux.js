@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { handleAction, createAction } from 'redux-actions';
 import { push } from 'react-router-redux';
 import { SubmissionError, initialize } from 'redux-form';
-import { updateApi, fetchApi } from 'redux/apis';
+import { updateApi, fetchApi, deleteApi } from 'redux/apis';
 
 import { mapServerErrorsToClient } from 'services/validate';
 
@@ -25,6 +25,15 @@ export const onSubmitEdit = (apiId, { name, request: { methods, ...req } }) => d
 
   return dispatch(push('/apis'));
 });
+
+export const onDelete = apiId => dispatch => dispatch(deleteApi(apiId))
+  .then((action) => {
+    if (action.error) {
+      return false;
+    }
+
+    return dispatch(push('/apis'));
+  });
 
 export const setApi = createAction('apiEditPage/SET_API');
 

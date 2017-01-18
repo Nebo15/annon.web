@@ -36,7 +36,7 @@ import styles from './styles.scss';
 })
 export default class ApiForm extends React.Component {
   render() {
-    const { handleSubmit, onSubmit, isEdit } = this.props;
+    const { handleSubmit, onSubmit, onDelete, isEdit } = this.props;
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -91,6 +91,10 @@ export default class ApiForm extends React.Component {
         <Button type="submit">
           {isEdit ? 'Edit API' : 'Create API'}
         </Button>
+
+        <div style={{ float: 'right' }}>
+          {isEdit && <Button type="button" onClick={onDelete} color="red">Delete API</Button>}
+        </div>
       </form>
     );
   }
