@@ -5,6 +5,7 @@ import ApiListPage from 'containers/pages/ApiListPage';
 import ApiCreatePage from 'containers/pages/ApiCreatePage';
 import ApiEditPage from 'containers/pages/ApiEditPage';
 
+import RequestListPage from 'containers/pages/RequestListPage';
 import ExamplePage from 'containers/pages/ExamplePage';
 
 import App from 'containers/layouts/App';
@@ -20,7 +21,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <Route path="create" component={ApiCreatePage} />
           <Route path=":apiId" component={ApiEditPage} />
         </Route>
-
+        <Route path="requests" component={RequestListPage} />
         <Route path="example" component={ExamplePage} />
       </Route>
     </Route>
