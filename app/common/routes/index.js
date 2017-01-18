@@ -18,7 +18,6 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <IndexRoute component={ApiListPage} />
           <Route path="create" component={ApiCreatePage} />
         </Route>
-    
         <Route path="requests" component={RequestListPage} />
         <Route path="example" component={ExamplePage} />
       </Route>
