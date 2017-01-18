@@ -45,14 +45,6 @@ export default class ApiCreatePage extends React.Component {
     this.props.onDelete(this.props.params.apiId);
   }
 
-  onEnable(checked, name) {
-    this.props.onEnable(
-      this.props.params.apiId,
-      name,
-      { is_enabled: checked },
-    );
-  }
-
   render() {
     const { name, id } = this.props.api;
 
@@ -85,7 +77,11 @@ export default class ApiCreatePage extends React.Component {
               name: item.name,
               active: (
                 <Checkbox
-                  onChange={val => this.onEnable(val, item.name)}
+                  onChange={checked => this.props.onEnable(
+                    item.api_id,
+                    item.name,
+                    { is_enabled: checked },
+                  )}
                   checked={item.is_enabled}
                 />
               ),
