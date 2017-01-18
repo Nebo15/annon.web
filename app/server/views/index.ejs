@@ -4,7 +4,9 @@
   <%- head.title.toString() %>
   <%- head.meta.toString() %>
   <%- head.link.toString() %>
-
+  <% if (isMobile) { %>
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <% } %>
   <% resources.css.forEach(function(src){ %>
   <link rel="stylesheet" href="<%= src %>">
   <% }) %>

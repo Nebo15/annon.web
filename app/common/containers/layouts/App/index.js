@@ -16,7 +16,6 @@ export default ({ children }) => (<div>
     ]}
     meta={[
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, user-scalable=no' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'keywords', content: 'api gateway, validation, proxy' },
       { name: 'description', content: 'Proxy server, what can validate request, control access and more.' },
