@@ -1,21 +1,9 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>API Gateway</title>
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#fff">
-  <meta name="viewport" content="width=device-width, user-scalable=no">
-
-  <meta name="keywords"
-        content="api gateway, validation, proxy">
-  <meta name="description"
-        content="Proxy server, what can validate request, control access and more.">
-
-  <meta property="og:title" content="API Gateway"/>
-  <meta property="og:site_name" content="API Gateway"/>
-  <meta property="og:description"
-        content="Proxy server, what can validate request, control access and more."/>
+<head <% head.htmlAttributes.toString() %>>
+  <%- head.title.toString() %>
+  <%- head.meta.toString() %>
+  <%- head.link.toString() %>
 
   <% resources.css.forEach(function(src){ %>
   <link rel="stylesheet" href="<%= src %>">

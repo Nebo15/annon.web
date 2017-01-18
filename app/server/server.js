@@ -37,7 +37,9 @@ server.use(cookieParser());
 server.use(config.PUBLIC_API_PROXY_PATH, proxy(config.PUBLIC_API_HOST));
 server.use(config.ADMIN_API_PROXY_PATH, proxy(config.ADMIN_API_HOST));
 server.use('/static', Express.static(path.join(__dirname, '../../static')));
+server.use('/public', Express.static(path.join(__dirname, '../../public')));
 server.use('/fonts', Express.static(path.join(__dirname, '../../assets/fonts')));
+server.use('/images', Express.static(path.join(__dirname, '../../assets/images')));
 server.get('*', page());
 
 server.use((err, req, res) => {
