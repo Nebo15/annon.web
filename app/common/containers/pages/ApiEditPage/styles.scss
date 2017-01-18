@@ -3,6 +3,12 @@
   position: relative;
 }
 
+.back {
+  padding-right: 17px;
+  color: #1fb6f5;
+  cursor: pointer;
+}
+
 .form {
   &__error {
     color: #ff1f44;

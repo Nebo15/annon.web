@@ -11,10 +11,12 @@ import RequestListPage from 'containers/pages/RequestListPage/redux';
 
 import apis from 'redux/apis';
 import requests from 'redux/requests';
+import plugins from 'redux/plugins';
 
 const data = combineReducers({
   apis,
   requests,
+  plugins,
 });
 
 const pages = combineReducers({
@@ -38,3 +40,7 @@ export const getApis = (state, apis) => apis.map(id => getApi(state, id));
 
 export const getRequest = (state, requestId) => state.data.requests[requestId];
 export const getRequests = (state, requests) => requests.map(id => getRequest(state, id));
+
+export const getPlugin = (state, pluginId) => state.data.plugins[pluginId];
+export const getPlugins = (state, plugins) => plugins.map(id => getPlugin(state, id));
+
