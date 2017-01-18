@@ -10,16 +10,15 @@ import styles from './styles.scss';
 
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
+const ActionsColumnData = ({ isOpened }) => (<span className={classnames(styles.arrow, isOpened && styles['arrow-active'])}>
+  <Icon name="arrow-down" />
+</span>);
 const FoldingRowComponent = ({ columns, data, onOpen, onClose, isOpened, component = 'div' }) => (
   <tbody className={classnames(styles.row, isOpened && styles.active)}>
     <TableRow
       data={{
         ...data,
-        [columns[0].key]: (<div>
-          {data[columns[0].key]}<span className={classnames(styles.arrow, isOpened && styles['arrow-active'])}>
-            <Icon name="arrow-down" />
-          </span>
-        </div>),
+        __actions: <ActionsColumnData isOpened={isOpened} />,
       }}
       columns={columns}
       onClick={!isOpened ? onOpen : onClose}
@@ -62,7 +61,7 @@ class FoldingRow extends React.Component {
 }
 
 const FoldingTable = ({ columns = [], data = [], name, component }) => (
-  <Table tbody={false} columns={columns}>
+  <Table tbody={false} columns={[...columns, { key: '__actions', title: ' ' }]}>
     {data.map((item, key) => (
       <FoldingRow
         name={`${name}-${key}`}
