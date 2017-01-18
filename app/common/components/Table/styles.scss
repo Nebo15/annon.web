@@ -116,6 +116,10 @@ $text-color: #3d3d3d;
     td,
     th {
       display: block;
+
+      &[hidden] {
+        display: none;
+      }
     }
 
     td,

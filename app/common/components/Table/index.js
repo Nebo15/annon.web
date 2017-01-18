@@ -6,8 +6,8 @@ import styles from './styles.scss';
 
 const DEFAULT_PLACEHOLDER = 'No data';
 
-const TableRowComponent = ({ columns = [], data = {} }) => (
-  <tr>
+const TableRowComponent = ({ columns = [], data = {}, ...rest }) => (
+  <tr {...rest}>
     {columns.map(({ key, title, align, colspan, width }) => (
       <td
         data-title={title}
