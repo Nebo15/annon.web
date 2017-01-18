@@ -29,30 +29,21 @@
   background: white;
   border: 1px solid #e0e0e0;
 
+  &_full {
+    width: 100%;
+  }
+
   &__header {
     border-bottom: 1px solid #e6e6e6;
-    padding: 10px 8px;
+    padding: 10px 12px;
   }
 
   &__body {
-    padding: 10px 8px;
-  }
-}
+    padding: 10px 12px;
 
-.headers {
-  margin-top: 20px;
-}
-
-.body {
-  margin-top: 20px;
-}
-
-.header {
-  dt,
-  dd {
-    display: inline-block;
-  }
-  dt {
-    color: #2b4060;
+    :global(.hljs) {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }
