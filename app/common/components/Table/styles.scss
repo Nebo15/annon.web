@@ -12,6 +12,7 @@ $text-color: #3d3d3d;
   font-size: 12px;
   line-height: 20px;
   color: $text-color;
+  table-layout: fixed;
 
   thead {
     background-color: $header-bg;

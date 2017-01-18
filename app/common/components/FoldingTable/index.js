@@ -26,7 +26,7 @@ const FoldingRowComponent = ({ columns, data, onOpen, onClose, isOpened, compone
     />
     {
       <tr hidden={!isOpened} className={styles['row-sub']}>
-        <td colSpan={columns.length}>{ React.createElement(component, data) }</td>
+        <td colSpan={columns.length}>{ isOpened && React.createElement(component, data) }</td>
       </tr>
     }
   </tbody>

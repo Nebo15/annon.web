@@ -1,8 +1,15 @@
 @import "variables.scss";
 
 .wrap {
+  display: block;
+  overflow: hidden;
+  background: #f5f7f9;
+}
+
+.row {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   @media screen and (max-width: $breakpoint-mobile-max) {
     display: block;
@@ -11,9 +18,37 @@
 
 .column {
   flex: 1 1 auto;
-  margin: 0 20px;
+  width: 49%;
+  overflow: hidden;
+  white-space: break-word;
+  margin: 10px;
+  background: white;
+  border: 1px solid #e0e0e0;
 
   &__header {
     border-bottom: 1px solid #e6e6e6;
+    padding: 10px 8px;
+  }
+
+  &__body {
+    padding: 10px 8px;
+  }
+}
+
+.headers {
+  margin-top: 20px;
+}
+
+.body {
+  margin-top: 20px;
+}
+
+.header {
+  dt,
+  dd {
+    display: inline-block;
+  }
+  dt {
+    color: #2b4060;
   }
 }

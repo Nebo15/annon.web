@@ -1,6 +1,8 @@
 $active-bg: #f3fdff;
 
 .row {
+  cursor: pointer;
+
   &.active {
     background-color: $active-bg !important;
   }
