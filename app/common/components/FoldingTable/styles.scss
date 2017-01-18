@@ -13,8 +13,7 @@ $active-bg: #f3fdff;
     background-color: #fff !important;
 
     & > td {
-      padding-left: 60px;
-      padding-right: 0;
+      padding: 0 !important;
 
       &::before,
       &::after {

@@ -1,0 +1,19 @@
+@import "variables.scss";
+
+.wrap {
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: $breakpoint-mobile-max) {
+    display: block;
+  }
+}
+
+.column {
+  flex: 1 1 auto;
+  margin: 0 20px;
+
+  &__header {
+    border-bottom: 1px solid #e6e6e6;
+  }
+}

@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
+
+import RequestDetails from 'containers/blocks/RequestDetails';
+
 import { H1 } from 'components/Title';
 import FoldingTable from 'components/FoldingTable';
-
+import StatusCode from 'components/StatusCode';
 import Button from 'components/Button';
 import { format } from 'helpers/date';
 // import Pagination from 'components/Pagination';
@@ -13,11 +16,6 @@ import { getRequests } from 'reducers';
 
 import { fetchRequests } from './redux';
 import styles from './styles.scss';
-
-const RequestDetails = ({ id, idempotency_key }) => (<div>
-  <p>id: {id}</p>
-  <p>idempotency_key: {idempotency_key}</p>
-</div>);
 
 @withStyles(styles)
 @provideHooks({
@@ -46,7 +44,7 @@ export default class RequestListPage extends React.Component {
             ]}
             data={requests.map(i => ({
               ...i,
-              status_code: String(i.status_code),
+              status_code: <StatusCode code={i.status_code} />,
               method: i.request.method,
               path: i.request && i.request.uri,
               client_ip: i.ip_address,
