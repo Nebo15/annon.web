@@ -14,12 +14,13 @@ const ActionsColumnData = ({ isOpened }) => (<span className={classnames(styles.
   <Icon name="arrow-down" />
 </span>);
 const FoldingRowComponent = ({ columns, data, onOpen, onClose, isOpened, component = 'div' }) => (
-  <tbody className={classnames(styles.row, isOpened && styles.active)}>
+  <tbody>
     <TableRow
       data={{
         ...data,
         __actions: <ActionsColumnData isOpened={isOpened} />,
       }}
+      className={classnames(styles.row, isOpened && styles.active)}
       columns={columns}
       onClick={!isOpened ? onOpen : onClose}
     />
@@ -61,7 +62,7 @@ class FoldingRow extends React.Component {
 }
 
 const FoldingTable = ({ columns = [], data = [], name, component }) => (
-  <Table tbody={false} columns={[...columns, { key: '__actions', title: ' ' }]}>
+  <Table tbody={false} columns={[...columns, { key: '__actions', title: 'Show details' }]}>
     {data.map((item, key) => (
       <FoldingRow
         name={`${name}-${key}`}

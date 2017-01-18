@@ -48,7 +48,7 @@ export default class RequestListPage extends React.Component {
               method: i.request.method,
               path: i.request && i.request.uri,
               client_ip: i.ip_address,
-              date: format(i.inserted_at, 'DD.MM.YYYY HH:mm:ss'),
+              date: <span className="nowrap">{format(i.inserted_at, 'DD.MM.YYYY HH:mm:ss')}</span>,
               api: i.api ? <Button theme="link" to={`/apis/${i.api.id}`}>Edit API</Button> : '–',
             }))}
             component={RequestDetails}

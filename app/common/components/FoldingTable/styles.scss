@@ -1,5 +1,18 @@
 $active-bg: #f3fdff;
 
+.row-sub {
+  background-color: #fff !important;
+
+  & > td {
+    padding: 0 !important;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
 .row {
   cursor: pointer;
 
@@ -9,19 +22,6 @@ $active-bg: #f3fdff;
 
   .right {
     text-align: right;
-  }
-
-  .row-sub {
-    background-color: #fff !important;
-
-    & > td {
-      padding: 0 !important;
-
-      &::before,
-      &::after {
-        display: none;
-      }
-    }
   }
 
   .arrow {
