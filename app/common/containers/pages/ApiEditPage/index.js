@@ -4,7 +4,9 @@ import { provideHooks } from 'redial';
 import { format } from 'helpers/date';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { H1 } from 'components/Title';
+import { H1, H3 } from 'components/Title';
+import Line from 'components/Line';
+import Icon from 'components/Icon';
 import { Confirm } from 'components/Popup';
 import Checkbox from 'components/Checkbox';
 import Table from 'components/Table';
@@ -30,6 +32,10 @@ import styles from './styles.scss';
   plugins: getPlugins(state, state.pages.ApiEditPage.plugins) || [],
 }), { onSubmitEdit, onDelete, onEnable })
 export default class ApiCreatePage extends React.Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired,
+  };
+
   state = {
     showConfirm: false,
   };
@@ -52,13 +58,22 @@ export default class ApiCreatePage extends React.Component {
 
     return (
       <div id="api-edit-page">
-        <H1>Edit {name} API</H1>
+        <H1>
+          <span onClick={() => this.context.router.goBack()} className={styles.back}>
+            <Icon name="arrow-left-large" />
+          </span>
+          Edit {name} API
+        </H1>
 
         <ApiForm
           isEdit
           onSubmit={values => this.props.onSubmitEdit(id, values)}
           onDelete={() => this.setState({ showConfirm: true })}
         >
+          <H3>Plugins</H3>
+
+          <Line width="280" />
+
           <Table
             columns={[
               { key: 'date', title: 'Date' },

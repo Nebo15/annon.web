@@ -90,9 +90,6 @@ export default class ApiForm extends React.Component {
 
         {
           children && <div className={styles.row}>
-            <H3>Plugins</H3>
-
-            <Line width="280" />
             {children}
           </div>
         }
