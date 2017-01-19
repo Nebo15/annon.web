@@ -59,6 +59,7 @@ export default class ApiForm extends React.Component {
             <Field labelText="Put" name="methods[put]" component={FieldCheckbox} />
             <Field labelText="Post" name="methods[post]" component={FieldCheckbox} />
             <Field labelText="Get" name="methods[get]" component={FieldCheckbox} />
+            <Field labelText="Delete" name="methods[delete]" component={FieldCheckbox} />
           </div>
 
           <div className={styles.columns}>
