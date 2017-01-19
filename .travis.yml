@@ -32,5 +32,4 @@ script:
 - if [ "${RUNNING_CONTAINERS//[[:space:]]/}" == "1" ]; then echo "[E] Container is
   not started!" && false; fi;
 after_success:
-- npm run report-coverage && rm -rf coverage
 - ./bin/ci/push.sh
