@@ -12,6 +12,8 @@ import RouterContext from 'react-router/lib/RouterContext';
 import match from 'react-router/lib/match';
 import Router from 'react-router/lib/Router';
 
+import mobile from 'is-mobile';
+
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import Provider from 'react-redux/lib/components/Provider';
@@ -25,6 +27,7 @@ import { configureRoutes } from '../common/routes';
 import WithStylesContext from '../common/WithStylesContext';
 
 export default () => (req, res, next) => {
+  const isMobile = mobile(req);
   if (__DEV__) {
     const head = Helmet.rewind();
     return res.render('index', {
@@ -32,6 +35,7 @@ export default () => (req, res, next) => {
       reduxState: null,
       inlineCss: null,
       head,
+      isMobile,
     });
   }
 
@@ -94,6 +98,7 @@ export default () => (req, res, next) => {
           reduxState,
           inlineCss: arrayFrom(css).join(''),
           head,
+          isMobile,
         });
       })
       .catch(err => next(err));

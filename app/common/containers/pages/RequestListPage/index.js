@@ -2,15 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
+
+import RequestDetails from 'containers/blocks/RequestDetails';
+
 import { H1 } from 'components/Title';
-import Table from 'components/Table';
+import { Confirm } from 'components/Popup';
+import FoldingTable from 'components/FoldingTable';
+import StatusCode from 'components/StatusCode';
 import Button from 'components/Button';
 import { format } from 'helpers/date';
-// import Pagination from 'components/Pagination';
 
 import { getRequests } from 'reducers';
 
-import { fetchRequests } from './redux';
+import { fetchRequests, deleteRequest } from './redux';
 import styles from './styles.scss';
 
 @withStyles(styles)
@@ -20,8 +24,21 @@ import styles from './styles.scss';
 @connect(state => ({
   ...state.pages.RequestListPage,
   requests: getRequests(state, state.pages.RequestListPage.requests),
-}))
+}), { deleteRequest })
 export default class RequestListPage extends React.Component {
+  state = {
+    deleteRequestId: null,
+  };
+  onDeleteRequestClick(deleteRequestId) {
+    this.setState({
+      deleteRequestId,
+    });
+  }
+  deleteRequest() {
+    this.props.deleteRequest(this.state.deleteRequestId).then(() => {
+      this.setState({ deleteRequestId: null });
+    });
+  }
   render() {
     const { requests = [] } = this.props;
     return (
@@ -29,34 +46,41 @@ export default class RequestListPage extends React.Component {
         <H1>Requests</H1>
         <p>Select Request to see details.</p>
         <div className={styles.table}>
-          <Table
+          <FoldingTable
             columns={[
-              { key: 'id', title: 'id' },
-              { key: 'inserted_at', title: 'Inserted at' },
-              { key: 'ip_address', title: 'From' },
-              { key: 'url', title: 'Url' },
-              { key: 'status_code', title: 'Status code' },
+              { key: 'status_code', title: 'Status' },
+              { key: 'method', title: 'Method' },
+              { key: 'path', title: 'Path' },
+              { key: 'client_ip', title: 'Client IP' },
+              { key: 'date', title: 'Date' },
               { key: 'api', title: 'Api' },
             ]}
+            keyColumn="id"
             data={requests.map(i => ({
+              ...i,
               id: i.id,
-              inserted_at: format(i.inserted_at),
-              ip_address: i.ip_address,
-              status_code: String(i.status_code),
-              url: i.request && `${i.request.method}: ${i.request.uri}`,
+              status_code: <StatusCode code={i.status_code} />,
+              method: i.request.method,
+              path: i.request && i.request.uri,
+              client_ip: i.ip_address,
+              date: <span className="nowrap">{format(i.inserted_at, 'DD.MM.YYYY HH:mm:ss')}</span>,
               api: i.api ? <Button theme="link" to={`/apis/${i.api.id}`}>Edit API</Button> : '–',
             }))}
+            component={props =>
+              <RequestDetails
+                {...props}
+                onDeleteRequestClick={() => this.onDeleteRequestClick(props.id)}
+              />
+            }
           />
-          {
-            // <div className={styles.pagination}>
-            //   <Pagination
-            //     count={20}
-            //     current={5}
-            //     formatter={v => `/apis?page=${v}`}
-            //   />
-            // </div>
-          }
         </div>
+        <Confirm
+          title="Are you sure want to delete request?"
+          active={this.state.deleteRequestId}
+          theme="error"
+          onCancel={() => this.setState({ deleteRequestId: null })}
+          onConfirm={() => this.deleteRequest()}
+        />
       </div>
     );
   }

@@ -3,9 +3,11 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
+import NavItem from 'components/NavItem';
 import Icon from 'components/Icon';
 
 import styles from './styles.scss';
+
 
 @withStyles(styles)
 export default class Nav extends React.Component {
@@ -15,12 +17,12 @@ export default class Nav extends React.Component {
     return (
       <nav className={classnames(styles.nav, isOpen && styles.open)}>
         <ul>
-          <li className={styles.active}>
+          <NavItem to="apis" activeClassName={styles.active}>
             <Link to="/apis">API’s</Link>
-          </li>
-          <li>
+          </NavItem>
+          <NavItem to="requests" activeClassName={styles.active}>
             <Link to="/requests">Requests</Link>
-          </li>
+          </NavItem>
         </ul>
         <ul className={styles.down}>
           <li>
