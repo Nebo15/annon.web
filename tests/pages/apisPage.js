@@ -3,13 +3,15 @@ module.exports = {
     return `${this.api.launchUrl}/apis`;
   },
   elements: {
-    main: {
+    mainPageAssert: {
       selector: '#api-list-page',
     },
   },
   commands: [{
     ssr() {
-      return this.waitForElementPresent('@main').assert.visible('@main');
+      return this
+        .waitForElementPresent('@mainPageAssert')
+        .assert.visible('@mainPageAssert');
     },
   }],
 };
