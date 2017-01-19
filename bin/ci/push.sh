@@ -23,4 +23,5 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" origin HEAD:$TRAVIS_BRANCH;
     git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" origin HEAD:$TRAVIS_BRANCH --tags;
   fi;
+
 fi;
