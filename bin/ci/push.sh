@@ -26,6 +26,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git add package.json;
     git commit -m "Increment version [ci skip]";
     git push origin HEAD:$TRAVIS_BRANCH;
-    git push origin HEAD:$TRAVIS_BRANCH;
+    git push origin HEAD:$TRAVIS_BRANCH --tag;
   fi;
 fi;
