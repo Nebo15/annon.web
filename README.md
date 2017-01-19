@@ -1,6 +1,9 @@
-# API Gateway Web
+# API Gateway Dashboard
 
-API Gateway Frontend project.
+API Gateway Dashboard - manage API Gateway settings, review and replay requests from history.
+
+API: https://github.com/Nebo15/os.gateway   
+Docs: http://docs.annon.apiary.io/    
 
 ## Technologies
 
