@@ -4,9 +4,6 @@ import HttpStatusCode from 'http-status-codes';
 import Highlight from 'react-highlight';
 
 import highlight from 'highlight.js/styles/color-brewer.css';
-
-import Button from 'components/Button';
-import StatusCode from 'components/StatusCode';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import Url from 'url';
