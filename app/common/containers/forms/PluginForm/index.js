@@ -13,6 +13,7 @@ import { H3 } from 'components/Title';
 import validate from 'modules/validate';
 
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
+import PluginJWTForm from 'containers/forms/PluginJWTForm';
 
 import styles from './styles.scss';
 
@@ -20,6 +21,7 @@ const selector = formValueSelector('plugin-form');
 
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
+  jwt: PluginJWTForm,
 };
 
 @withStyles(styles)
@@ -47,9 +49,12 @@ export default class PluginForm extends React.Component {
       return;
     }
 
+    const { is_enabled } = this.props.values;
+
     this.props.onSubmit({
       ...this.props.values,
       ...this.pluginForm.values,
+      ...{ is_enabled },
     });
   }
 
