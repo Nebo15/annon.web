@@ -16,6 +16,7 @@ node_js:
 before_install:
 - sh ./bin/install-docker-travis.sh
 - npm run docker:up
+- docker-compose -f ./docker/dc.travis.yml up -d
 - chmod -R +x bin
 script:
 - npm run test
@@ -31,5 +32,4 @@ script:
 - if [ "${RUNNING_CONTAINERS//[[:space:]]/}" == "1" ]; then echo "[E] Container is
   not started!" && false; fi;
 after_success:
-- npm run report-coverage && rm -rf coverage
 - ./bin/ci/push.sh
