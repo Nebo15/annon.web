@@ -9,6 +9,15 @@
   cursor: pointer;
 }
 
+.add-plugin {
+  float: right;
+
+  span {
+    font-size: 10px;
+    padding-right: 5px;
+  }
+}
+
 .form {
   &__error {
     color: #ff1f44;

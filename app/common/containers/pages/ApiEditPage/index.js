@@ -5,6 +5,7 @@ import { format } from 'helpers/date';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { H1, H3 } from 'components/Title';
+import Button from 'components/Button';
 import Line from 'components/Line';
 import Icon from 'components/Icon';
 import { Confirm } from 'components/Popup';
@@ -62,7 +63,16 @@ export default class ApiCreatePage extends React.Component {
           onSubmit={values => this.props.onSubmitEdit(id, values)}
           onDelete={() => this.setState({ showConfirm: true })}
         >
-          <H3>Plugins</H3>
+          <H3>
+            Plugins
+
+            <div className={styles['add-plugin']}>
+              <Button to={`/apis/${id}/plugins/add`} theme="link">
+                <span><Icon name="add" /></span>
+                Add new plugin
+              </Button>
+            </div>
+          </H3>
 
           <Line width="280" />
 

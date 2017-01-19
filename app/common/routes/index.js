@@ -5,6 +5,8 @@ import ApiListPage from 'containers/pages/ApiListPage';
 import ApiCreatePage from 'containers/pages/ApiCreatePage';
 import ApiEditPage from 'containers/pages/ApiEditPage';
 
+import PluginCreatePage from 'containers/pages/PluginCreatePage';
+
 import RequestListPage from 'containers/pages/RequestListPage';
 import ExamplePage from 'containers/pages/ExamplePage';
 
@@ -20,6 +22,10 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <IndexRoute component={ApiListPage} />
           <Route path="create" component={ApiCreatePage} />
           <Route path=":apiId" component={ApiEditPage} />
+          <Route path=":apiId/plugins">
+            <Route path="add" component={PluginCreatePage} />
+            <Route path=":pluginId" />
+          </Route>
         </Route>
         <Route path="requests" component={RequestListPage} />
         <Route path="example" component={ExamplePage} />
