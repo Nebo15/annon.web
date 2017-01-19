@@ -20,7 +20,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "Done. Commiting changes back to repo.";
     git add package.json;
     git commit -m "Increment version [ci skip]";
-    git push origin HEAD:$TRAVIS_BRANCH;
-    git push origin HEAD:$TRAVIS_BRANCH --tags;
+    git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" origin HEAD:$TRAVIS_BRANCH;
+    git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" origin HEAD:$TRAVIS_BRANCH --tags;
   fi;
 fi;
