@@ -13,7 +13,7 @@ git config --global push.default upstream;
 FULL_REPO="https://$GH_TOKEN@$GH_REF";
 
 git remote rm origin
-git remote add origin FULL_REPO
+git remote add origin $FULL_REPO
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   if [ "$TRAVIS_BRANCH" == "$RELEASE_BRANCH" ]; then
