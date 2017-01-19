@@ -51,6 +51,7 @@ const Table = (props) => {
     hovered = true,
     head = true,
     tbody = true,
+    keyColumn,
     rowComponent, headComponent,
     children = [],
   } = props;
@@ -70,7 +71,11 @@ const Table = (props) => {
   if (children.length !== 0) {
     rows = Children.map(children, (child, key) => React.cloneElement(child, { columns, key }));
   } else {
-    rows = data.map((item, key) => React.createElement(Row, { columns, key, data: item }));
+    rows = data.map((item, key) => React.createElement(Row, {
+      columns,
+      key: item[keyColumn] || key,
+      data: item,
+    }));
   }
 
   if (rows.length === 0) {
