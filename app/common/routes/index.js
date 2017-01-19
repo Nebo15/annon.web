@@ -6,9 +6,9 @@ import ApiCreatePage from 'containers/pages/ApiCreatePage';
 import ApiEditPage from 'containers/pages/ApiEditPage';
 
 import PluginCreatePage from 'containers/pages/PluginCreatePage';
+import PluginEditPage from 'containers/pages/PluginEditPage';
 
 import RequestListPage from 'containers/pages/RequestListPage';
-import ExamplePage from 'containers/pages/ExamplePage';
 
 import App from 'containers/layouts/App';
 import MainLayout from 'containers/layouts/Main';
@@ -24,11 +24,10 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <Route path=":apiId" component={ApiEditPage} />
           <Route path=":apiId/plugins">
             <Route path="add" component={PluginCreatePage} />
-            <Route path=":pluginId" />
+            <Route path=":pluginId" component={PluginEditPage} />
           </Route>
         </Route>
         <Route path="requests" component={RequestListPage} />
-        <Route path="example" component={ExamplePage} />
       </Route>
     </Route>
   );

@@ -18,6 +18,10 @@ import styles from './styles.scss';
 
 const selector = formValueSelector('plugin-form');
 
+const pluginsComponentMap = {
+  proxy: PluginProxyForm,
+};
+
 @withStyles(styles)
 @reduxForm({
   form: 'plugin-form',
@@ -29,38 +33,55 @@ const selector = formValueSelector('plugin-form');
 })
 @connect(state => ({
   name: selector(state, 'name'),
-  settings: getFormValues('plugin-settings-form')(state),
+  values: getFormValues('plugin-form')(state),
 }))
 export default class PluginForm extends React.Component {
-  render() {
-    const { handleSubmit, isEdit, name, onSubmit, settings = {} } = this.props;
+  onSubmit() {
+    if (!this.pluginForm) {
+      return;
+    }
 
-    console.log(this.settingsForm);
+    this.pluginForm.submit();
+
+    if (!this.pluginForm.valid) {
+      return;
+    }
+
+    this.props.onSubmit({
+      ...this.props.values,
+      ...this.pluginForm.values,
+    });
+  }
+
+  render() {
+    const { isEdit, name } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(values => onSubmit({ ...values, ...settings }))}>
-        <Line width="280" />
+      <div>
+        <form>
+          <Line width="280" />
 
-        <div style={{ maxWidth: '280px' }} className={styles.row}>
-          <Field
-            labelText="Plugin type"
-            name="name"
-            component={FiledSelect}
-            placeholder="Select type..."
-            options={[
-              { name: 'proxy', title: 'Proxy' },
-              { name: 'jwt', title: 'JWT Authorization' },
-              { name: 'acl', title: 'ACL' },
-              { name: 'validator', title: 'Validator' },
-              { name: 'idempotency', title: 'Idempotency' },
-              { name: 'ip_restriction', title: 'IP Restriction' },
-            ]}
-          />
-        </div>
+          <div style={{ maxWidth: '280px' }} className={styles.row}>
+            <Field
+              labelText="Plugin type"
+              name="name"
+              component={FiledSelect}
+              placeholder="Select type..."
+              options={[
+                { name: 'proxy', title: 'Proxy' },
+                { name: 'jwt', title: 'JWT Authorization' },
+                { name: 'acl', title: 'ACL' },
+                { name: 'validator', title: 'Validator' },
+                { name: 'idempotency', title: 'Idempotency' },
+                { name: 'ip_restriction', title: 'IP Restriction' },
+              ]}
+            />
+          </div>
 
-        <div className={styles.row}>
-          <Field labelText="Enabled" name="is_enabled" component={FieldCheckbox} />
-        </div>
+          <div className={styles.row}>
+            <Field labelText="Enabled" name="is_enabled" component={FieldCheckbox} />
+          </div>
+        </form>
 
         <H3>Plugin settings</H3>
 
@@ -68,12 +89,15 @@ export default class PluginForm extends React.Component {
 
         <div className={styles.row}>
           { !name && <span style={{ color: '#999' }}>Select plugin type...</span> }
-          { name && <PluginProxyForm /> }
+          { name && React.createElement(pluginsComponentMap[name], {
+            ref: ref => (this.pluginForm = ref),
+            onSubmit: () => {},
+          }) }
         </div>
-        <Button type="submit">
+        <Button onClick={() => this.onSubmit()}>
           {isEdit ? 'Edit plugin' : 'Add plugin'}
         </Button>
-      </form>
+      </div>
     );
   }
 }

@@ -12,7 +12,6 @@ import validate from 'modules/validate';
 
 import styles from './styles.scss';
 
-@withStyles(styles)
 @reduxForm({
   form: 'plugin-settings-form',
   initialValues: {
@@ -32,10 +31,13 @@ import styles from './styles.scss';
     },
   }),
 })
+@withStyles(styles)
 export default class PluginProxyForm extends React.Component {
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <div id="plugin-proxy-form">
+      <form onSubmit={handleSubmit} id="plugin-proxy-form">
         <FormSection name="settings">
           <div className={styles.columns}>
             <div>
@@ -73,7 +75,7 @@ export default class PluginProxyForm extends React.Component {
             <Field labelText="Strip API path" name="strip_api_path" component={FieldCheckbox} />
           </div>
         </FormSection>
-      </div>
+      </form>
     );
   }
 }
