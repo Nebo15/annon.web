@@ -36,6 +36,10 @@
   &__header {
     border-bottom: 1px solid #e6e6e6;
     padding: 10px 12px;
+
+    &__buttons {
+      float: right;
+    }
   }
 
   &__body {

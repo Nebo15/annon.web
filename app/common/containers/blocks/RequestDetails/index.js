@@ -2,7 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import HttpStatusCode from 'http-status-codes';
 import Highlight from 'react-highlight';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
+import Button from 'components/Button';
 import highlight from 'highlight.js/styles/color-brewer.css';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
@@ -42,21 +44,37 @@ const requestToCurl = request =>
 @withStyles(highlight)
 @withStyles(styles)
 export default class RequestDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onCopy = this.onCopy.bind(this);
+  }
+  state = {
+    curlCopied: false,
+  };
+  onCopy() {
+    this.setState({ curlCopied: true }, () => {
+      setTimeout(() => {
+        this.setState({ curlCopied: false });
+      }, 1500);
+    });
+  }
   render() {
     const { request, response, latencies, ...rest } = this.props;
+    const curl = requestToCurl(request);
     return (<div className={styles.wrap}>
       <div className={styles.row}>
         <div className={styles.column}>
-          <div className={styles.column__header}>Request</div>
+          <div className={styles.column__header}>
+            Request
+            <div className={styles.column__header__buttons}>
+              <CopyToClipboard text={curl} onCopy={this.onCopy}>
+                <Button theme="link">{this.state.curlCopied ? 'Copied' : 'Copy CURL'}</Button>
+              </CopyToClipboard>
+            </div>
+          </div>
           <div className={styles.column__body}>
             <Highlight className="language-http">
               { requestToHttp(request) }
-            </Highlight>
-          </div>
-          <div className={styles.column__header}>CURL</div>
-          <div className={styles.column__body}>
-            <Highlight className="language-bash">
-              { requestToCurl(request) }
             </Highlight>
           </div>
         </div>
