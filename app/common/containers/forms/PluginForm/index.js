@@ -67,6 +67,7 @@ export default class PluginForm extends React.Component {
               name="name"
               component={FiledSelect}
               placeholder="Select type..."
+              disabled={isEdit}
               options={[
                 { name: 'proxy', title: 'Proxy' },
                 { name: 'jwt', title: 'JWT Authorization' },
@@ -95,7 +96,7 @@ export default class PluginForm extends React.Component {
           }) }
         </div>
         <Button onClick={() => this.onSubmit()}>
-          {isEdit ? 'Edit plugin' : 'Add plugin'}
+          {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
       </div>
     );

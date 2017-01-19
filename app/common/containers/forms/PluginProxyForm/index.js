@@ -58,7 +58,7 @@ export default class PluginProxyForm extends React.Component {
 
           <div className={styles.columns}>
             <div>
-              <Field parse={value => Number(value)} labelText="Port" name="port" component={FieldInput} />
+              <Field normalize={a => (isNaN(Number(a)) ? a : Number(a))} labelText="Port" type="tel" name="port" component={FieldInput} />
             </div>
             <div>
               <Field labelText="Path" name="path" component={FieldInput} />
@@ -66,10 +66,6 @@ export default class PluginProxyForm extends React.Component {
           </div>
 
           <Line width="280" />
-
-          <div className={styles.row}>
-            <Field labelText="Strip host" name="strip_host" component={FieldCheckbox} />
-          </div>
 
           <div className={styles.row}>
             <Field labelText="Strip API path" name="strip_api_path" component={FieldCheckbox} />

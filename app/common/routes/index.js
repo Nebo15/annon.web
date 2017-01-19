@@ -10,7 +10,6 @@ import PluginEditPage from 'containers/pages/PluginEditPage';
 
 import RequestListPage from 'containers/pages/RequestListPage';
 
-import ExamplePage from 'containers/pages/ExamplePage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
 
 import App from 'containers/layouts/App';
@@ -31,7 +30,6 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           </Route>
         </Route>
         <Route path="requests" component={RequestListPage} />
-        <Route path="example" component={ExamplePage} />
         <Route path="404" component={NotFoundPage} />
         <Redirect from="*" to="/404" />
       </Route>
