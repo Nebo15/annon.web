@@ -98,6 +98,14 @@ export default class PluginForm extends React.Component {
         <Button onClick={() => this.onSubmit()}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
+
+        {
+          isEdit && <div style={{ float: 'right' }}>
+            <Button color="red" onClick={() => this.props.onDelete()}>
+              Delete plugin
+            </Button>
+          </div>
+        }
       </div>
     );
   }

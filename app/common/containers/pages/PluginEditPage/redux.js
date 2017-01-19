@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { handleAction, createAction } from 'redux-actions';
 
 import { SubmissionError, initialize } from 'redux-form';
-import { updatePlugin, fetchPlugins } from 'redux/plugins';
+import { updatePlugin, fetchPlugins, unbindPlugin } from 'redux/plugins';
 
 import { mapServerErrorsToClient } from 'services/validate';
 
@@ -17,6 +17,15 @@ export const onSubmitEdit = (apiId, name, body) => dispatch => dispatch(
 
   return dispatch(push(`/apis/${apiId}`));
 });
+
+export const onUnbind = (apiId, name) => dispatch => dispatch(unbindPlugin(apiId, name))
+  .then((action) => {
+    if (action.error) {
+      return false;
+    }
+
+    return dispatch(push(`/apis/${apiId}`));
+  });
 
 export const setPlugins = createAction('apiEditPage/SET_PLUGINS');
 
