@@ -96,7 +96,7 @@ export default class ApiForm extends React.Component {
         }
 
         <Button type="submit">
-          {isEdit ? 'Edit API' : 'Create API'}
+          {isEdit ? 'Save API' : 'Create API'}
         </Button>
 
         <div style={{ float: 'right' }}>

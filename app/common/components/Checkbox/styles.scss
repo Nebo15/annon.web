@@ -7,7 +7,7 @@ $errored: #ff1f44;
   user-select: none;
 
   input {
-    display: none;
+    text-indent: -99999px;
   }
 }
 
@@ -34,7 +34,11 @@ $errored: #ff1f44;
     opacity: 0.5;
   }
 
-  input:checked + & {
+  input:focus + & {
+    border-color: #11d8fb;
+  }
+
+  .checked & {
     i {
       opacity: 1;
     }

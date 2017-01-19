@@ -4,13 +4,15 @@ import { provideHooks } from 'redial';
 import { format } from 'helpers/date';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { H1, H3 } from 'components/Title';
+import { H3 } from 'components/Title';
+import Button from 'components/Button';
 import Line from 'components/Line';
 import Icon from 'components/Icon';
 import { Confirm } from 'components/Popup';
 import Checkbox from 'components/Checkbox';
 import Table from 'components/Table';
 
+import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import ApiForm from 'containers/forms/ApiForm';
 
 import { getApi, getPlugins } from 'reducers';
@@ -21,9 +23,9 @@ import styles from './styles.scss';
 
 @withStyles(styles)
 @provideHooks({
-  fetch: ({ dispatch, params }) => dispatch([
-    fetch(params.apiId),
-    pluginsFetch(params.apiId),
+  fetch: ({ dispatch, params }) => Promise.all([
+    dispatch(fetch(params.apiId)),
+    dispatch(pluginsFetch(params.apiId)),
   ]),
 })
 @connect(state => ({
@@ -32,10 +34,6 @@ import styles from './styles.scss';
   plugins: getPlugins(state, state.pages.ApiEditPage.plugins) || [],
 }), { onSubmitEdit, onDelete, onEnable })
 export default class ApiCreatePage extends React.Component {
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired,
-  };
-
   state = {
     showConfirm: false,
   };
@@ -49,20 +47,22 @@ export default class ApiCreatePage extends React.Component {
     const { name, id } = this.props.api;
 
     return (
-      <div id="api-edit-page">
-        <H1>
-          <span onClick={() => this.context.router.goBack()} className={styles.back}>
-            <Icon name="arrow-left-large" />
-          </span>
-          Edit {name} API
-        </H1>
-
+      <FormPageWrapper id="api-edit-page" title={`Edit ${name} API`}>
         <ApiForm
           isEdit
           onSubmit={values => this.props.onSubmitEdit(id, values)}
           onDelete={() => this.setState({ showConfirm: true })}
         >
-          <H3>Plugins</H3>
+          <H3>
+            Plugins
+
+            <div className={styles['add-plugin']}>
+              <Button to={`/apis/${id}/plugins/add`} theme="link">
+                <span><Icon name="add" /></span>
+                Add new plugin
+              </Button>
+            </div>
+          </H3>
 
           <Line width="280" />
 
@@ -71,6 +71,7 @@ export default class ApiCreatePage extends React.Component {
               { key: 'date', title: 'Date' },
               { key: 'name', title: 'Name' },
               { key: 'active', title: 'Active' },
+              { key: 'actions', title: 'Actions' },
             ]}
             data={this.props.plugins.map(item => ({
               date: format(item.inserted_at),
@@ -85,6 +86,11 @@ export default class ApiCreatePage extends React.Component {
                   checked={item.is_enabled}
                 />
               ),
+              actions: (
+                <Button theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
+                  Edit&nbsp;plugin
+                </Button>
+              ),
             }))}
           />
         </ApiForm>
@@ -96,7 +102,7 @@ export default class ApiCreatePage extends React.Component {
           onCancel={() => this.setState({ showConfirm: false })}
           onConfirm={() => this.onDelete()}
         />
-      </div>
+      </FormPageWrapper>
     );
   }
 }

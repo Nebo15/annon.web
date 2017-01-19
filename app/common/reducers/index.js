@@ -6,6 +6,8 @@ import ApiListPage from 'containers/pages/ApiListPage/redux';
 import ApiCreatePage from 'containers/pages/ApiCreatePage/redux';
 import ApiEditPage from 'containers/pages/ApiEditPage/redux';
 
+import PluginEditPage from 'containers/pages/PluginEditPage/redux';
+
 import RequestListPage from 'containers/pages/RequestListPage/redux';
 
 
@@ -23,6 +25,7 @@ const pages = combineReducers({
   ApiListPage,
   ApiCreatePage,
   ApiEditPage,
+  PluginEditPage,
   RequestListPage,
 });
 
