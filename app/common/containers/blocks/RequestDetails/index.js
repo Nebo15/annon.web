@@ -59,7 +59,7 @@ export default class RequestDetails extends React.Component {
     });
   }
   render() {
-    const { request, response, latencies, ...rest } = this.props;
+    const { request, response, latencies, onDeleteRequestClick = () => {}, ...rest } = this.props;
     const curl = requestToCurl(request);
     return (<div className={styles.wrap}>
       <div className={styles.row}>
@@ -105,6 +105,7 @@ export default class RequestDetails extends React.Component {
             <p><b>ID</b>: {rest.id}</p>
             <p><b>Idempotency key</b>: {rest.idempotency_key || '–'}</p>
             <p><b>Updated at</b>: {rest.updated_at}</p>
+            <p><Button theme="link" color="red" onClick={onDeleteRequestClick}>Delete request</Button></p>
           </div>
         </div>
       </div>
