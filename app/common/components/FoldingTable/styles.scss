@@ -1,0 +1,64 @@
+$active-bg: #f3fdff;
+
+.row-sub {
+  background-color: #fff !important;
+
+  & > td {
+    padding: 0 !important;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.row {
+  cursor: pointer;
+
+  &.active {
+    background-color: $active-bg !important;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 4px;
+    vertical-align: middle;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in;
+
+    &.arrow-active {
+      transform: rotate(-180deg);
+    }
+
+    &.arrow-up,
+    &.arrow-down {
+      margin: 0 10px;
+    }
+
+    &.arrow-up {
+      color: #29e28a;
+      transform: rotate(-180deg);
+    }
+
+    &.arrow-down {
+      color: #ff1149;
+      transform: rotate(0deg);
+    }
+  }
+
+  .percent {
+    display: flex;
+    justify-content: flex-end;
+
+    div:last-child {
+      flex: 0 1 30px;
+      text-align: left;
+    }
+  }
+}
