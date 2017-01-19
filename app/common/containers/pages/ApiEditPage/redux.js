@@ -49,7 +49,7 @@ export const fetch = apiId => dispatch =>
           request: {
             ...api.request,
             methods: api.request.methods.reduce((target, item) => {
-              target[item] = true; // eslint-disable-line
+              target[item.toLowerCase()] = true; // eslint-disable-line
               return target;
             }, {}),
           },

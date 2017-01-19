@@ -10,10 +10,7 @@ let Field = ({
   formName, dispatch, // eslint-disable-line
   formSubmitFailed, ...props }) =>
 React.createElement(component, {
-  value: input.value,
-  onChange: input.onChange,
-  onBlur: input.onBlur,
-  onFocus: input.onFocus,
+  ...input,
   active: meta.active,
   error: (formSubmitFailed || (meta.dirty && !meta.active)) && meta.error,
   ...props,

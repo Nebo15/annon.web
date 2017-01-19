@@ -1,17 +1,8 @@
+.add-plugin {
+  float: right;
 
-.main {
-  position: relative;
-}
-
-.back {
-  padding-right: 17px;
-  color: #1fb6f5;
-  cursor: pointer;
-}
-
-.form {
-  &__error {
-    color: #ff1f44;
-    margin-bottom: 15px;
+  span {
+    font-size: 10px;
+    padding-right: 5px;
   }
 }

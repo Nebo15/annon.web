@@ -96,8 +96,8 @@ class Select extends React.Component {
         <section ref={ref => (this.selectNode = ref)} className={classNames}>
           <div className={styles.label}>{labelText}</div>
           <div onClick={() => this.setState({ open: !this.state.open })} className={styles.control}>
-            <span hidden={activeItem} className={styles.placeholder}>{placeholder}</span>
-            <span hidden={!activeItem}>
+            <span hidden={activeItem.title} className={styles.placeholder}>{placeholder}</span>
+            <span hidden={!activeItem.title}>
               {activeItem && activeItem.title}
             </span>
             <span className={styles.arrow} />

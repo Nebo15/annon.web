@@ -6,7 +6,10 @@ export const showApis = createAction('apiListPage/SHOW_APIS');
 
 export const fetchApis = () => dispatch =>
   dispatch(fromApis.fetchApis({ limit: 100 }))
-  .then(action => dispatch(showApis(action.payload.result)));
+  .then((action) => {
+    if (action.error) throw action;
+    return dispatch(showApis(action.payload.result));
+  });
 
 const apis = handleAction(showApis, (state, action) => action.payload, []);
 

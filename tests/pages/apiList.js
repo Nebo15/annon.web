@@ -1,10 +1,10 @@
 module.exports = {
   url() {
-    return `${this.api.launchUrl}/example`;
+    return `${this.api.launchUrl}/apis`;
   },
   elements: {
     main: {
-      selector: '#example-page',
+      selector: '#api-list-page',
     },
   },
   commands: [{

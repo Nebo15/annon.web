@@ -1,4 +1,4 @@
-import { handleAction, combineActions } from 'redux-actions';
+import { handleActions, combineActions } from 'redux-actions';
 import { ADMIN_API_URL } from 'config';
 import { normalize, arrayOf } from 'normalizr';
 import { invoke } from 'helpers/api';
@@ -19,7 +19,7 @@ export const fetchRequests = options => invoke({
   }, 'requests/FETCH_LIST_FAILURE'],
 });
 
-export const fetchApi = (requestId, options) => invoke({
+export const fetchRequest = (requestId, options) => invoke({
   endpoint: createUrl(`${ADMIN_API_URL}/requests/${requestId}`, options),
   method: 'GET',
   headers: {
@@ -33,7 +33,7 @@ export const fetchApi = (requestId, options) => invoke({
   }, 'requests/FETCH_DETAILS_FAILURE'],
 });
 
-export const deleteApi = (requestId, body, options) => invoke({
+export const deleteRequest = (requestId, body, options) => invoke({
   endpoint: createUrl(`${ADMIN_API_URL}/requests/${requestId}`, options),
   method: 'DELETE',
   headers: {
@@ -43,14 +43,12 @@ export const deleteApi = (requestId, body, options) => invoke({
   types: ['requests/DELETE_REQUEST', 'requests/DELETE_SUCCESS', 'requests/DELETE_FAILURE'],
 });
 
-export default handleAction(
-  combineActions(
+export default handleActions({
+  [combineActions(
     'requests/FETCH_LIST_SUCCESS',
     'requests/FETCH_DETAILS_SUCCESS'
-  ),
-  (state, action) => ({
+  )]: (state, action) => ({
     ...state,
     ...action.payload.entities.requests,
   }),
-  {}
-);
+}, {});

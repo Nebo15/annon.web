@@ -12,8 +12,9 @@ const Checkbox = ({
   onChange = e => e,
   onBlur, onFocus,
   error, name, labelText,
+  disabled,
 }) => (
-  <label className={classnames(styles.wrap, error && styles.isError)}>
+  <label className={classnames(styles.wrap, error && styles.isError, checked && styles.checked)}>
     {
       <input
         type="checkbox"
@@ -23,6 +24,7 @@ const Checkbox = ({
           onBlur,
           onFocus,
           name,
+          disabled,
         }}
       />
     }

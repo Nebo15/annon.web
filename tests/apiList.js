@@ -1,7 +1,7 @@
 module.exports = {
   // before: client => ,
   'Server-side rendering': (client) => {
-    client.page.example().navigate().ssr();
+    client.page.apiList().navigate().ssr();
     client.end();
   },
 };

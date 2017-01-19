@@ -5,9 +5,11 @@ import ApiListPage from 'containers/pages/ApiListPage';
 import ApiCreatePage from 'containers/pages/ApiCreatePage';
 import ApiEditPage from 'containers/pages/ApiEditPage';
 
+import PluginCreatePage from 'containers/pages/PluginCreatePage';
+import PluginEditPage from 'containers/pages/PluginEditPage';
+
 import RequestListPage from 'containers/pages/RequestListPage';
 
-import ExamplePage from 'containers/pages/ExamplePage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
 
 import App from 'containers/layouts/App';
@@ -22,9 +24,12 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <IndexRoute component={ApiListPage} />
           <Route path="create" component={ApiCreatePage} />
           <Route path=":apiId" component={ApiEditPage} />
+          <Route path=":apiId/plugins">
+            <Route path="add" component={PluginCreatePage} />
+            <Route path=":pluginId" component={PluginEditPage} />
+          </Route>
         </Route>
         <Route path="requests" component={RequestListPage} />
-        <Route path="example" component={ExamplePage} />
         <Route path="404" component={NotFoundPage} />
         <Redirect from="*" to="/404" />
       </Route>
