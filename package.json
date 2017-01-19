@@ -79,6 +79,7 @@
     "fontgen-loader": "^0.2.1",
     "history": "3.0.0",
     "ignore-styles": "^5.0.1",
+    "is-mobile": "^0.2.2",
     "isomorphic-fetch": "^2.2.1",
     "json-loader": "^0.5.4",
     "jwt-decode": "^2.1.0",

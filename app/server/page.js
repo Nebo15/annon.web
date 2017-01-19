@@ -12,6 +12,8 @@ import RouterContext from 'react-router/lib/RouterContext';
 import match from 'react-router/lib/match';
 import Router from 'react-router/lib/Router';
 
+import mobile from 'is-mobile';
+
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import Provider from 'react-redux/lib/components/Provider';
@@ -47,6 +49,7 @@ export default () => (req, res, next) => {
   });
   const router = <Router history={history}>{ routes }</Router>;
   const historyLocation = history.createLocation(req.url);
+  const isMobile = mobile(req);
 
   return match({
     routes: router, location: historyLocation,
@@ -94,6 +97,7 @@ export default () => (req, res, next) => {
           reduxState,
           inlineCss: arrayFrom(css).join(''),
           head,
+          isMobile,
         });
       })
       .catch(err => next(err));
