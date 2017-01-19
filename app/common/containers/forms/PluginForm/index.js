@@ -22,8 +22,9 @@ const selector = formValueSelector('plugin-form');
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
-  idempodancy: null,
+  idempotency: null,
 };
+const availablePlugins = Object.keys(pluginsComponentMap);
 
 @withStyles(styles)
 @reduxForm({
@@ -85,7 +86,7 @@ export default class PluginForm extends React.Component {
                 { name: 'validator', title: 'Validator' },
                 { name: 'idempotency', title: 'Idempotency' },
                 { name: 'ip_restriction', title: 'IP Restriction' },
-              ]}
+              ].filter(i => availablePlugins.indexOf(i.name) > -1)}
             />
           </div>
 
@@ -94,17 +95,22 @@ export default class PluginForm extends React.Component {
           </div>
         </form>
 
-        <H3>Plugin settings</H3>
+        {
+          (pluginsComponentMap[name]) && (<div>
+            <H3>Plugin settings</H3>
+            <Line width="280" />
 
-        <Line width="280" />
-
-        <div className={styles.row}>
-          { !name && <span style={{ color: '#999' }}>Select plugin type...</span> }
-          { name && pluginsComponentMap[name] && React.createElement(pluginsComponentMap[name], {
-            ref: ref => (this.pluginForm = ref),
-            onSubmit: () => {},
-          }) }
-        </div>
+            <div className={styles.row}>
+              { !name && <span style={{ color: '#999' }}>Select plugin type...</span> }
+              { name && pluginsComponentMap[name] &&
+                React.createElement(pluginsComponentMap[name], {
+                  ref: ref => (this.pluginForm = ref),
+                  onSubmit: () => {},
+                })
+              }
+            </div>
+          </div>)
+        }
         <Button onClick={() => this.onSubmit()}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
