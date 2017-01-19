@@ -22,6 +22,7 @@ const selector = formValueSelector('plugin-form');
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
+  idempodancy: null,
 };
 
 @withStyles(styles)
@@ -40,6 +41,10 @@ const pluginsComponentMap = {
 export default class PluginForm extends React.Component {
   onSubmit() {
     if (!this.pluginForm) {
+      this.props.onSubmit({
+        settings: { },
+        ...this.props.values,
+      });
       return;
     }
 
@@ -95,7 +100,7 @@ export default class PluginForm extends React.Component {
 
         <div className={styles.row}>
           { !name && <span style={{ color: '#999' }}>Select plugin type...</span> }
-          { name && React.createElement(pluginsComponentMap[name], {
+          { name && pluginsComponentMap[name] && React.createElement(pluginsComponentMap[name], {
             ref: ref => (this.pluginForm = ref),
             onSubmit: () => {},
           }) }
