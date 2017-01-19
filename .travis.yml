@@ -16,6 +16,7 @@ node_js:
 before_install:
 - sh ./bin/install-docker-travis.sh
 - npm run docker:up
+- docker-compose up -d
 - chmod -R +x bin
 script:
 - npm run test
