@@ -13,6 +13,7 @@ import { H3 } from 'components/Title';
 import validate from 'modules/validate';
 
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
+import PluginJWTForm from 'containers/forms/PluginJWTForm';
 
 import styles from './styles.scss';
 
@@ -20,6 +21,7 @@ const selector = formValueSelector('plugin-form');
 
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
+  jwt: PluginJWTForm,
 };
 
 @withStyles(styles)
