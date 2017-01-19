@@ -49,9 +49,12 @@ export default class PluginForm extends React.Component {
       return;
     }
 
+    const { is_enabled } = this.props.values;
+
     this.props.onSubmit({
       ...this.props.values,
       ...this.pluginForm.values,
+      ...{ is_enabled },
     });
   }
 
