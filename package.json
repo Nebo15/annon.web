@@ -143,6 +143,7 @@
     "concurrently": "2.2.0",
     "coveralls": "^2.11.14",
     "enzyme": "^2.4.1",
+    "faker": "^3.1.0",
     "eslint": "3.6.0",
     "eslint-config-airbnb": "11.2.0",
     "eslint-import-resolver-babel-module": "2.2.1",
