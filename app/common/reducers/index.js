@@ -7,6 +7,7 @@ import ApiCreatePage from 'containers/pages/ApiCreatePage/redux';
 import ApiEditPage from 'containers/pages/ApiEditPage/redux';
 
 import PluginEditPage from 'containers/pages/PluginEditPage/redux';
+import PluginCreatePage from 'containers/pages/PluginCreatePage/redux';
 
 import RequestListPage from 'containers/pages/RequestListPage/redux';
 
@@ -26,6 +27,7 @@ const pages = combineReducers({
   ApiCreatePage,
   ApiEditPage,
   PluginEditPage,
+  PluginCreatePage,
   RequestListPage,
 });
 
@@ -46,4 +48,3 @@ export const getRequests = (state, requests) => requests.map(id => getRequest(st
 
 export const getPlugin = (state, pluginId) => state.data.plugins[pluginId];
 export const getPlugins = (state, plugins) => plugins.map(id => getPlugin(state, id));
-

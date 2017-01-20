@@ -9,7 +9,7 @@ import { Confirm } from 'components/Popup';
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import PluginForm from 'containers/forms/PluginForm';
 
-import { getPlugin } from 'reducers';
+import { getPlugin, getPlugins } from 'reducers';
 
 import { onSubmitEdit, pluginsFetch, onUnbind } from './redux';
 
@@ -21,6 +21,7 @@ import styles from './styles.scss';
 })
 @connect((state, { params }) => ({
   ...state.pages.PluginEditPage,
+  plugins: getPlugins(state, state.pages.PluginEditPage.plugins).map(i => i.name),
   plugin: getPlugin(state, params.pluginId) || {},
 }), { onSubmitEdit, onUnbind })
 export default class ApiCreatePage extends React.Component {
@@ -37,11 +38,13 @@ export default class ApiCreatePage extends React.Component {
 
   render() {
     const { name, api_id } = this.props.plugin;
+    const { plugins } = this.props;
 
     return (
       <FormPageWrapper id="plugin-edit-page" title={`Edit ${name} plugin`} back={`/apis/${api_id}`}>
         <PluginForm
           isEdit
+          existingPlugins={plugins}
           onDelete={() => this.setState({ showConfirm: true })}
           onSubmit={values => this.props.onSubmitEdit(api_id, name, values)}
         />
