@@ -65,7 +65,19 @@ export default class PluginForm extends React.Component {
   }
 
   render() {
-    const { isEdit, name } = this.props;
+    const { isEdit, name, existingPlugins = [] } = this.props;
+    const pluginsSelectOptions = [
+      { name: 'proxy', title: 'Proxy' },
+      { name: 'jwt', title: 'JWT Authorization' },
+      { name: 'acl', title: 'ACL' },
+      { name: 'validator', title: 'Validator' },
+      { name: 'idempotency', title: 'Idempotency' },
+      { name: 'ip_restriction', title: 'IP Restriction' },
+    ].filter(i => availablePlugins.indexOf(i.name) > -1)
+    .map(item => ({
+      ...item,
+      disabled: existingPlugins.indexOf(item.name) > -1,
+    }));
 
     return (
       <div>
@@ -79,14 +91,7 @@ export default class PluginForm extends React.Component {
               component={FiledSelect}
               placeholder="Select type..."
               disabled={isEdit}
-              options={[
-                { name: 'proxy', title: 'Proxy' },
-                { name: 'jwt', title: 'JWT Authorization' },
-                { name: 'acl', title: 'ACL' },
-                { name: 'validator', title: 'Validator' },
-                { name: 'idempotency', title: 'Idempotency' },
-                { name: 'ip_restriction', title: 'IP Restriction' },
-              ].filter(i => availablePlugins.indexOf(i.name) > -1)}
+              options={pluginsSelectOptions}
             />
           </div>
 
