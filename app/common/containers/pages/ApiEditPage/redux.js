@@ -7,25 +7,16 @@ import { fetchPlugins, updatePlugin } from 'redux/plugins';
 
 import { mapServerErrorsToClient } from 'services/validate';
 
-export const onSubmitEdit = (apiId, { name, request: { methods, ...req } }) => dispatch => dispatch(
-  updateApi(apiId, {
-    name,
-    request: {
-      methods: Object.keys(methods).reduce((target, name) => {
-        methods[name] && target.push(name);
-        return target;
-      }, []),
-      ...req,
-    },
-  })
-).then((action) => {
-  if (action.error) {
-    const errors = mapServerErrorsToClient(action.payload.response.error);
-    throw new SubmissionError(errors);
-  }
+export const onSubmitEdit = (apiId, { name, request }) => dispatch =>
+  dispatch(updateApi(apiId, { name, request }))
+  .then((action) => {
+    if (action.error) {
+      const errors = mapServerErrorsToClient(action.payload.response.error);
+      throw new SubmissionError(errors);
+    }
 
-  return dispatch(push('/apis'));
-});
+    return dispatch(push('/apis'));
+  });
 
 export const onDelete = apiId => dispatch => dispatch(deleteApi(apiId))
   .then((action) => {
@@ -44,16 +35,7 @@ export const fetch = apiId => dispatch =>
       const apiId = action.payload.result;
       const api = action.payload.entities.apis[apiId];
       return dispatch([
-        initialize('api-form', {
-          name: api.name,
-          request: {
-            ...api.request,
-            methods: api.request.methods.reduce((target, item) => {
-              target[item.toLowerCase()] = true; // eslint-disable-line
-              return target;
-            }, {}),
-          },
-        }, true),
+        initialize('api-form', api, true),
         setApi(action.payload.result),
       ]);
     });

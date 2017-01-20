@@ -14,6 +14,7 @@ import validate from 'modules/validate';
 
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
 import PluginJWTForm from 'containers/forms/PluginJWTForm';
+import PluginACLForm from 'containers/forms/PluginACLForm';
 
 import styles from './styles.scss';
 
@@ -22,13 +23,18 @@ const selector = formValueSelector('plugin-form');
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
+  acl: PluginACLForm,
   idempotency: null,
 };
+
 const availablePlugins = Object.keys(pluginsComponentMap);
 
 @withStyles(styles)
 @reduxForm({
   form: 'plugin-form',
+  initialValues: {
+    name: 'acl',
+  },
   validate: validate({
     name: {
       required: true,
@@ -57,6 +63,8 @@ export default class PluginForm extends React.Component {
 
     const { is_enabled } = this.props.values;
 
+    console.log(this.pluginForm.values);
+
     this.props.onSubmit({
       ...this.props.values,
       ...this.pluginForm.values,
@@ -65,7 +73,19 @@ export default class PluginForm extends React.Component {
   }
 
   render() {
-    const { isEdit, name } = this.props;
+    const { isEdit, name, existingPlugins = [] } = this.props;
+    const pluginsSelectOptions = [
+      { name: 'proxy', title: 'Proxy' },
+      { name: 'jwt', title: 'JWT Authorization' },
+      { name: 'acl', title: 'ACL' },
+      { name: 'validator', title: 'Validator' },
+      { name: 'idempotency', title: 'Idempotency' },
+      { name: 'ip_restriction', title: 'IP Restriction' },
+    ].filter(i => availablePlugins.indexOf(i.name) > -1)
+    .map(item => ({
+      ...item,
+      disabled: existingPlugins.indexOf(item.name) > -1,
+    }));
 
     return (
       <div>
@@ -79,14 +99,7 @@ export default class PluginForm extends React.Component {
               component={FiledSelect}
               placeholder="Select type..."
               disabled={isEdit}
-              options={[
-                { name: 'proxy', title: 'Proxy' },
-                { name: 'jwt', title: 'JWT Authorization' },
-                { name: 'acl', title: 'ACL' },
-                { name: 'validator', title: 'Validator' },
-                { name: 'idempotency', title: 'Idempotency' },
-                { name: 'ip_restriction', title: 'IP Restriction' },
-              ].filter(i => availablePlugins.indexOf(i.name) > -1)}
+              options={pluginsSelectOptions}
             />
           </div>
 

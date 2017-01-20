@@ -1,9 +1,10 @@
 import React from 'react';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { reduxForm, Field, FormSection } from 'redux-form';
+import uniq from 'lodash/uniq';
 
 import FieldInput from 'components/reduxForm/FieldInput';
-import FieldCheckbox from 'components/reduxForm/FieldCheckbox';
+import { CheckboxGroup } from 'components/reduxForm/FieldCheckboxGroup';
 import FiledSelect from 'components/reduxForm/FieldSelect';
 
 import Button from 'components/Button';
@@ -56,10 +57,17 @@ export default class ApiForm extends React.Component {
 
         <FormSection name="request">
           <div className={styles.row}>
-            <Field labelText="Put" name="methods[put]" component={FieldCheckbox} />
-            <Field labelText="Post" name="methods[post]" component={FieldCheckbox} />
-            <Field labelText="Get" name="methods[get]" component={FieldCheckbox} />
-            <Field labelText="Delete" name="methods[delete]" component={FieldCheckbox} />
+            <CheckboxGroup
+              name="methods"
+              options={[
+                { label: 'POST', value: 'POST' },
+                { label: 'PUT', value: 'PUT' },
+                { label: 'GET', value: 'GET' },
+                { label: 'DELETE', value: 'DELETE' },
+              ]}
+              format={value => uniq((value || []).map(i => i.toUpperCase()))}
+              normalize={value => uniq(value.map(i => i.toUpperCase()))}
+            />
           </div>
 
           <div className={styles.columns}>

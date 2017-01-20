@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { H1 } from 'components/Title';
+import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import ApiForm from 'containers/forms/ApiForm';
 
 import { onSubmitCreate } from './redux';
@@ -14,11 +14,9 @@ import styles from './styles.scss';
 export default class ApiCreatePage extends React.Component {
   render() {
     return (
-      <div id="api-create-page">
-        <H1>Create API</H1>
-
+      <FormPageWrapper id="api-edit-page" title="Create API" back="/apis">
         <ApiForm onSubmit={values => this.props.onSubmitCreate(values)} />
-      </div>
+      </FormPageWrapper>
     );
   }
 }

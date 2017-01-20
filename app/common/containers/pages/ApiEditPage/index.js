@@ -28,9 +28,9 @@ import styles from './styles.scss';
     dispatch(pluginsFetch(params.apiId)),
   ]),
 })
-@connect(state => ({
+@connect((state, { params: { apiId } }) => ({
   ...state.pages.ApiEditPage,
-  api: getApi(state, state.pages.ApiEditPage.api) || {},
+  api: getApi(state, apiId) || {},
   plugins: getPlugins(state, state.pages.ApiEditPage.plugins) || [],
 }), { onSubmitEdit, onDelete, onEnable })
 export default class ApiCreatePage extends React.Component {
@@ -47,11 +47,12 @@ export default class ApiCreatePage extends React.Component {
     const { name, id } = this.props.api;
 
     return (
-      <FormPageWrapper id="api-edit-page" title={`Edit ${name} API`}>
+      <FormPageWrapper id="api-edit-page" title={`Edit ${name} API`} back="/apis">
         <ApiForm
           isEdit
           onSubmit={values => this.props.onSubmitEdit(id, values)}
           onDelete={() => this.setState({ showConfirm: true })}
+          initialValues={this.props.api}
         >
           <H3>
             Plugins
