@@ -2,10 +2,10 @@
 import faker from 'faker';
 
 module.exports = {
-  // 'apis ssr test': (client) => {
-  //   client.page.apisPage().navigate();
-  //   client.page.apisPage().apisList();
-  // },
+  'apis ssr test': (client) => {
+    client.page.apisPage().navigate();
+    client.page.apisPage().apisList();
+  },
   'create/delete API test': (client) => {
     const apiName = faker.lorem.words(1);
     const hostName = faker.lorem.words(1);
