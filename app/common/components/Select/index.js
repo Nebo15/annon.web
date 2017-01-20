@@ -23,6 +23,7 @@ class Select extends React.Component {
       PropTypes.shape({
         title: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
         name: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+        disabled: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
       })
     ).isRequired,
     onChange: PropTypes.func,
@@ -105,7 +106,14 @@ class Select extends React.Component {
           <ul ref={ref => (this.listNode = ref)} className={styles.list}>
             {
               options.map(item => (
-                <li onClick={() => this.onSelect(item)} className={item.name === activeItem.name ? styles.active : ''} key={item.name}>
+                <li
+                  onClick={() => !item.disabled && this.onSelect(item)}
+                  className={classnames(
+                    item.name === activeItem.name && styles.active,
+                    item.disabled && styles.disabled
+                  )}
+                  key={item.name}
+                >
                   {item.title}
                   {item.name === activeItem.name && <span className={styles.icon}><Icon name="check-right" /></span>}
                 </li>
