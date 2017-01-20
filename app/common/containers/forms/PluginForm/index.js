@@ -14,6 +14,7 @@ import validate from 'modules/validate';
 
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
 import PluginJWTForm from 'containers/forms/PluginJWTForm';
+import PluginACLForm from 'containers/forms/PluginACLForm';
 
 import styles from './styles.scss';
 
@@ -22,13 +23,18 @@ const selector = formValueSelector('plugin-form');
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
+  acl: PluginACLForm,
   idempotency: null,
 };
+
 const availablePlugins = Object.keys(pluginsComponentMap);
 
 @withStyles(styles)
 @reduxForm({
   form: 'plugin-form',
+  initialValues: {
+    name: 'acl',
+  },
   validate: validate({
     name: {
       required: true,
@@ -56,6 +62,8 @@ export default class PluginForm extends React.Component {
     }
 
     const { is_enabled } = this.props.values;
+
+    console.log(this.pluginForm.values);
 
     this.props.onSubmit({
       ...this.props.values,
@@ -86,7 +94,7 @@ export default class PluginForm extends React.Component {
                 { name: 'validator', title: 'Validator' },
                 { name: 'idempotency', title: 'Idempotency' },
                 { name: 'ip_restriction', title: 'IP Restriction' },
-              ].filter(i => availablePlugins.indexOf(i.name) > -1)}
+              ].filter(i => availablePlugins.indexOf(i.name) !== -1)}
             />
           </div>
 
