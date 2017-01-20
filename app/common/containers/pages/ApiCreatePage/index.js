@@ -14,7 +14,7 @@ import styles from './styles.scss';
 export default class ApiCreatePage extends React.Component {
   render() {
     return (
-      <FormPageWrapper id="api-edit-page" title="Create API" back="/apis">
+      <FormPageWrapper id="api-create-page" title="Create API" back="/apis">
         <ApiForm onSubmit={values => this.props.onSubmitCreate(values)} />
       </FormPageWrapper>
     );
