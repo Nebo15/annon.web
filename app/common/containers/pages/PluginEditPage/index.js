@@ -39,7 +39,7 @@ export default class ApiCreatePage extends React.Component {
     const { name, api_id } = this.props.plugin;
 
     return (
-      <FormPageWrapper id="plugin-edit-page" title={`Edit ${name} plugin`}>
+      <FormPageWrapper id="plugin-edit-page" title={`Edit ${name} plugin`} back={`/apis/${api_id}`}>
         <PluginForm
           isEdit
           onDelete={() => this.setState({ showConfirm: true })}

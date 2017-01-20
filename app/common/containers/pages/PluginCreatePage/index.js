@@ -14,10 +14,11 @@ import styles from './styles.scss';
 @connect(null, { onSubmitCreate })
 export default class ApiCreatePage extends React.Component {
   render() {
+    const { apiId } = this.props.params;
     return (
-      <FormPageWrapper id="plugin-create-page" title="Add new plugin to API">
+      <FormPageWrapper id="plugin-create-page" title="Add new plugin to API" back={`/apis/${apiId}`}>
         <PluginForm
-          onSubmit={values => this.props.onSubmitCreate(this.props.params.apiId, values)}
+          onSubmit={values => this.props.onSubmitCreate(apiId, values)}
         />
       </FormPageWrapper>
     );

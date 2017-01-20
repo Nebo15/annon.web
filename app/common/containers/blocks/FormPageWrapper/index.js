@@ -11,6 +11,13 @@ export default class FormPageWrapper extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   };
+  goBack() {
+    if (this.props.back) {
+      this.context.router.push(this.props.back);
+    } else {
+      this.context.router.goBack();
+    }
+  }
 
   render() {
     const { id, title, children } = this.props;
@@ -18,7 +25,7 @@ export default class FormPageWrapper extends React.Component {
     return (
       <div id={id}>
         <H1>
-          <span onClick={() => this.context.router.goBack()} className={styles.back}>
+          <span onClick={() => this.goBack()} className={styles.back}>
             <Icon name="arrow-left-large" />
           </span>
           {title}
