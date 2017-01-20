@@ -35,6 +35,11 @@ module.exports = {
     },
   },
   commands: [{
+    createApiSSR() {
+      return this
+        .waitForElementPresent('@createApiAssert')
+        .assert.visible('@createApiAssert');
+    },
     createApis({ api, host, port, path }) {
       return this
         .waitForElementPresent('@createApiAssert')
