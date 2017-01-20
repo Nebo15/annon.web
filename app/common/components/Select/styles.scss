@@ -14,7 +14,7 @@ $disabled-bg: #f5f5f5;
     color: $placeholder-color;
   }
 
-  &.disabled {
+  &.disabled .control {
     opacity: 0.5;
     background-color: $disabled-bg;
     pointer-events: none;

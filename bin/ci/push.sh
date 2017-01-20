@@ -10,6 +10,11 @@ git config --global user.email "travis@travis-ci.com";
 git config --global user.name "Travis-CI";
 git config --global push.default upstream;
 
+FULL_REPO="https://$GH_TOKEN@$GH_REF";
+
+git remote rm origin
+git remote add origin $FULL_REPO
+
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   if [ "$TRAVIS_BRANCH" == "$RELEASE_BRANCH" ]; then
     echo "Release docker container"
@@ -21,6 +26,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git add package.json;
     git commit -m "Increment version [ci skip]";
     git push origin HEAD:$TRAVIS_BRANCH;
-    git push origin HEAD:$TRAVIS_BRANCH --tags;
+    git push origin HEAD:$TRAVIS_BRANCH --tag;
   fi;
 fi;

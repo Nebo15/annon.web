@@ -61,12 +61,11 @@ class FoldingRow extends React.Component {
   }
 }
 
-const FoldingTable = ({ columns = [], data = [], name, component }) => (
-  <Table tbody={false} columns={[...columns, { key: '__actions', title: 'Show details' }]}>
+const FoldingTable = ({ columns = [], data = [], component, keyColumn, ...rest }) => (
+  <Table tbody={false} columns={[...columns, { key: '__actions', title: 'Show details' }]} {...rest} >
     {data.map((item, key) => (
       <FoldingRow
-        name={`${name}-${key}`}
-        key={key}
+        key={item[keyColumn] || key}
         data={item}
         component={component}
       />

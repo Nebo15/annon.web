@@ -27,6 +27,7 @@ import { configureRoutes } from '../common/routes';
 import WithStylesContext from '../common/WithStylesContext';
 
 export default () => (req, res, next) => {
+  const isMobile = mobile(req);
   if (__DEV__) {
     const head = Helmet.rewind();
     return res.render('index', {
@@ -34,6 +35,7 @@ export default () => (req, res, next) => {
       reduxState: null,
       inlineCss: null,
       head,
+      isMobile,
     });
   }
 
@@ -49,7 +51,6 @@ export default () => (req, res, next) => {
   });
   const router = <Router history={history}>{ routes }</Router>;
   const historyLocation = history.createLocation(req.url);
-  const isMobile = mobile(req);
 
   return match({
     routes: router, location: historyLocation,
