@@ -87,8 +87,8 @@ const ConfirmComponent = (props) => {
         {children}
       </article>
       <footer>
-        <Button theme="border" onClick={onCancel}>{cancel}</Button>
-        <Button onClick={onConfirm}>{confirm}</Button>
+        <Button id="popup-confirm-cancel" theme="border" onClick={onCancel}>{cancel}</Button>
+        <Button id="popup-confirm-ok" onClick={onConfirm}>{confirm}</Button>
       </footer>
     </Popup>
   );
