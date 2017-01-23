@@ -15,6 +15,7 @@ import validate from 'modules/validate';
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
 import PluginJWTForm from 'containers/forms/PluginJWTForm';
 import PluginACLForm from 'containers/forms/PluginACLForm';
+import PluginIPRestrictionForm from 'containers/forms/PluginIPRestrictionForm';
 
 import styles from './styles.scss';
 
@@ -24,6 +25,7 @@ const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
   acl: PluginACLForm,
+  ip_restriction: PluginIPRestrictionForm,
   idempotency: null,
 };
 
@@ -33,7 +35,7 @@ const availablePlugins = Object.keys(pluginsComponentMap);
 @reduxForm({
   form: 'plugin-form',
   initialValues: {
-    name: 'acl',
+    is_enabled: true,
   },
   validate: validate({
     name: {
@@ -62,8 +64,6 @@ export default class PluginForm extends React.Component {
     }
 
     const { is_enabled } = this.props.values;
-
-    console.log(this.pluginForm.values);
 
     this.props.onSubmit({
       ...this.props.values,
