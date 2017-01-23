@@ -13,7 +13,8 @@ module.exports = {
       path: 'test/test',
     });
     client.page.apisPage().apisList().assertNewApi(apiName);
-    client.page.apisPage().editApi().addPlugins();
+    client.page.apisPage().editApi();
+    client.page.editApiPage().addPlugins();
     client.page.pluginsPage().assertPluginsPage(); // TODO
   },
   after: (client) => {

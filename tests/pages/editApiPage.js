@@ -36,6 +36,9 @@ module.exports = {
     saveForm: {
       selector: '#api-edit-page button[type="submit"]',
     },
+    addPluginButton: {
+      selector: '#add-plugin-button',
+    },
   },
   commands: [{
     assertEditPage() {
@@ -50,6 +53,11 @@ module.exports = {
         .waitForElementPresent('@confirmDeleteButton')
         .waitForElementVisible('@cancelDeleteButton')
         .click('@confirmDeleteButton');
+    },
+    addPlugins() {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton');
     },
     editAPI({ api, host, port, path }) {
       return this

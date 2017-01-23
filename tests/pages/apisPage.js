@@ -9,9 +9,6 @@ module.exports = {
     editApiLink: {
       selector: '#edit-api-button',
     },
-    addPluginButton: {
-      selector: '#add-plugin-button',
-    },
   },
   commands: [{
     apisList() {
@@ -28,11 +25,6 @@ module.exports = {
       return this
         .waitForElementPresent('@editApiLink')
         .click('@editApiLink');
-    },
-    addPlugins() {
-      return this
-        .waitForElementPresent('@addPluginButton')
-        .click('@addPluginButton');
     },
     assertEmptyList(apiName) {
       return this
