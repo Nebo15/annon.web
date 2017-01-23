@@ -58,7 +58,7 @@ export default class ApiCreatePage extends React.Component {
             Plugins
 
             <div className={styles['add-plugin']}>
-              <Button to={`/apis/${id}/plugins/add`} theme="link">
+              <Button id="add-plugin-button" to={`/apis/${id}/plugins/add`} theme="link">
                 <span><Icon name="add" /></span>
                 Add new plugin
               </Button>

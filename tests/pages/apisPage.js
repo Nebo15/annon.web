@@ -7,7 +7,10 @@ module.exports = {
       selector: '#api-list-page',
     },
     editApiLink: {
-      selector: '#api-list-page div:nth-child(1)',
+      selector: '#edit-api-button',
+    },
+    addPluginButton: {
+      selector: '#add-plugin-button',
     },
   },
   commands: [{
@@ -25,6 +28,11 @@ module.exports = {
       return this
         .waitForElementPresent('@editApiLink')
         .click('@editApiLink');
+    },
+    addPlugins() {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton');
     },
     assertEmptyList(apiName) {
       return this
