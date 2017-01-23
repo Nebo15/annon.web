@@ -4,7 +4,7 @@ module.exports = {
   },
   elements: {
     createApiAssert: {
-      selector: '#api-create-page',
+      selector: '#api-edit-page',
     },
     apiNameInput: {
       selector: 'input[name="name"]',
