@@ -43,13 +43,14 @@ const RuleField = ({ rule, index, fields }) => (
       />
     </div>
     <div style={{ maxWidth: '280px' }} className={styles.row}>
-      <Field labelText="Path" name={`${rule}.path`} component={FieldInput} />
+      <Field labelText="Path" placeholder="^path_pattern$" name={`${rule}.path`} component={FieldInput} />
     </div>
     <div className={styles.row}>
       <Field
         labelText="Schema"
         name={`${rule}.schema`}
         component={FieldCode}
+        parse={value => JSON.parse(value)}
       />
     </div>
     <Line width="280" />

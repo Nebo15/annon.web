@@ -34,6 +34,9 @@ const availablePlugins = Object.keys(pluginsComponentMap);
 @withStyles(styles)
 @reduxForm({
   form: 'plugin-form',
+  initialValues: {
+    name: 'validator',
+  },
   validate: validate({
     name: {
       required: true,
@@ -61,10 +64,11 @@ export default class PluginForm extends React.Component {
     }
 
     const { is_enabled } = this.props.values;
+    const pluginValues = this.pluginForm.values;
 
     this.props.onSubmit({
       ...this.props.values,
-      ...this.pluginForm.values,
+      ...pluginValues,
       ...{ is_enabled },
     });
   }
