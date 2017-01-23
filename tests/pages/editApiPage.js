@@ -7,22 +7,19 @@ module.exports = {
       selector: 'button[type="button"]',
     },
     confirmDeleteButton: {
-      selector: '#api-edit-page button:nth-child(2)',
+      selector: '#popup-confirm-ok',
     },
     apiNameInput: {
       selector: 'input[name="name"]',
     },
-    apiMethodPut: {
-      selector: 'label:nth-child(1) > span:nth-child(2) > i:nth-child(1)',
-    },
     apiMethodPost: {
-      selector: 'label:nth-child(2) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(2)',
     },
     apiMethodGet: {
-      selector: 'label:nth-child(3) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(3)',
     },
     apiMethodDelete: {
-      selector: 'label:nth-child(4) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(4)',
     },
     hostInput: {
       selector: 'input[name="request.host"]',
@@ -34,7 +31,7 @@ module.exports = {
       selector: 'input[name="request.path"]',
     },
     saveForm: {
-      selector: 'button[type="submit"]:nth-child(8)',
+      selector: '#api-edit-page button[type="submit"]',
     },
   },
   commands: [{
@@ -48,6 +45,7 @@ module.exports = {
         .waitForElementPresent('@deleteApiButton')
         .click('@deleteApiButton')
         .waitForElementPresent('@confirmDeleteButton')
+        .waitForElementVisible('@confirmDeleteButton')
         .click('@confirmDeleteButton')
         .click('@confirmDeleteButton');
     },
@@ -56,8 +54,7 @@ module.exports = {
         .waitForElementPresent('@apiNameInput')
         .clearValue('@apiNameInput')
         .setValue('@apiNameInput', api)
-        .waitForElementPresent('@apiMethodPut')
-        .click('@apiMethodPut')
+        .waitForElementPresent('@apiMethodDelete')
         .click('@apiMethodDelete')
         .setValue('@hostInput', host)
         .setValue('@portInput', port)

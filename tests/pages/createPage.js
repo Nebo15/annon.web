@@ -9,17 +9,14 @@ module.exports = {
     apiNameInput: {
       selector: 'input[name="name"]',
     },
-    apiMethodPut: {
-      selector: 'label:nth-child(1) > span:nth-child(2) > i:nth-child(1)',
-    },
     apiMethodPost: {
-      selector: 'label:nth-child(2) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(2)',
     },
     apiMethodGet: {
-      selector: 'label:nth-child(3) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(3)',
     },
     apiMethodDelete: {
-      selector: 'label:nth-child(4) > span:nth-child(2) > i:nth-child(1)',
+      selector: '#api-edit-page label:nth-child(4)',
     },
     hostInput: {
       selector: 'input[name="request.host"]',
@@ -31,7 +28,7 @@ module.exports = {
       selector: 'input[name="request.path"]',
     },
     submitForm: {
-      selector: 'button[type="submit"]',
+      selector: '#api-edit-page button[type="submit"]',
     },
   },
   commands: [{
@@ -46,8 +43,7 @@ module.exports = {
         .assert.visible('@createApiAssert')
         .waitForElementPresent('@apiNameInput')
         .setValue('@apiNameInput', api)
-        .waitForElementPresent('@apiMethodPut')
-        .click('@apiMethodPut')
+        .waitForElementPresent('@apiMethodPost')
         .click('@apiMethodPost')
         .click('@apiMethodGet')
         .click('@apiMethodDelete')
