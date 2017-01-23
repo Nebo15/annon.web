@@ -8,7 +8,7 @@ import styles from './styles.scss';
 class Textarea extends Component {
   state = {
     focused: false,
-  }
+  };
 
   focusTextarea() {
     this.setState({
@@ -22,13 +22,25 @@ class Textarea extends Component {
     });
   }
 
+  parseValue() {
+    const { value } = this.props;
+
+    if (value instanceof Object) {
+      return JSON.stringify(value);
+    }
+
+    return value;
+  }
+
   render() {
     const {
       rows,
       labelText,
       disabled,
+      name,
       required,
       defaultValue,
+      onChange,
       error,
     } = this.props;
 
@@ -48,10 +60,13 @@ class Textarea extends Component {
         </div>
         <span className={styles['group-textarea']}>
           <textarea
+            name={name}
             rows={rows}
             disabled={disabled}
             className={textareaClasses}
             defaultValue={defaultValue}
+            value={this.parseValue()}
+            onChange={onChange}
             onBlur={() => this.blurTextarea()}
             onFocus={() => this.focusTextarea()}
           />
