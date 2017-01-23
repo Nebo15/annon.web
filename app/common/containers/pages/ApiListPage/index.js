@@ -36,7 +36,7 @@ export default class ApiListPage extends React.Component {
               { key: 'action', title: 'Action' },
             ]}
             data={apis.map(i => ({
-              name: i.name,
+              name: <span className={styles.name}>{i.name}</span>,
               host: `${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`,
               methods: i.request.methods.join(' ').toUpperCase(),
               action: (<Button theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),

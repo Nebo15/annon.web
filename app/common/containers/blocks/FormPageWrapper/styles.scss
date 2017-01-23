@@ -3,3 +3,11 @@
   color: #1fb6f5;
   cursor: pointer;
 }
+
+.title {
+  display: inline-block;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
