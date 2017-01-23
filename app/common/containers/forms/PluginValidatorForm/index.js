@@ -20,7 +20,6 @@ const RuleField = ({ rule, index, fields }) => (
     <div className={styles.rule}>
       <H4>
         Rule {index + 1}
-
         {index > 0 && <span>
           <Button color="red" theme="link" onClick={() => fields.remove(index)}>
               Delete
