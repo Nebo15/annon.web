@@ -28,7 +28,7 @@ export default class FormPageWrapper extends React.Component {
           <span onClick={() => this.goBack()} className={styles.back}>
             <Icon name="arrow-left-large" />
           </span>
-          {title}
+          <div className={styles.title}>{title}</div>
         </H1>
         {children}
       </div>

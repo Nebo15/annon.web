@@ -20,7 +20,7 @@ const PopupComponent = ({ children, title, active = false, theme, onClose, bgClo
   <section className={classnames(styles.popup, active && styles.active, theme && styles[`theme-${theme}`])}>
     <div className={styles.content}>
       {
-        title && <header>
+        title && <header className={styles.header}>
           <H2 color={THEMES_COLOR[theme]}>{title}</H2>
         </header>
       }
@@ -87,8 +87,8 @@ const ConfirmComponent = (props) => {
         {children}
       </article>
       <footer>
-        <Button theme="border" onClick={onCancel}>{cancel}</Button>
-        <Button onClick={onConfirm}>{confirm}</Button>
+        <Button id="popup-confirm-cancel" theme="border" onClick={onCancel}>{cancel}</Button>
+        <Button id="popup-confirm-ok" onClick={onConfirm}>{confirm}</Button>
       </footer>
     </Popup>
   );
