@@ -9,6 +9,9 @@ module.exports = {
     confirmDeleteButton: {
       selector: '#popup-confirm-ok',
     },
+    cancelDeleteButton: {
+      selector: '#popup-confirm-cancel',
+    },
     apiNameInput: {
       selector: 'input[name="name"]',
     },
@@ -45,8 +48,7 @@ module.exports = {
         .waitForElementPresent('@deleteApiButton')
         .click('@deleteApiButton')
         .waitForElementPresent('@confirmDeleteButton')
-        .waitForElementVisible('@confirmDeleteButton')
-        .click('@confirmDeleteButton')
+        .waitForElementVisible('@cancelDeleteButton')
         .click('@confirmDeleteButton');
     },
     editAPI({ api, host, port, path }) {
