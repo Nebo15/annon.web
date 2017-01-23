@@ -1,8 +1,7 @@
 import React from 'react';
+
 import CodeMirror from 'react-codemirror';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-
-import 'codemirror/mode/javascript/javascript';
 
 import codeMirrorStyles from 'codemirror/lib/codemirror.css';
 import styles from './styles.scss';
