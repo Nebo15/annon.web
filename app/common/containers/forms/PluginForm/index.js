@@ -38,7 +38,6 @@ const availablePlugins = Object.keys(pluginsComponentMap);
   form: 'plugin-form',
   initialValues: {
     is_enabled: true,
-    name: 'validator',
   },
   validate: validate({
     name: {

@@ -13,6 +13,8 @@ import { H4 } from 'components/Title';
 
 import FieldsList from 'containers/blocks/FieldsList';
 
+import validate, { collectionOf } from 'modules/validate';
+
 import styles from './styles.scss';
 
 const RuleField = ({ rule, index, fields }) => (
@@ -58,38 +60,22 @@ const RuleField = ({ rule, index, fields }) => (
 
 @reduxForm({
   form: 'plugin-settings-form',
-  validate: (values) => {
-    if (!values.settings) {
-      return;
-    }
-
-    const { rules = [] } = values.settings;
-    const errors = {
-      settings: { rules: [] },
-    };
-
-    rules.forEach((item, index) => {
-      if (!errors.settings.rules[index]) {
-        errors.settings.rules[index] = {};
-      }
-
-      if (!item || !item.path) {
-        errors.settings.rules[index].path = 'Required';
-      }
-
-      if (!item || !item.schema) {
-        errors.settings.rules[index].schema = 'Required';
-      } else {
-        try {
-          JSON.parse(item.schema);
-        } catch (e) {
-          errors.settings.rules[index].schema = 'Invalid JSON';
-        }
-      }
-    });
-
-    return errors; // eslint-disable-line
-  },
+  validate: validate({
+    'settings.rules': collectionOf({
+      path: {
+        required: true,
+      },
+      schema: {
+        required: true,
+        json: true,
+      },
+      methods: {
+        required: true,
+      },
+    }, {
+      required: true,
+    }),
+  }),
 })
 @withStyles(styles)
 export default class PluginValidatorForm extends React.Component {
