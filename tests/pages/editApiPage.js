@@ -39,6 +39,9 @@ module.exports = {
     addPluginButton: {
       selector: '#add-plugin-button',
     },
+    editPluginsButton: {
+      selector: '#edit-plugin-button',
+    },
   },
   commands: [{
     assertEditPage() {
@@ -70,6 +73,21 @@ module.exports = {
         .setValue('@portInput', port)
         .setValue('@pathInput', path)
         .click('@saveForm');
+    },
+    assertPluginsInList(plugName) {
+      return this
+        .waitForElementPresent('@editPageAssert')
+        .expect.element('@editPageAssert').text.to.contain(plugName);
+    },
+    editPluginLink() {
+      return this
+        .waitForElementPresent('@editPluginsButton')
+        .click('@editPluginsButton');
+    },
+    assertPluginsEmptyList(plugName) {
+      return this
+        .waitForElementPresent('@editPageAssert')
+        .expect.element('@editPageAssert').text.to.not.contain(plugName);
     },
   }],
 };

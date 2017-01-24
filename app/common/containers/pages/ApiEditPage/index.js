@@ -88,7 +88,7 @@ export default class ApiCreatePage extends React.Component {
                 />
               ),
               actions: (
-                <Button theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
+                <Button id="edit-plugin-button" theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
                   Edit&nbsp;plugin
                 </Button>
               ),
