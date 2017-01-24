@@ -49,7 +49,6 @@ const RuleField = ({ rule, index, fields }) => (
         labelText="Schema"
         name={`${rule}.schema`}
         component={FieldCode}
-        parse={value => JSON.parse(value)}
       />
     </div>
     <Line width="280" />

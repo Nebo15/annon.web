@@ -17,12 +17,14 @@ export default class FieldCode extends React.Component {
     return (
       <FieldInput
         component={CodeMirror}
-        value={(value instanceof Object) ? JSON.stringify(value, null, 2) : value}
+        value={typeof value !== 'string' ? JSON.stringify(value, null, 2) : value}
         options={{
           mode: 'javascript',
           readOnly: false,
           lineNumbers: true,
+          indentUnit: 2,
           tabSize: 2,
+          smartIndent: false,
         }}
         {...this.props}
       />
