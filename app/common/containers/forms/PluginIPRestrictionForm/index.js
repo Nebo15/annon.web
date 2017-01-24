@@ -5,6 +5,7 @@ import { reduxForm, Field, FieldArray } from 'redux-form';
 import FieldInput from 'components/reduxForm/FieldInput';
 
 import Button from 'components/Button';
+import Icon from 'components/Icon';
 import Line from 'components/Line';
 import { H4 } from 'components/Title';
 
@@ -14,17 +15,15 @@ import styles from './styles.scss';
 
 const RuleField = ({ rule, index, fields }) => (
   <div>
-    <div className={styles.rule}>
-      <H4>
-        <span>
-          <Button color="red" theme="link" onClick={() => fields.remove(index)}>
-              Delete
-          </Button>
-        </span>
-      </H4>
-    </div>
-    <div style={{ maxWidth: '280px' }} className={styles.row}>
-      <Field labelText="IP" name={`${rule}`} component={FieldInput} />
+    <div style={{ maxWidth: '280px' }} className={styles['delete-row']}>
+      <div>
+        <Field placeholder="127.0.0.*" name={`${rule}`} component={FieldInput} />
+      </div>
+      <div className={styles.delete}>
+        <Button color="red" theme="link" onClick={() => fields.remove(index)}>
+          <Icon name="trash" />
+        </Button>
+      </div>
     </div>
     <Line width="280" />
   </div>
