@@ -48,6 +48,7 @@ const RuleField = ({ rule, index, fields }) => (
       <Field
         labelText="Schema"
         name={`${rule}.schema`}
+        placeholder="Your JSON schema"
         component={FieldCode}
       />
     </div>
@@ -57,6 +58,38 @@ const RuleField = ({ rule, index, fields }) => (
 
 @reduxForm({
   form: 'plugin-settings-form',
+  validate: (values) => {
+    if (!values.settings) {
+      return;
+    }
+
+    const { rules = [] } = values.settings;
+    const errors = {
+      settings: { rules: [] },
+    };
+
+    rules.forEach((item, index) => {
+      if (!errors.settings.rules[index]) {
+        errors.settings.rules[index] = {};
+      }
+
+      if (!item || !item.path) {
+        errors.settings.rules[index].path = 'Required';
+      }
+
+      if (!item || !item.schema) {
+        errors.settings.rules[index].schema = 'Required';
+      } else {
+        try {
+          JSON.parse(item.schema);
+        } catch (e) {
+          errors.settings.rules[index].schema = 'Invalid JSON';
+        }
+      }
+    });
+
+    return errors; // eslint-disable-line
+  },
 })
 @withStyles(styles)
 export default class PluginValidatorForm extends React.Component {
