@@ -143,6 +143,10 @@ $text-color: #3d3d3d;
       }
     }
 
+    td {
+      width: 100% !important;
+    }
+
     tr + tr,
     tbody + tbody {
       margin-top: 10px;
