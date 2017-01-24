@@ -57,14 +57,20 @@ export default class PluginForm extends React.Component {
       return;
     }
 
-    this.pluginForm.submit();
-
     if (!this.pluginForm.valid) {
       return;
     }
 
     const { is_enabled } = this.props.values;
-    const pluginValues = this.pluginForm.values;
+    let pluginValues = this.pluginForm.values;
+
+    if (this.props.values.name === 'validator') {
+      pluginValues = JSON.parse(JSON.stringify(pluginValues));
+      pluginValues.settings.rules = pluginValues.settings.rules.map(i => ({
+        ...i,
+        schema: typeof i.schema !== 'object' ? JSON.parse(i.schema) : i.schema,
+      }));
+    }
 
     this.props.onSubmit({
       ...this.props.values,

@@ -8,17 +8,17 @@ import { mapServerErrorsToClient } from 'services/validate';
 
 export const setPlugins = createAction('apiCreatePage/SET_PLUGINS');
 
+export const onSubmitCreate = (apiId, body) => dispatch =>
+  dispatch(
+    bindPlugin(apiId, body)
+  ).then((action) => {
+    if (action.error) {
+      const errors = mapServerErrorsToClient(action.payload.response.error);
+      throw new SubmissionError(errors);
+    }
 
-export const onSubmitCreate = (apiId, body) => dispatch => dispatch(
-  bindPlugin(apiId, body)
-).then((action) => {
-  if (action.error) {
-    const errors = mapServerErrorsToClient(action.payload.response.error);
-    throw new SubmissionError(errors);
-  }
-
-  return dispatch(push(`/apis/${apiId}`));
-});
+    return dispatch(push(`/apis/${apiId}`));
+  });
 
 export const pluginsFetch = apiId => dispatch =>
   dispatch(fetchPlugins(apiId))

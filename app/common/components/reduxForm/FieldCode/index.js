@@ -12,21 +12,25 @@ import FieldInput from '../FieldInput';
 @withStyles(styles)
 export default class FieldCode extends React.Component {
   render() {
-    const { input: { value } } = this.props;
+    const { input, ...rest } = this.props;
 
     return (
       <FieldInput
+        {...input}
+        value={typeof input.value === 'object' ? JSON.stringify(input.value, null, 2) : input.value}
+        {...rest}
         component={CodeMirror}
-        value={typeof value !== 'string' ? JSON.stringify(value, null, 2) : value}
         options={{
-          mode: 'javascript',
+          mode: {
+            name: 'javascript',
+            json: true,
+          },
           readOnly: false,
           lineNumbers: true,
           indentUnit: 2,
           tabSize: 2,
           smartIndent: false,
         }}
-        {...this.props}
       />
     );
   }
