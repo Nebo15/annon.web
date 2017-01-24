@@ -7,7 +7,7 @@ module.exports = {
       selector: '#api-list-page',
     },
     editApiLink: {
-      selector: '#edit-api-button',
+      selector: '#edit-api-button-0',
     },
   },
   commands: [{

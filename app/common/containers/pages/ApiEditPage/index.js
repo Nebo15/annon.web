@@ -74,7 +74,7 @@ export default class ApiCreatePage extends React.Component {
               { key: 'active', title: 'Active' },
               { key: 'actions', title: 'Actions' },
             ]}
-            data={this.props.plugins.map(item => ({
+            data={this.props.plugins.map((item, index) => ({
               date: format(item.inserted_at),
               name: item.name,
               active: (
@@ -88,7 +88,7 @@ export default class ApiCreatePage extends React.Component {
                 />
               ),
               actions: (
-                <Button id="edit-plugin-button" theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
+                <Button id={`edit-plugin-button-${index}`} theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
                   Edit&nbsp;plugin
                 </Button>
               ),

@@ -40,7 +40,7 @@ module.exports = {
       selector: '#add-plugin-button',
     },
     editPluginsButton: {
-      selector: '#edit-plugin-button',
+      selector: '#edit-plugin-button-0',
     },
   },
   commands: [{
