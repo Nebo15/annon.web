@@ -41,14 +41,12 @@ export default class PluginIPRestrictionForm extends React.Component {
       <form onSubmit={handleSubmit} id="plugin-ip-restriction-form">
         <div className={styles.row}>
           <H4>Whitelist</H4>
-          <Line width="280" />
 
           <FieldArray notAddOnMount name="settings.whitelist" ruleComponent={RuleField} addText="Add IP" component={FieldsList} />
         </div>
 
         <div className={styles.row}>
           <H4>Blacklist</H4>
-          <Line width="280" />
         </div>
 
         <FieldArray notAddOnMount name="settings.blacklist" ruleComponent={RuleField} addText="Add IP" component={FieldsList} />
