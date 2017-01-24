@@ -55,7 +55,6 @@ module.exports = {
         .click('@deleteApiButton')
         .waitForElementPresent('@confirmDeleteButton')
         .waitForElementVisible('@cancelDeleteButton')
-        .click('@confirmDeleteButton')
         .click('@confirmDeleteButton');
     },
     addPlugins() {

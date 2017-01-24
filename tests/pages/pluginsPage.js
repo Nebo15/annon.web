@@ -65,7 +65,6 @@ module.exports = {
         .click('@deletePluginButton')
         .waitForElementPresent('@confirmDeletePluginButton')
         .waitForElementVisible('@cancelDeletePluginButton')
-        .click('@confirmDeletePluginButton')
         .click('@confirmDeletePluginButton');
     },
     enableACLPlugin(path) {
