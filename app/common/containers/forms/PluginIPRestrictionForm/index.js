@@ -2,6 +2,8 @@ import React from 'react';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
+import { validators } from 'modules/validate';
+
 import FieldInput from 'components/reduxForm/FieldInput';
 
 import Button from 'components/Button';
@@ -31,6 +33,34 @@ const RuleField = ({ rule, index, fields }) => (
 
 @reduxForm({
   form: 'plugin-settings-form',
+  validate: (values) => {
+    if (!values.settings) {
+      return;
+    }
+
+    const { whitelist = [], blacklist = [] } = values.settings;
+    const errors = {
+      settings: { whitelist: [], blacklist: [] },
+    };
+
+    whitelist.forEach((item, index) => {
+      if (!item) {
+        errors.settings.whitelist[index] = 'Required';
+      } else {
+        validators.ip(item) || (errors.settings.whitelist[index] = 'Invalid IP address');
+      }
+    });
+
+    blacklist.forEach((item, index) => {
+      if (!item) {
+        errors.settings.blacklist[index] = 'Required';
+      } else {
+        validators.ip(item) || (errors.settings.blacklist[index] = 'Invalid IP address');
+      }
+    });
+
+    return errors; // eslint-disable-line
+  },
 })
 @withStyles(styles)
 export default class PluginIPRestrictionForm extends React.Component {
