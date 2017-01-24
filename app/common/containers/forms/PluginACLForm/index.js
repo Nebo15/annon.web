@@ -30,7 +30,7 @@ const RuleField = ({ rule, index, fields }) => (
     <div style={{ marginBottom: 10 }}>
       Methods
     </div>
-    <div className={styles.row}>
+    <div id={`acl-plugin-chechboxes${index}`} className={styles.row}>
       <CheckboxGroup
         name={`${rule}.methods`}
         options={[
@@ -49,7 +49,7 @@ const RuleField = ({ rule, index, fields }) => (
     <div style={{ marginBottom: 10 }}>
       Scopes
     </div>
-    <div className={styles.row}>
+    <div id={`acl-plugin-scopes${index}`} className={styles.row}>
       <CheckboxGroup
         name={`${rule}.scopes`}
         options={[

@@ -30,6 +30,15 @@ module.exports = {
     cancelDeletePluginButton: {
       selector: '#popup-confirm-cancel',
     },
+    aclPOSTMethodSelect: {
+      selector: '#acl-plugin-chechboxes0 label:nth-child(1) span:nth-child(2)',
+    },
+    aclPathInput: {
+      selector: 'input[name="settings.rules[0].path"]',
+    },
+    scopesSelect: {
+      selector: '#acl-plugin-scopes0 label:nth-child(1) span:nth-child(2)',
+    },
   },
   commands: [{
     assertPluginsPage() {
@@ -56,7 +65,19 @@ module.exports = {
         .click('@deletePluginButton')
         .waitForElementPresent('@confirmDeletePluginButton')
         .waitForElementVisible('@cancelDeletePluginButton')
+        .click('@confirmDeletePluginButton')
         .click('@confirmDeletePluginButton');
+    },
+    enableACLPlugin(path) {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .waitForElementVisible('@addPluginButton')
+        .click('@addPluginButton')
+        .waitForElementPresent('@aclPOSTMethodSelect')
+        .click('@aclPOSTMethodSelect')
+        .setValue('@aclPathInput', path)
+        .click('@scopesSelect')
+        .click('@addPluginButton');
     },
   }],
 };
