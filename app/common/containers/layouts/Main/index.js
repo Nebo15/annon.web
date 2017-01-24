@@ -15,7 +15,9 @@ const App = ({ children }) => (
       </div>
     </main>
     <footer className={styles.footer}>
-      <Icon name="nebo15" />
+      <a href="http://nebo15.com" rel="noopener noreferrer" target="_blank">
+        <Icon name="nebo15" />
+      </a>
     </footer>
   </div>
 );
