@@ -84,7 +84,6 @@ const validate = (obj, schema, options = {}) => {
   }, {});
 
   if (typeof options.format === 'function') result = options.format(result);
-
   return result;
 };
 
@@ -166,6 +165,7 @@ validate.validators.password = function passwordValidation(value) {
   return this.format(value, /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/);
 };
 validate.validators.json = function jsonValidation(value) {
+  if (typeof value === 'object') return true;
   try {
     JSON.parse(value);
     return true;
