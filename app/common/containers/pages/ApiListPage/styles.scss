@@ -1,6 +1,13 @@
 
 .table {
   margin-top: 30px;
+
+  .name {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .pagination {

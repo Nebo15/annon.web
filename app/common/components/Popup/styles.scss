@@ -20,6 +20,10 @@ $error-color: #f52740;
   transform: translateZ(0);
   transition: opacity 0.2s ease-in-out;
 
+  .header {
+    word-break: break-all;
+  }
+
   .content {
     position: relative;
     display: flex;

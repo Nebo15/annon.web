@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import trigger from 'redial/lib/trigger';
 
+import 'codemirror/mode/javascript/javascript';
+
 import { configureStore } from '../common/store';
 import { configureRoutes } from '../common/routes';
 import WithStylesContext from '../common/WithStylesContext';
