@@ -18,7 +18,8 @@ const Button = (props) => {
     disabled = false,
     block = false,
     inheritColor = false,
-    to, children, onClick, type, id, icon,
+    type = 'button',
+    to, children, onClick, id, icon,
   } = props;
 
   const className = classnames(

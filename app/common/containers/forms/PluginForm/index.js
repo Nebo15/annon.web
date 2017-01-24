@@ -15,6 +15,7 @@ import validate from 'modules/validate';
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
 import PluginJWTForm from 'containers/forms/PluginJWTForm';
 import PluginACLForm from 'containers/forms/PluginACLForm';
+import PluginValidatorForm from 'containers/forms/PluginValidatorForm';
 
 import styles from './styles.scss';
 
@@ -24,6 +25,7 @@ const pluginsComponentMap = {
   proxy: PluginProxyForm,
   jwt: PluginJWTForm,
   acl: PluginACLForm,
+  validator: PluginValidatorForm,
   idempotency: null,
 };
 
@@ -33,7 +35,7 @@ const availablePlugins = Object.keys(pluginsComponentMap);
 @reduxForm({
   form: 'plugin-form',
   initialValues: {
-    name: 'acl',
+    name: 'validator',
   },
   validate: validate({
     name: {
@@ -55,19 +57,24 @@ export default class PluginForm extends React.Component {
       return;
     }
 
-    this.pluginForm.submit();
-
     if (!this.pluginForm.valid) {
       return;
     }
 
     const { is_enabled } = this.props.values;
+    let pluginValues = this.pluginForm.values;
 
-    console.log(this.pluginForm.values);
+    if (this.props.values.name === 'validator') {
+      pluginValues = JSON.parse(JSON.stringify(pluginValues));
+      pluginValues.settings.rules = pluginValues.settings.rules.map(i => ({
+        ...i,
+        schema: typeof i.schema !== 'object' ? JSON.parse(i.schema) : i.schema,
+      }));
+    }
 
     this.props.onSubmit({
       ...this.props.values,
-      ...this.pluginForm.values,
+      ...pluginValues,
       ...{ is_enabled },
     });
   }
