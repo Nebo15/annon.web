@@ -33,12 +33,12 @@ export default class ApiListPage extends React.Component {
               { key: 'name', title: 'Name' },
               { key: 'host', title: 'Host' },
               { key: 'methods', title: 'Methods' },
-              { key: 'action', title: 'Action' },
+              { key: 'action', title: 'Action', width: '100px' },
             ]}
             data={apis.map(i => ({
               name: <span className={styles.name}>{i.name}</span>,
-              host: `${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`,
-              methods: i.request.methods.join(' ').toUpperCase(),
+              host: <span style={{ wordBreak: 'break-all' }}>{`${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`}</span>,
+              methods: i.request.methods.join(', ').toUpperCase(),
               action: (<Button theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
             }))}
           />

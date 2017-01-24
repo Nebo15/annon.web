@@ -71,8 +71,8 @@ export default class ApiCreatePage extends React.Component {
             columns={[
               { key: 'date', title: 'Date' },
               { key: 'name', title: 'Name' },
-              { key: 'active', title: 'Active' },
-              { key: 'actions', title: 'Actions' },
+              { key: 'active', title: 'Active', width: '100px' },
+              { key: 'actions', title: 'Actions', width: '150px' },
             ]}
             data={this.props.plugins.map(item => ({
               date: format(item.inserted_at),
