@@ -43,9 +43,9 @@ describe('Button', () => {
     });
 
     describe('type', () => {
-      it('should be undefined by default', () => {
+      it('should be button by default', () => {
         const wrapper = mount(<Button />);
-        expect(wrapper.find('button').prop('type')).to.be.undefined;
+        expect(wrapper.find('button').prop('type')).to.equal('button');
       });
       it('should be passed to button', () => {
         const wrapperType = mount(<Button type="test" />);

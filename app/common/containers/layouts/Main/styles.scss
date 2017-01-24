@@ -138,11 +138,11 @@ html {
   flex-flow: column nowrap;
   width: 100vw;
   min-height: 100vh;
-  padding: 30px;
+  padding: 30px 30px 16px;
   background-image: linear-gradient(-30deg, #3d72b4 -10%, #2d2b4a 50%);
 
   @media (max-width: 860px) {
-    padding: 0;
+    padding: 0 0 16px;
 
     main {
       flex-flow: column nowrap;
@@ -168,6 +168,18 @@ html {
     padding: 60px 50px;
     max-width: 1040px;
     overflow: hidden;
+  }
+
+  .footer {
+    text-align: center;
+    color: #fff;
+    font-size: 38px;
+    padding-top: 16px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
   & > header {

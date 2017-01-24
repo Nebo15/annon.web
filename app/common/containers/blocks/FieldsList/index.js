@@ -9,11 +9,11 @@ import styles from './styles.scss';
 @withStyles(styles)
 export default class FieldsList extends React.Component {
   componentDidMount() {
-    this.props.fields.push();
+    !this.props.notAddOnMount && this.props.fields.push();
   }
 
   render() {
-    const { fields, ruleComponent } = this.props;
+    const { fields, ruleComponent, addText = 'Add rule' } = this.props;
 
     return (
       <div>
@@ -25,7 +25,7 @@ export default class FieldsList extends React.Component {
         <div className={styles['add-rule']}>
           <Button theme="link" onClick={() => fields.push()}>
             <span><Icon name="add" /></span>
-            Add rule
+            {addText}
           </Button>
         </div>
       </div>

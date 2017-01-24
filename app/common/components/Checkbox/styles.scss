@@ -1,13 +1,17 @@
 $errored: #ff1f44;
 
 .wrap {
+  position: relative;
   line-height: 1;
   display: inline-block;
   cursor: pointer;
   user-select: none;
 
   input {
-    text-indent: -99999px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
   }
 }
 
