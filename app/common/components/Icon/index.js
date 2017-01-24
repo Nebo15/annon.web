@@ -12,6 +12,7 @@ export const icons = [
   'add',
   'doc',
   'trash',
+  'nebo15',
 ];
 
 const Icon = ({ name }) => React.createElement('i', {
