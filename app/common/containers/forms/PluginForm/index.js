@@ -38,7 +38,7 @@ const availablePlugins = Object.keys(pluginsComponentMap);
   form: 'plugin-form',
   initialValues: {
     is_enabled: true,
-    name: 'validator',
+    name: 'ip_restriction',
   },
   validate: validate({
     name: {
@@ -59,6 +59,8 @@ export default class PluginForm extends React.Component {
       });
       return;
     }
+
+    this.pluginForm.submit();
 
     if (!this.pluginForm.valid) {
       return;
