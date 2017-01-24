@@ -7,7 +7,7 @@ module.exports = {
       selector: '#add-plugin-dropdown',
     },
     selectPluginIdempotency: {
-      selector: '#add-plugin-dropdown li:nth-child(4)',
+      selector: '#add-plugin-dropdown li:nth-child(5)',
     },
     selectPluginACL: {
       selector: '#add-plugin-dropdown li:nth-child(3)',

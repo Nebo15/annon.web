@@ -4,7 +4,7 @@ module.exports = {
       selector: '#api-edit-page',
     },
     deleteApiButton: {
-      selector: 'button[type="button"]',
+      selector: '#delete-api-button',
     },
     confirmDeleteButton: {
       selector: '#popup-confirm-ok',
