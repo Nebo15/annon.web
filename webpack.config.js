@@ -124,6 +124,11 @@ const config = merge({
       path: path.join(__dirname, 'static'),
     }),
   ],
+  node: {
+    fs: 'empty',
+    file: 'empty',
+    system: 'empty',
+  },
 }, genConfig);
 
 const serverConfig = merge({

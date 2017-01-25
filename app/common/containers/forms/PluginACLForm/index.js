@@ -10,6 +10,8 @@ import Button from 'components/Button';
 import Line from 'components/Line';
 import { H4 } from 'components/Title';
 
+import validate, { collectionOf } from 'modules/validate';
+
 import FieldsList from 'containers/blocks/FieldsList';
 
 import styles from './styles.scss';
@@ -64,6 +66,19 @@ const RuleField = ({ rule, index, fields }) => (
 
 @reduxForm({
   form: 'plugin-settings-form',
+  validate: validate({
+    'settings.rules': collectionOf({
+      methods: {
+        required: true,
+      },
+      path: {
+        required: true,
+      },
+      scopes: {
+        required: true,
+      },
+    }),
+  }),
 })
 @withStyles(styles)
 export default class PluginACLForm extends React.Component {
