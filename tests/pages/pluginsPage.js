@@ -39,6 +39,15 @@ module.exports = {
     scopesSelect: {
       selector: '#acl-plugin-scopes0 label:nth-child(1) span:nth-child(2)',
     },
+    proxyHostInput: {
+      selector: 'input[name="settings.host"]',
+    },
+    proxyPortInput: {
+      selector: 'input[name="settings.port"]',
+    },
+    proxyPathInput: {
+      selector: 'input[name="settings.path"]',
+    },
   },
   commands: [{
     assertPluginsPage() {
@@ -76,6 +85,16 @@ module.exports = {
         .click('@aclPOSTMethodSelect')
         .setValue('@aclPathInput', path)
         .click('@scopesSelect')
+        .click('@addPluginButton');
+    },
+    enableProxyPlugin({ host, port, path }) {
+      return this
+        .waitForElementPresent('@proxyHostInput')
+        .waitForElementVisible('@proxyHostInput')
+        .setValue('@proxyHostInput', host)
+        .setValue('@proxyPortInput', port)
+        .setValue('@proxyPathInput', path)
+        .waitForElementPresent('@addPluginButton')
         .click('@addPluginButton');
     },
   }],
