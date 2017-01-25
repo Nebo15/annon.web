@@ -4,6 +4,9 @@ import moment from 'moment';
 import setFn from 'lodash/set';
 import getFn from 'lodash/get';
 
+import { ValidateArray } from './arrayOf';
+import { ValidateCollection } from './collectionOf';
+
 /* eslint-disable */
 function validateCardNumber(value) {
 
@@ -41,12 +44,43 @@ Object.entries(validators).reduce((errors, [validatorName, validatorParams]) => 
   return errors;
 }, null);
 
+const validateCollection = (value = [], schema, values) =>
+  value.map(item => validate(item, schema, values));
+
+const validateArray = (value = [], schema, values) =>
+  value.map(item => validateValue(item, schema, values));
+
+
 const validate = (obj, schema, options = {}) => {
   const values = Object.assign({}, obj);
   let result = Object.entries(schema).reduce((errors, [path, validators]) => {
-    const validation = validateValue(getFn(obj, path), validators, values);
-    if (validation) return { ...errors, [path]: validation };
-    return errors;
+    const value = getFn(obj, path);
+    let newError = errors;
+
+    if (validators instanceof ValidateCollection) {
+      const validations = validateCollection(value, validators.schema, values);
+      if (validations) {
+        newError = Object.assign({}, validations.reduce((error, item, index) =>
+          Object.entries(item).reduce((res, [subPath, error]) => ({
+            ...res,
+            [`${path}[${index}].${subPath}`]: error,
+          }), error),
+          errors
+        ));
+      }
+    } else if (validators instanceof ValidateArray) {
+      const validations = validateArray(value, validators.schema, values);
+      if (validations) {
+        newError = Object.assign({}, errors, validations.reduce((error, item, index) => ({
+          ...error,
+          [`${path}[${index}]`]: item,
+        }), {}));
+      }
+    } else {
+      const validation = validateValue(value, validators, values);
+      if (validation) newError = { ...errors, [path]: validation };
+    }
+    return newError;
   }, {});
 
   if (typeof options.format === 'function') result = options.format(result);
@@ -55,7 +89,7 @@ const validate = (obj, schema, options = {}) => {
 
 const PATTERNS_EMAIL = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i; // eslint-disable-line
 const PATTERNS_PHONE_NUMBER = /^\+[0-9]{9,16}$/;
-const IP_PATTERN = /^[\d]{3}\.[\d]{1,3}\.[\d]{1,3}\.([\d]{1,3}|\*)$/;
+const PATTERNS_IPV4 = /^[\d]{3}\.[\d]{1,3}\.[\d]{1,3}\.([\d]{1,3}|\*)$/;
 
 export const validators = validate.validators = {
   array: value => Array.isArray(value),
@@ -66,7 +100,9 @@ export const validators = validate.validators = {
   string: value => typeof value === 'string',
 
   required: value => !!value,
-  ip: value => IP_PATTERN.test(value),
+  ipv4: function ipv4Validation(value) {
+    return this.format(value, PATTERNS_IPV4);
+  },
   min: (value, param) => value >= param,
   max: (value, param) => value <= param,
   equals: (value, param) => value === param,
@@ -128,6 +164,15 @@ export const validators = validate.validators = {
 validate.validators.password = function passwordValidation(value) {
   return this.format(value, /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/);
 };
+validate.validators.json = function jsonValidation(value) {
+  if (typeof value === 'object') return true;
+  try {
+    JSON.parse(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 const validateFn = schema => values => validate(values, schema, {
   format: errors => Object.entries(errors).reduce((prev, [path, value]) => {
@@ -136,5 +181,7 @@ const validateFn = schema => values => validate(values, schema, {
   }, {}),
 });
 
+export arrayOf from './arrayOf';
+export collectionOf from './collectionOf';
 export ErrorMessages, { ErrorMessage } from './ErrorMessages';
 export default validateFn;

@@ -31,7 +31,8 @@ export const Component = ({
   onChange,
   onBlur,
   onFocus,
-  component = 'input',
+  inputComponent = 'input',
+  component = inputComponent,
   theme = 'gray',
   className, // eslint-disable-line
   ...rest // eslint-disable-line

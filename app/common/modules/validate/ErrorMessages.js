@@ -34,7 +34,8 @@ const errors = {
   alphanumeric: 'Value must contain only latin letters and digits',
   metadata: 'Invalid metadata format',
   password: 'Password must contain at least 6 chars, one char in uppercase and one digit',
-  ip: 'Invalid IP address',
+  ipv4: 'Invalid IP address',
+  json: 'Invalid JSON',
 };
 
 export class ErrorMessage extends React.Component {
@@ -66,7 +67,7 @@ export const ErrorMessagesComponent = ({ error, children }) => {
   if (!errors) return null;
   const [errorKey, errorParams] = Object.entries(error)[0];
   const messages = React.Children.toArray(children).filter(i => i.props.when === errorKey);
-  if (!messages) return null;
+  if (!messages || messages.length === 0) return null;
   return React.cloneElement(messages[0], { ...messages[0].props, params: errorParams });
 };
 

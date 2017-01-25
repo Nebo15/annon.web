@@ -13,6 +13,8 @@ import { H4 } from 'components/Title';
 
 import FieldsList from 'containers/blocks/FieldsList';
 
+import validate, { collectionOf } from 'modules/validate';
+
 import styles from './styles.scss';
 
 const RuleField = ({ rule, index, fields }) => (
@@ -48,6 +50,7 @@ const RuleField = ({ rule, index, fields }) => (
       <Field
         labelText="Schema"
         name={`${rule}.schema`}
+        placeholder="Your JSON schema"
         component={FieldCode}
       />
     </div>
@@ -57,6 +60,20 @@ const RuleField = ({ rule, index, fields }) => (
 
 @reduxForm({
   form: 'plugin-settings-form',
+  validate: validate({
+    'settings.rules': collectionOf({
+      path: {
+        required: true,
+      },
+      schema: {
+        required: true,
+        json: true,
+      },
+      methods: {
+        required: true,
+      },
+    }),
+  }),
 })
 @withStyles(styles)
 export default class PluginValidatorForm extends React.Component {

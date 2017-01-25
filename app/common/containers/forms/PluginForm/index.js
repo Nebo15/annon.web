@@ -38,7 +38,6 @@ const availablePlugins = Object.keys(pluginsComponentMap);
   form: 'plugin-form',
   initialValues: {
     is_enabled: true,
-    name: 'ip_restriction',
   },
   validate: validate({
     name: {
@@ -72,9 +71,9 @@ export default class PluginForm extends React.Component {
 
     if (this.props.values.name === 'validator') {
       pluginValues = JSON.parse(JSON.stringify(pluginValues));
-      pluginValues.settings.rules = pluginValues.settings.rules.map(i => ({
+      pluginValues.settings.rules = pluginValues.settings.rules.map(i => i || {}).map(i => ({
         ...i,
-        schema: typeof i.schema !== 'object' ? JSON.parse(i.schema) : i.schema,
+        schema: typeof i.schema === 'string' ? JSON.parse(i.schema) : i.schema,
       }));
     }
 
