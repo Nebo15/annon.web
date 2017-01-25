@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 
 import CodeMirror from 'react-codemirror';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
@@ -18,32 +17,29 @@ export default class FieldCode extends React.Component {
     const { input, ...rest } = this.props;
 
     return (
-      <div
-        className={classnames(styles.editor, rest.meta.error && rest.meta.touched && styles.error)}
-      >
-        <FieldInput
-          {...input}
-          value={typeof input.value === 'object' ? JSON.stringify(input.value, null, 2) : input.value}
-          {...rest}
-          component={CodeMirror}
-          options={{
-            mode: {
-              name: 'application/json',
-              json: true,
-            },
-            placeholder: this.props.placeholder,
-            readOnly: false,
-            lineNumbers: true,
-            indentUnit: 2,
-            tabSize: 2,
-            smartIndent: false,
-            gutters: ['CodeMirror-lint-markers'],
-            lint: true,
-          }}
-        />
-
-        {rest.meta.error && rest.meta.touched && <div className={styles['error-message']}>{rest.meta.error}</div>}
-      </div>
+      <FieldInput
+        {...rest}
+        inputComponent={CodeMirror}
+        input={{
+          ...input,
+          value: typeof input.value === 'object' ? JSON.stringify(input.value, null, 2) : input.value,
+          onChange: value => value !== input.value && input.onChange(value),
+        }}
+        options={{
+          mode: {
+            name: 'application/json',
+            json: true,
+          },
+          placeholder: this.props.placeholder,
+          readOnly: false,
+          lineNumbers: true,
+          indentUnit: 2,
+          tabSize: 2,
+          smartIndent: false,
+          gutters: ['CodeMirror-lint-markers'],
+          lint: true,
+        }}
+      />
     );
   }
 }

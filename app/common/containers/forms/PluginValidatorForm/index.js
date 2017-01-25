@@ -72,8 +72,6 @@ const RuleField = ({ rule, index, fields }) => (
       methods: {
         required: true,
       },
-    }, {
-      required: true,
     }),
   }),
 })

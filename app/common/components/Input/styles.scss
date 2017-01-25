@@ -54,8 +54,7 @@ $errored: #ff1f44;
 }
 
 .input {
-  height: 35px;
-  padding: 11px 10px 12px;
+  min-height: 35px;
   color: #3d3d3d;
   font-size: 14px;
   width: 100%;
@@ -64,6 +63,11 @@ $errored: #ff1f44;
   &::placeholder {
     color: rgba(61, 61, 61, 0.5);
   }
+}
+
+input.input,
+textarea.input {
+  padding: 11px 10px 12px;
 }
 
 .prefix-wrapper {
@@ -106,7 +110,7 @@ $errored: #ff1f44;
 
 .error-label {
   position: absolute;
-  top: 30px;
+  top: 100%;
   right: 0;
   padding: 8px 15px 7px 13px;
   color: #fff;
