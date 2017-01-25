@@ -73,13 +73,11 @@ export default class ApiCreatePage extends React.Component {
 
           <Table
             columns={[
-              { key: 'date', title: 'Date' },
-              { key: 'name', title: 'Actions', width: '150px' },
+              { key: 'name', title: 'Name' },
               { key: 'active', title: 'Active', width: '150px' },
-              { key: 'actions', title: 'Actions' },
+              { key: 'actions', title: 'Actions', width: '150px' },
             ]}
             data={this.props.plugins.map((item, index) => ({
-              date: format(item.inserted_at),
               name: item.name,
               active: (
                 <Checkbox
