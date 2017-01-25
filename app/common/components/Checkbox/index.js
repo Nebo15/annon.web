@@ -46,4 +46,7 @@ Checkbox.PropTypes = {
   onFocus: PropTypes.func,
 };
 
+export const CheckboxGroup = withStyles(styles)(
+  ({ children }) => <span className={styles.group}>{children}</span>
+);
 export default withStyles(styles)(Checkbox);

@@ -15,6 +15,7 @@
     "chai-expect"
   ],
   "rules": {
+    "no-nested-ternary": 0,
     "new-cap": 0,
     "camelcase": 0,
     "no-bitwise": 0,
