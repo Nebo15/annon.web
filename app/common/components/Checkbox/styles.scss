@@ -6,8 +6,6 @@ $errored: #ff1f44;
   display: inline-block;
   cursor: pointer;
   user-select: none;
-  margin-top: 10px;
-  margin-left: 10px;
 
   input {
     position: absolute;
@@ -72,4 +70,9 @@ $errored: #ff1f44;
   position: relative;
   margin-top: -10px;
   margin-left: -10px;
+
+  .wrap {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
 }
