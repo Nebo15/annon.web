@@ -18,6 +18,9 @@ module.exports = {
     selectPluginJWT: {
       selector: '#add-plugin-dropdown li:nth-child(2)',
     },
+    selectPluginIPrestriction: {
+      selector: '#add-plugin-dropdown li:nth-child(6)',
+    },
     addPluginButton: {
       selector: '#plugins-button-add',
     },
@@ -47,6 +50,15 @@ module.exports = {
     },
     proxyPathInput: {
       selector: 'input[name="settings.path"]',
+    },
+    ipAdressInput: {
+      selector: 'input[name="settings.whitelist[0]"]',
+    },
+    jwtSignatureInput: {
+      selector: 'input[name="settings.signature"]',
+    },
+    selectIPFieldInput: {
+      selector: '#plugin-ip-restriction-form button[type="button"]',
     },
   },
   commands: [{
@@ -94,6 +106,23 @@ module.exports = {
         .setValue('@proxyHostInput', host)
         .setValue('@proxyPortInput', port)
         .setValue('@proxyPathInput', path)
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton');
+    },
+    enableJWTPlugin(signature) {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .waitForElementVisible('@addPluginButton')
+        .setValue('@jwtSignatureInput', signature)
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton');
+    },
+    enableIPPlugin(ip) {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .waitForElementVisible('@addPluginButton')
+        .click('@selectIPFieldInput')
+        .setValue('@ipAdressInput', ip)
         .waitForElementPresent('@addPluginButton')
         .click('@addPluginButton');
     },
