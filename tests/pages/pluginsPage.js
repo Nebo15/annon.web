@@ -34,13 +34,13 @@ module.exports = {
       selector: '#popup-confirm-cancel',
     },
     aclPOSTMethodSelect: {
-      selector: '#acl-plugin-chechboxes0 label:nth-child(1) span:nth-child(2)',
+      selector: '#acl-plugin-chechboxes0 label:nth-child(1)',
     },
     aclPathInput: {
       selector: 'input[name="settings.rules[0].path"]',
     },
     scopesSelect: {
-      selector: '#acl-plugin-scopes0 label:nth-child(1) span:nth-child(2)',
+      selector: '#acl-plugin-scopes0 label:nth-child(1)',
     },
     proxyHostInput: {
       selector: 'input[name="settings.host"]',
