@@ -17,7 +17,6 @@ import { configureStore } from '../common/store';
 import { configureRoutes } from '../common/routes';
 import WithStylesContext from '../common/WithStylesContext';
 
-
 promise.polyfill();
 
 window.jsonlint = require('jsonlint').parser;
