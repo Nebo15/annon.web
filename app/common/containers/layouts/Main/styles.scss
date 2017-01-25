@@ -194,3 +194,7 @@ html {
 :global(.nowrap) {
   white-space: nowrap;
 }
+
+:global(.break-all) {
+  word-break: break-all;
+}

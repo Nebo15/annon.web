@@ -12,10 +12,13 @@ import StatusCode from 'components/StatusCode';
 import Button from 'components/Button';
 import { format } from 'helpers/date';
 
+import URLPath from 'components/URLPath';
+
 import { getRequests } from 'reducers';
 
 import { fetchRequests, deleteRequest } from './redux';
 import styles from './styles.scss';
+
 
 @withStyles(styles)
 @provideHooks({
@@ -48,23 +51,29 @@ export default class RequestListPage extends React.Component {
         <div className={styles.table}>
           <FoldingTable
             columns={[
-              { key: 'status_code', title: 'Status' },
-              { key: 'method', title: 'Method' },
+              { key: 'status_code', title: 'Status', width: '80px' },
+              { key: 'method', title: 'Method', width: '80px' },
               { key: 'path', title: 'Path' },
-              { key: 'client_ip', title: 'Client IP' },
-              { key: 'date', title: 'Date' },
-              { key: 'api', title: 'Api' },
+              { key: 'client_ip', title: 'Client IP', width: '100px' },
+              { key: 'date', title: 'Date', width: '130px' },
+              { key: 'api', title: 'Api', width: '100px' },
             ]}
+            detailsColumn={{
+              title: 'Details',
+              width: '80px',
+            }}
             keyColumn="id"
             data={requests.map(i => ({
               ...i,
               id: i.id,
               status_code: <StatusCode code={i.status_code} />,
               method: i.request.method,
-              path: i.request && i.request.uri,
+              path: <URLPath>{i.request && i.request.uri}</URLPath>,
               client_ip: i.ip_address,
               date: <span className="nowrap">{format(i.inserted_at, 'DD.MM.YYYY HH:mm:ss')}</span>,
-              api: i.api ? <Button theme="link" to={`/apis/${i.api.id}`}>Edit API</Button> : '–',
+              api: i.api && typeof i.api.id !== 'undefined'
+                ? <Button theme="link" to={`/apis/${i.api.id}`}>Edit API</Button>
+                : '–',
             }))}
             component={props =>
               <RequestDetails

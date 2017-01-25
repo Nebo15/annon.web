@@ -6,6 +6,8 @@ $errored: #ff1f44;
   display: inline-block;
   cursor: pointer;
   user-select: none;
+  margin-top: 10px;
+  margin-left: 10px;
 
   input {
     position: absolute;
@@ -51,7 +53,7 @@ $errored: #ff1f44;
 
 .label {
   display: inline-block;
-  margin: 0 20px 0 10px;
+  margin: 0 10px;
   vertical-align: middle;
 }
 
@@ -63,4 +65,11 @@ $errored: #ff1f44;
   i {
     color: $errored;
   }
+}
+
+.group {
+  display: inline-block;
+  position: relative;
+  margin-top: -10px;
+  margin-left: -10px;
 }

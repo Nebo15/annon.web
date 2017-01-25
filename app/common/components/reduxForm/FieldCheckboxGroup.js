@@ -1,5 +1,5 @@
 import React from 'react';
-import Checkbox from 'components/Checkbox';
+import Checkbox, { CheckboxGroup as CheckboxGroupWrap } from 'components/Checkbox';
 import { Field } from 'redux-form';
 
 import FieldInput from './FieldInput';
@@ -28,7 +28,7 @@ const FieldCheckboxGroup = ({ checkboxValue, input, ...props }) =>
 export default FieldCheckboxGroup;
 
 export const CheckboxGroup = ({ options, name, ...rest }) => (
-  <span>
+  <CheckboxGroupWrap>
     { options.map(item => (
       <Field
         {...rest}
@@ -39,5 +39,5 @@ export const CheckboxGroup = ({ options, name, ...rest }) => (
         component={FieldCheckboxGroup}
       />
     ))}
-  </span>
+  </CheckboxGroupWrap>
 );
