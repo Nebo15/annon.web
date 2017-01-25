@@ -72,7 +72,7 @@
     "decimal.js-light": "^2.0.2",
     "dotenv": "2.0.0",
     "ejs": "2.4.2",
-    "es6-promise": "^3.2.1",
+    "es6-promise": "^3.3.1",
     "express": "4.14.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file": "^0.2.2",
