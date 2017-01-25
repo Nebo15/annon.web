@@ -11,6 +11,8 @@ import PluginCreatePage from 'containers/pages/PluginCreatePage/redux';
 
 import RequestListPage from 'containers/pages/RequestListPage/redux';
 
+import Aside from 'containers/blocks/Aside/redux';
+
 
 import apis from 'redux/apis';
 import requests from 'redux/requests';
@@ -31,11 +33,16 @@ const pages = combineReducers({
   RequestListPage,
 });
 
+const blocks = combineReducers({
+  Aside,
+});
+
 export default combineReducers({
   form: formReducer,
   routing: routerReducer,
   data,
   pages,
+  blocks,
 });
 
 export const getForm = (state, formName) => state.form[formName];
