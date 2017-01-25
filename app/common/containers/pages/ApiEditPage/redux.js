@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { handleAction, createAction } from 'redux-actions';
+import { handleAction, createAction, handleActions } from 'redux-actions';
 import { push } from 'react-router-redux';
 import { SubmissionError, initialize } from 'redux-form';
 import { updateApi, fetchApi, deleteApi } from 'redux/apis';
@@ -43,12 +43,16 @@ export const fetch = apiId => dispatch =>
 const api = handleAction(setApi, (state, action) => action.payload, {});
 
 export const setPlugins = createAction('apiEditPage/SET_PLUGINS');
+export const cleanPlugins = createAction('apiEditPage/CLEAN');
 
 export const pluginsFetch = apiId => dispatch =>
   dispatch(fetchPlugins(apiId))
     .then(action => dispatch(setPlugins(action.payload.result)));
 
-const plugins = handleAction(setPlugins, (state, action) => action.payload, []);
+const plugins = handleActions({
+  [setPlugins]: (state, action) => action.payload,
+  [cleanPlugins]: () => [],
+}, []);
 
 export const onEnable = (apiId, name, body) => dispatch =>
   dispatch(updatePlugin(apiId, name, body));
