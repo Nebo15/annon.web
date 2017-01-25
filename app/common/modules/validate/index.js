@@ -55,8 +55,9 @@ const validate = (obj, schema, options = {}) => {
 
 const PATTERNS_EMAIL = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i; // eslint-disable-line
 const PATTERNS_PHONE_NUMBER = /^\+[0-9]{9,16}$/;
+const IP_PATTERN = /^[\d]{3}\.[\d]{1,3}\.[\d]{1,3}\.([\d]{1,3}|\*)$/;
 
-validate.validators = {
+export const validators = validate.validators = {
   array: value => Array.isArray(value),
   object: value => value !== null && typeof value === 'object',
   integer: value => Number(value) === value && value % 1 === 0,
@@ -65,6 +66,7 @@ validate.validators = {
   string: value => typeof value === 'string',
 
   required: value => !!value,
+  ip: value => IP_PATTERN.test(value),
   min: (value, param) => value >= param,
   max: (value, param) => value <= param,
   equals: (value, param) => value === param,

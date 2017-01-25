@@ -17,7 +17,7 @@ import ApiForm from 'containers/forms/ApiForm';
 
 import { getApi, getPlugins } from 'reducers';
 
-import { onSubmitEdit, fetch, pluginsFetch, onDelete, onEnable } from './redux';
+import { onSubmitEdit, fetch, pluginsFetch, onDelete, onEnable, cleanPlugins } from './redux';
 
 import styles from './styles.scss';
 
@@ -32,11 +32,15 @@ import styles from './styles.scss';
   ...state.pages.ApiEditPage,
   api: getApi(state, apiId) || {},
   plugins: getPlugins(state, state.pages.ApiEditPage.plugins) || [],
-}), { onSubmitEdit, onDelete, onEnable })
+}), { onSubmitEdit, onDelete, onEnable, cleanPlugins })
 export default class ApiCreatePage extends React.Component {
   state = {
     showConfirm: false,
   };
+
+  componentWillUnmount() {
+    this.props.cleanPlugins();
+  }
 
   onDelete() {
     this.setState({ showConfirm: false });

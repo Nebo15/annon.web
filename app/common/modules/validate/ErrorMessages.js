@@ -34,6 +34,7 @@ const errors = {
   alphanumeric: 'Value must contain only latin letters and digits',
   metadata: 'Invalid metadata format',
   password: 'Password must contain at least 6 chars, one char in uppercase and one digit',
+  ip: 'Invalid IP address',
 };
 
 export class ErrorMessage extends React.Component {
