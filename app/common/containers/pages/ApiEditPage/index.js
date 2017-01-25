@@ -74,8 +74,8 @@ export default class ApiCreatePage extends React.Component {
           <Table
             columns={[
               { key: 'date', title: 'Date' },
-              { key: 'name', title: 'Name' },
-              { key: 'active', title: 'Active' },
+              { key: 'active', title: 'Active', width: '100px' },
+              { key: 'actions', title: 'Actions', width: '150px' },
               { key: 'actions', title: 'Actions' },
             ]}
             data={this.props.plugins.map((item, index) => ({
