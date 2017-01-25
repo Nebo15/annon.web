@@ -8,7 +8,6 @@ import trigger from 'redial/lib/trigger';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/display/placeholder';
-
 import 'codemirror/addon/lint/lint';
 import 'codemirror/addon/lint/json-lint';
 
