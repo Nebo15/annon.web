@@ -30,9 +30,9 @@ export default class ApiListPage extends React.Component {
         <div className={styles.table}>
           <Table
             columns={[
-              { key: 'name', title: 'Name' },
+              { key: 'name', title: 'Name', width: '150px' },
               { key: 'host', title: 'Host' },
-              { key: 'methods', title: 'Methods' },
+              { key: 'methods', title: 'Methods', width: '190px' },
               { key: 'action', title: 'Action', width: '100px' },
             ]}
             data={apis.map(i => ({

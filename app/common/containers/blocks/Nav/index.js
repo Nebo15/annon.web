@@ -8,9 +8,15 @@ import Icon from 'components/Icon';
 
 import styles from './styles.scss';
 
-
 @withStyles(styles)
 export default class Nav extends React.Component {
+  componentWillReceiveProps(props) {
+    if (props.isOpen) {
+      document.documentElement.classList.add(styles.navIsOpen);
+    } else {
+      document.documentElement.classList.remove(styles.navIsOpen);
+    }
+  }
   render() {
     const { isOpen } = this.props;
 

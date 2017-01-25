@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import { format } from 'helpers/date';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { H3 } from 'components/Title';
@@ -73,13 +72,11 @@ export default class ApiCreatePage extends React.Component {
 
           <Table
             columns={[
-              { key: 'date', title: 'Date' },
               { key: 'name', title: 'Name' },
               { key: 'active', title: 'Active', width: '100px' },
               { key: 'actions', title: 'Actions', width: '150px' },
             ]}
             data={this.props.plugins.map(item => ({
-              date: format(item.inserted_at),
               name: item.name,
               active: (
                 <Checkbox

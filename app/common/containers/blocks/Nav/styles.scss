@@ -1,9 +1,12 @@
+$nav-breakpoint: 860px;
+
 .nav {
   padding: 47px 0 0 37px;
   font-weight: 300;
 
-  @media (max-width: 860px) {
+  @media (max-width: $nav-breakpoint) {
     position: fixed;
+    z-index: 10;
     top: 84px;
     left: 0;
     right: 0;
@@ -110,5 +113,11 @@
     vertical-align: middle;
     text-decoration: none;
     color: #fff;
+  }
+}
+
+html.navIsOpen {
+  @media (max-width: $nav-breakpoint) {
+    overflow: hidden;
   }
 }
