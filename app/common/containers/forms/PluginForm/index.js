@@ -194,7 +194,6 @@ export default class PluginForm extends React.Component {
           </div>)
         }
         <Button id="plugins-button-add" onClick={() => this.onSubmit()} disabled={!this.isChanged}>
-        <Button onClick={() => this.onSubmit()}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
 
