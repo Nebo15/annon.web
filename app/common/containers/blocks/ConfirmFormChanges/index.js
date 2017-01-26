@@ -38,13 +38,13 @@ export default class ConfirmFormChanges extends React.Component {
   render() {
     return (
       <Confirm
-        title="Your changes not saving"
+        title="You have unsaved changes"
         active={this.state.showConfirm}
         theme="error"
         confirm="Ok"
         onCancel={() => this.setState({ showConfirm: false })}
         onConfirm={() => this.confirmLocation()}
-      >Leave this page?</Confirm>
+      >Are you sure want to leave this page?</Confirm>
     );
   }
 }
