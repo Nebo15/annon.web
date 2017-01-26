@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
@@ -9,6 +10,9 @@ import Icon from 'components/Icon';
 import styles from './styles.scss';
 
 @withStyles(styles)
+@connect(state => ({
+  location: state.routing,
+}))
 export default class Nav extends React.Component {
   componentWillReceiveProps(props) {
     if (props.isOpen) {
