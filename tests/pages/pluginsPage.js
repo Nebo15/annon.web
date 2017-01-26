@@ -21,6 +21,9 @@ module.exports = {
     selectPluginIPrestriction: {
       selector: '#add-plugin-dropdown li:nth-child(6)',
     },
+    selectPluginValidation: {
+      selector: '#add-plugin-dropdown li:nth-child(4)',
+    },
     addPluginButton: {
       selector: '#plugins-button-add',
     },
@@ -59,6 +62,15 @@ module.exports = {
     },
     selectIPFieldInput: {
       selector: '#plugin-ip-restriction-form button[type="button"]',
+    },
+    validationMethodCheckboxPost: {
+      selector: '#validation-methods-0 label:nth-child(1) ',
+    },
+    validationPathInput: {
+      selector: 'input[name="settings.rules[0].path"]',
+    },
+    validationShemaField: {
+      selector: '.CodeMirror.cm-s-default.CodeMirror-empty>div>textarea',
     },
   },
   commands: [{
@@ -126,6 +138,18 @@ module.exports = {
         .waitForElementVisible('@addPluginButton')
         .click('@selectIPFieldInput')
         .setValue('@ipAdressInput', ip)
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton');
+    },
+    enableValidationPlugin(path) {
+      return this
+        .waitForElementPresent('@validationMethodCheckboxPost')
+        .waitForElementVisible('@validationMethodCheckboxPost')
+        .click('@validationMethodCheckboxPost')
+        .setValue('@validationPathInput', path);
+    },
+    submitValidationPlugin() {
+      return this
         .waitForElementPresent('@addPluginButton')
         .click('@addPluginButton');
     },

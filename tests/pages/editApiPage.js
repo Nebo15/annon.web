@@ -42,9 +42,6 @@ module.exports = {
     addPluginButton: {
       selector: '#add-plugin-button',
     },
-    editPluginsButton: {
-      selector: '#edit-plugin-button-0',
-    },
   },
   commands: [{
     assertEditPage() {
@@ -85,10 +82,10 @@ module.exports = {
         .waitForElementPresent('@pluginsTableList')
         .expect.element('@pluginsTableList').text.to.contain(plugName);
     },
-    editPluginLink() {
+    editPluginLink(plugName) {
       return this
-        .waitForElementPresent('@editPluginsButton')
-        .click('@editPluginsButton');
+        .waitForElementPresent(`#edit-plugin-button-${plugName}`)
+        .click(`#edit-plugin-button-${plugName}`);
     },
     assertPluginsEmptyList(plugName) {
       return this
