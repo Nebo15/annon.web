@@ -9,6 +9,9 @@ module.exports = {
     editApiLink: {
       selector: '#edit-api-button-0',
     },
+    apiTableList: {
+      selector: '#api-table',
+    },
   },
   commands: [{
     apisList() {
@@ -18,8 +21,8 @@ module.exports = {
     },
     assertNewApi(apiName) {
       return this
-        .waitForElementPresent('@mainPageAssert')
-        .expect.element('@mainPageAssert').text.to.contain(apiName);
+        .waitForElementPresent('@apiTableList')
+        .expect.element('@apiTableList').text.to.contain(apiName);
     },
     editApi() {
       return this
@@ -28,8 +31,8 @@ module.exports = {
     },
     assertEmptyList(apiName) {
       return this
-        .waitForElementPresent('@mainPageAssert')
-        .expect.element('@mainPageAssert').text.to.not.contain(apiName);
+        .waitForElementPresent('@apiTableList')
+        .expect.element('@apiTableList').text.to.not.contain(apiName);
     },
   }],
 };

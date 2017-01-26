@@ -83,7 +83,10 @@ module.exports = {
     deletePlugins() {
       return this
         .waitForElementPresent('@deletePluginButton')
-        .click('@deletePluginButton')
+        .click('@deletePluginButton');
+    },
+    confirmDeletePlugins() {
+      return this
         .waitForElementPresent('@confirmDeletePluginButton')
         .waitForElementVisible('@cancelDeletePluginButton')
         .click('@confirmDeletePluginButton');

@@ -24,7 +24,10 @@ module.exports = {
     });
     client.page.apisPage().apisList().assertNewApi(editApiName);
     client.page.apisPage().editApi();
-    client.page.editApiPage().assertEditPage().deleteApis();
+    client.page.editApiPage().assertEditPage();
+    client.page.editApiPage().deleteApis();
+    client.pause(1000);
+    client.page.editApiPage().confirmDeleteApis();
     client.page.apisPage().apisList().assertEmptyList(apiName);
   },
   after: (client) => {

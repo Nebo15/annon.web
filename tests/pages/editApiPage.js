@@ -3,6 +3,9 @@ module.exports = {
     editPageAssert: {
       selector: '#api-edit-page',
     },
+    pluginsTableList: {
+      selector: '#api-plugins-table',
+    },
     deleteApiButton: {
       selector: '#delete-api-button',
     },
@@ -52,7 +55,10 @@ module.exports = {
     deleteApis() {
       return this
         .waitForElementPresent('@deleteApiButton')
-        .click('@deleteApiButton')
+        .click('@deleteApiButton');
+    },
+    confirmDeleteApis() {
+      return this
         .waitForElementPresent('@confirmDeleteButton')
         .waitForElementVisible('@cancelDeleteButton')
         .click('@confirmDeleteButton');
@@ -76,8 +82,8 @@ module.exports = {
     },
     assertPluginsInList(plugName) {
       return this
-        .waitForElementPresent('@editPageAssert')
-        .expect.element('@editPageAssert').text.to.contain(plugName);
+        .waitForElementPresent('@pluginsTableList')
+        .expect.element('@pluginsTableList').text.to.contain(plugName);
     },
     editPluginLink() {
       return this
@@ -86,8 +92,8 @@ module.exports = {
     },
     assertPluginsEmptyList(plugName) {
       return this
-        .waitForElementPresent('@editPageAssert')
-        .expect.element('@editPageAssert').text.to.not.contain(plugName);
+        .waitForElementPresent('@pluginsTableList')
+        .expect.element('@pluginsTableList').text.to.not.contain(plugName);
     },
   }],
 };

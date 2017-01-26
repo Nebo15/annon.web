@@ -27,7 +27,7 @@ export default class ApiListPage extends React.Component {
       <div id="api-list-page">
         <H1>API's</H1>
         <p>Select API to edit API’s plugins</p>
-        <div className={styles.table}>
+        <div id="api-table" className={styles.table}>
           <Table
             columns={[
               { key: 'name', title: 'Name', width: '150px' },
