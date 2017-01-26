@@ -27,7 +27,7 @@ export default class ApiListPage extends React.Component {
       <div id="api-list-page">
         <H1>API's</H1>
         <p>Select API to edit API’s plugins</p>
-        <div className={styles.table}>
+        <div id="api-table" className={styles.table}>
           <Table
             columns={[
               { key: 'name', title: 'Name', width: '150px' },
@@ -39,7 +39,7 @@ export default class ApiListPage extends React.Component {
               name: <span className={styles.name}>{i.name}</span>,
               host: <span style={{ wordBreak: 'break-all' }}>{`${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`}</span>,
               methods: i.request.methods.join(', ').toUpperCase(),
-              action: (<Button theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
+              action: (<Button id={`edit-api-button-${i.name}`} theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
             }))}
           />
           {

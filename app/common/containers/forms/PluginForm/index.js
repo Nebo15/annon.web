@@ -161,7 +161,7 @@ export default class PluginForm extends React.Component {
         <form>
           <Line width="280" />
 
-          <div style={{ maxWidth: '280px' }} className={styles.row}>
+          <div id="add-plugin-dropdown" style={{ maxWidth: '280px' }} className={styles.row}>
             <Field
               labelText="Plugin type"
               name="name"
@@ -193,13 +193,14 @@ export default class PluginForm extends React.Component {
             </div>
           </div>)
         }
-        <Button onClick={() => this.onSubmit()} disabled={!this.isChanged}>
+        <Button id="plugins-button-add" onClick={() => this.onSubmit()} disabled={!this.isChanged}>
+        <Button onClick={() => this.onSubmit()}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
 
         {
           isEdit && <div style={{ float: 'right' }}>
-            <Button color="red" onClick={() => this.props.onDelete()}>
+            <Button id="plugins-button-delete" color="red" onClick={() => this.props.onDelete()}>
               Delete plugin
             </Button>
           </div>
