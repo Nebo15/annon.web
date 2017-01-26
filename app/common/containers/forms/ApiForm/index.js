@@ -108,7 +108,7 @@ export default class ApiForm extends React.Component {
         </Button>
 
         <div style={{ float: 'right' }}>
-          {isEdit && <Button type="button" onClick={onDelete} color="red">Delete API</Button>}
+          {isEdit && <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>}
         </div>
       </form>
     );

@@ -61,7 +61,7 @@ export default class ApiCreatePage extends React.Component {
             Plugins
 
             <div className={styles['add-plugin']}>
-              <Button to={`/apis/${id}/plugins/add`} theme="link">
+              <Button id="add-plugin-button" to={`/apis/${id}/plugins/add`} theme="link">
                 <span><Icon name="add" /></span>
                 Add new plugin
               </Button>
@@ -69,32 +69,33 @@ export default class ApiCreatePage extends React.Component {
           </H3>
 
           <Line width="280" />
-
-          <Table
-            columns={[
+          <div id="api-plugins-table">
+            <Table
+              columns={[
               { key: 'name', title: 'Name' },
               { key: 'active', title: 'Active', width: '100px' },
               { key: 'actions', title: 'Actions', width: '150px' },
-            ]}
-            data={this.props.plugins.map(item => ({
-              name: item.name,
-              active: (
-                <Checkbox
-                  onChange={checked => this.props.onEnable(
+              ]}
+              data={this.props.plugins.map((item, index) => ({
+                name: item.name,
+                active: (
+                  <Checkbox
+                    onChange={checked => this.props.onEnable(
                     item.api_id,
                     item.name,
                     { is_enabled: checked },
                   )}
-                  checked={item.is_enabled}
-                />
+                    checked={item.is_enabled}
+                  />
               ),
-              actions: (
-                <Button theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
+                actions: (
+                  <Button id={`edit-plugin-button-${index}`} theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
                   Edit&nbsp;plugin
-                </Button>
+                  </Button>
               ),
-            }))}
-          />
+              }))}
+            />
+          </div>
         </ApiForm>
 
         <Confirm
