@@ -32,7 +32,7 @@ const RuleField = ({ rule, index, fields }) => (
     <div style={{ marginBottom: 10 }}>
       Methods
     </div>
-    <div className={styles.row}>
+    <div id={`validation-methods-${index}`} className={styles.row}>
       <CheckboxGroup
         name={`${rule}.methods`}
         options={[

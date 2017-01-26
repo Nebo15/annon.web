@@ -17,7 +17,7 @@ module.exports = {
     client.page.editApiPage().addPlugins();
     client.page.pluginsPage().assertPluginsPage().selectPlugins('Idempotency').enableIdempotencyPlugin();
     client.page.editApiPage().assertPluginsInList('idempotency');
-    client.page.editApiPage().editPluginLink();
+    client.page.editApiPage().editPluginLink('idempotency');
     client.page.pluginsPage().deletePlugins();
     client.pause(1000);
     client.page.pluginsPage().confirmDeletePlugins();
@@ -107,6 +107,28 @@ module.exports = {
     client.page.editApiPage().addPlugins();
     client.page.pluginsPage().assertPluginsPage().selectPlugins('IPrestriction').enableIPPlugin('127.0.0.5');
     client.page.editApiPage().assertPluginsInList('ip_restriction');
+    client.page.editApiPage().deleteApis();
+    client.pause(1000);
+    client.page.editApiPage().confirmDeleteApis();
+    client.page.apisPage().apisList().assertEmptyList(apiName);
+  },
+  'add validation plugin test': (client) => {
+    const apiName = faker.name.firstName();
+    const hostName = faker.lorem.words(1);
+
+    client.page.createPage().navigate().createApis({
+      api: apiName,
+      host: hostName,
+      port: '9091',
+      path: 'test/test',
+    });
+    client.page.apisPage().apisList().assertNewApi(apiName);
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().addPlugins();
+    client.page.pluginsPage().assertPluginsPage().selectPlugins('Validation').enableValidationPlugin('/');
+    client.keys(client.Keys.TAB).keys('{}');
+    client.page.pluginsPage().submitValidationPlugin();
+    client.page.editApiPage().assertPluginsInList('validator');
     client.page.editApiPage().deleteApis();
     client.pause(1000);
     client.page.editApiPage().confirmDeleteApis();

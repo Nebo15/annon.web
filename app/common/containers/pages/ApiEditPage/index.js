@@ -76,7 +76,7 @@ export default class ApiCreatePage extends React.Component {
               { key: 'active', title: 'Active', width: '100px' },
               { key: 'actions', title: 'Actions', width: '150px' },
               ]}
-              data={this.props.plugins.map((item, index) => ({
+              data={this.props.plugins.map(item => ({
                 name: item.name,
                 active: (
                   <Checkbox
@@ -89,7 +89,7 @@ export default class ApiCreatePage extends React.Component {
                   />
               ),
                 actions: (
-                  <Button id={`edit-plugin-button-${index}`} theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
+                  <Button id={`edit-plugin-button-${item.name}`} theme="link" to={`/apis/${item.api_id}/plugins/${item.id}`}>
                   Edit&nbsp;plugin
                   </Button>
               ),
