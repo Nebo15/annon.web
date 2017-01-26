@@ -6,9 +6,6 @@ module.exports = {
     mainPageAssert: {
       selector: '#api-list-page',
     },
-    editApiLink: {
-      selector: '#edit-api-button-0',
-    },
     apiTableList: {
       selector: '#api-table',
     },
@@ -24,10 +21,10 @@ module.exports = {
         .waitForElementPresent('@apiTableList')
         .expect.element('@apiTableList').text.to.contain(apiName);
     },
-    editApi() {
+    editApi(apiName) {
       return this
-        .waitForElementPresent('@editApiLink')
-        .click('@editApiLink');
+        .waitForElementPresent(`#edit-api-button-${apiName}`)
+        .click(`#edit-api-button-${apiName}`);
     },
     assertEmptyList(apiName) {
       return this
