@@ -28,10 +28,10 @@ module.exports = {
       selector: '#plugins-button-delete',
     },
     confirmDeletePluginButton: {
-      selector: '#popup-confirm-ok',
+      selector: '#confirm-delete-plugin button[name="popup-confirm-ok"]',
     },
     cancelDeletePluginButton: {
-      selector: '#popup-confirm-cancel',
+      selector: '#confirm-delete-plugin button[name="popup-confirm-cancel"]',
     },
     aclPOSTMethodSelect: {
       selector: '#acl-plugin-chechboxes0 label:nth-child(1)',

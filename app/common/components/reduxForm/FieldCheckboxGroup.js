@@ -10,7 +10,7 @@ const addToArray = (arr = [], value) => [...arr, value];
 const toggleValue = (arr, value) =>
   (containsValue(arr, value) ? removeFromArray(arr, value) : addToArray(arr, value));
 
-const containsValue = (arr, value) => (arr || []).indexOf(value) > -1;
+const containsValue = (arr, value) => (arr || []).indexOf(value) !== -1;
 
 const FieldCheckboxGroup = ({ checkboxValue, input, ...props }) =>
   <FieldInput

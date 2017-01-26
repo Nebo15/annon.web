@@ -102,6 +102,7 @@ export default class ApiCreatePage extends React.Component {
           title={`Delete ${name} API?`}
           active={this.state.showConfirm}
           theme="error"
+          id="confirm-delete-api"
           onCancel={() => this.setState({ showConfirm: false })}
           onConfirm={() => this.onDelete()}
         />

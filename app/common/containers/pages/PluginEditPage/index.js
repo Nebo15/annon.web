@@ -53,6 +53,7 @@ export default class ApiCreatePage extends React.Component {
           title={`Delete ${name} plugin?`}
           active={this.state.showConfirm}
           theme="error"
+          id="confirm-delete-plugin"
           onCancel={() => this.setState({ showConfirm: false })}
           onConfirm={() => this.onDelete()}
         />

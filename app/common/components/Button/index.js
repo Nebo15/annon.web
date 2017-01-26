@@ -19,7 +19,7 @@ const Button = (props) => {
     block = false,
     inheritColor = false,
     type = 'button',
-    to, children, onClick, id, icon,
+    to, children, onClick, id, icon, name,
   } = props;
 
   const className = classnames(
@@ -42,7 +42,7 @@ const Button = (props) => {
 
   if (to === undefined) {
     return (
-      <button id={id} onClick={onClick} type={type} className={className}>
+      <button name={name} id={id} onClick={onClick} type={type} className={className}>
         {content}
       </button>
     );
