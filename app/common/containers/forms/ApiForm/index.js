@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
-import { reduxForm, Field, FormSection } from 'redux-form';
+import { reduxForm, Field, FormSection, getFormValues } from 'redux-form';
 import uniq from 'lodash/uniq';
 
 import FieldInput from 'components/reduxForm/FieldInput';
@@ -10,6 +12,8 @@ import FiledSelect from 'components/reduxForm/FieldSelect';
 import Button from 'components/Button';
 import Line from 'components/Line';
 import { H3 } from 'components/Title';
+
+import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
 import validate from 'modules/validate';
 
@@ -35,9 +39,23 @@ import styles from './styles.scss';
     },
   }),
 })
+@connect(state => ({
+  values: getFormValues('api-form')(state),
+}))
 export default class ApiForm extends React.Component {
+  state = {
+    isConfirmed: false,
+    showConfirm: false,
+    location: null,
+  };
+
+  get isChanged() {
+    const { values = {}, initialValues = {} } = this.props;
+    return JSON.stringify(values) !== JSON.stringify(initialValues);
+  }
+
   render() {
-    const { handleSubmit, onSubmit, onDelete, isEdit, children } = this.props;
+    const { handleSubmit, onSubmit, onDelete, isEdit, children, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,13 +78,13 @@ export default class ApiForm extends React.Component {
             <CheckboxGroup
               name="methods"
               options={[
-                { label: 'POST', value: 'POST' },
-                { label: 'PUT', value: 'PUT' },
-                { label: 'GET', value: 'GET' },
-                { label: 'DELETE', value: 'DELETE' },
+                { label: 'POST', value: 'post' },
+                { label: 'PUT', value: 'put' },
+                { label: 'GET', value: 'get' },
+                { label: 'DELETE', value: 'delete' },
               ]}
-              format={value => uniq((value || []).map(i => i.toUpperCase()))}
-              normalize={value => uniq(value.map(i => i.toUpperCase()))}
+              format={value => uniq((value || []).map(i => i.toLowerCase()))}
+              normalize={value => uniq(value.map(i => i.toLowerCase()))}
             />
           </div>
 
@@ -103,13 +121,15 @@ export default class ApiForm extends React.Component {
           </div>
         }
 
-        <Button type="submit">
+        <Button type="submit" disabled={!this.isChanged}>
           {isEdit ? 'Save API' : 'Create API'}
         </Button>
 
         <div style={{ float: 'right' }}>
           {isEdit && <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>}
         </div>
+
+        <ConfirmFormChanges submitting={submitting} isChanged={this.isChanged} />
       </form>
     );
   }
