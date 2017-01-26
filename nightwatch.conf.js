@@ -3,7 +3,7 @@ require('babel-core/register');
 
 const config = {
   src_folders: [
-    'tests/pluginsTest.js',
+    'tests',
   ],
   custom_commands_path: '',
   custom_assertions_path: '',
