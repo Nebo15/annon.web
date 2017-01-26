@@ -18,6 +18,8 @@ import PluginACLForm from 'containers/forms/PluginACLForm';
 import PluginIPRestrictionForm from 'containers/forms/PluginIPRestrictionForm';
 import PluginValidatorForm from 'containers/forms/PluginValidatorForm';
 
+import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
+
 import styles from './styles.scss';
 
 const selector = formValueSelector('plugin-form');
@@ -48,14 +50,28 @@ const availablePlugins = Object.keys(pluginsComponentMap);
 @connect(state => ({
   name: selector(state, 'name'),
   values: getFormValues('plugin-form')(state),
+  pluginValues: getFormValues('plugin-settings-form')(state),
 }))
 export default class PluginForm extends React.Component {
+  state = {
+    submitting: false,
+  };
+
+  componentWillReceiveProps({ pluginValues, values }) {
+    if (!this.pluginInitialValues && pluginValues) {
+      this.pluginInitialValues = values;
+    }
+  }
+
   onSubmit() {
     if (!this.pluginForm) {
+      this.setState({ submitting: true });
+
       this.props.onSubmit({
         settings: { },
         ...this.props.values,
       });
+
       return;
     }
 
@@ -65,9 +81,11 @@ export default class PluginForm extends React.Component {
       return;
     }
 
+    this.setState({ submitting: true });
+
     const { is_enabled } = this.props.values;
 
-    let pluginValues = this.pluginForm.values;
+    let pluginValues = this.pluginForm.values || {};
 
     if (this.props.values.name === 'validator') {
       pluginValues = JSON.parse(JSON.stringify(pluginValues));
@@ -82,6 +100,45 @@ export default class PluginForm extends React.Component {
       ...pluginValues,
       ...{ is_enabled },
     });
+  }
+
+  pluginInitialValues = null;
+
+  get isChanged() {
+    if (!this.pluginInitialValues || !this.pluginForm) {
+      return true;
+    }
+
+    const { values = {} } = this.props;
+    const { is_enabled } = values;
+
+    let pluginValues = this.pluginForm.values;
+
+    if (this.props.values.name === 'validator' && pluginValues.settings) {
+      pluginValues = JSON.parse(JSON.stringify(pluginValues));
+      try {
+        pluginValues.settings.rules = pluginValues.settings.rules.map((item) => {
+          if (!item) {
+            return {};
+          }
+
+          if (item.schema instanceof Object) {
+            return item;
+          }
+
+          return {
+            ...item,
+            schema: JSON.parse(item.schema),
+          };
+        });
+      } catch (e) {
+        return true;
+      }
+    }
+
+    const currentValues = JSON.stringify({ ...values, ...pluginValues, is_enabled });
+
+    return currentValues !== JSON.stringify(this.pluginInitialValues);
   }
 
   render() {
@@ -136,7 +193,7 @@ export default class PluginForm extends React.Component {
             </div>
           </div>)
         }
-        <Button onClick={() => this.onSubmit()}>
+        <Button onClick={() => this.onSubmit()} disabled={!this.isChanged}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
 
@@ -147,6 +204,8 @@ export default class PluginForm extends React.Component {
             </Button>
           </div>
         }
+
+        <ConfirmFormChanges submitting={this.state.submitting} isChanged={this.isChanged} />
       </div>
     );
   }
