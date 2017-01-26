@@ -10,10 +10,10 @@ module.exports = {
       selector: '#delete-api-button',
     },
     confirmDeleteButton: {
-      selector: '#popup-confirm-ok',
+      selector: '#confirm-delete-api button[name="popup-confirm-ok"]',
     },
     cancelDeleteButton: {
-      selector: '#popup-confirm-cancel',
+      selector: '#confirm-delete-api button[name="popup-confirm-cancel"]',
     },
     apiNameInput: {
       selector: 'input[name="name"]',

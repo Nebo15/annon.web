@@ -57,7 +57,7 @@ export default class PluginForm extends React.Component {
     submitting: false,
   };
 
-  componentWillReceiveProps({ pluginValues, values }) {
+  componentWillReceiveProps({ values, pluginValues }) {
     if (!this.pluginInitialValues && pluginValues) {
       this.pluginInitialValues = values;
     }
@@ -105,14 +105,18 @@ export default class PluginForm extends React.Component {
   pluginInitialValues = null;
 
   get isChanged() {
-    if (!this.pluginInitialValues || !this.pluginForm) {
-      return true;
+    if (!this.pluginForm) {
+      return false;
+    }
+
+    let pluginValues = this.pluginForm.values;
+
+    if (!this.pluginInitialValues) {
+      return false;
     }
 
     const { values = {} } = this.props;
     const { is_enabled } = values;
-
-    let pluginValues = this.pluginForm.values;
 
     if (this.props.values.name === 'validator' && pluginValues.settings) {
       pluginValues = JSON.parse(JSON.stringify(pluginValues));
@@ -156,6 +160,8 @@ export default class PluginForm extends React.Component {
       disabled: existingPlugins.indexOf(item.name) > -1,
     }));
 
+    console.log(this.isChanged);
+
     return (
       <div>
         <form>
@@ -193,7 +199,7 @@ export default class PluginForm extends React.Component {
             </div>
           </div>)
         }
-        <Button id="plugins-button-add" onClick={() => this.onSubmit()} disabled={!this.isChanged}>
+        <Button id="plugins-button-add" onClick={() => this.onSubmit()} disabled={!this.isChanged && this.pluginForm}>
           {isEdit ? 'Save plugin' : 'Add plugin'}
         </Button>
 
