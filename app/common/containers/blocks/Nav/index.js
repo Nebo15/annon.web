@@ -28,7 +28,7 @@ export default class Nav extends React.Component {
       <nav className={classnames(styles.nav, isOpen && styles.open)}>
         <ul>
           <NavItem to="apis" activeClassName={styles.active}>
-            <Link to="/apis">API’s</Link>
+            <Link id="apis-nav" to="/apis">API’s</Link>
           </NavItem>
           <NavItem to="requests" activeClassName={styles.active}>
             <Link to="/requests">Requests</Link>

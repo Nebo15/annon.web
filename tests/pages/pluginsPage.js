@@ -69,9 +69,6 @@ module.exports = {
     validationPathInput: {
       selector: 'input[name="settings.rules[0].path"]',
     },
-    validationShemaField: {
-      selector: '.CodeMirror.cm-s-default.CodeMirror-empty>div>textarea',
-    },
   },
   commands: [{
     assertPluginsPage() {
