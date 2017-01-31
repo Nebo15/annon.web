@@ -21,6 +21,12 @@ module.exports = {
     cancelDeleteButton: {
       selector: '#confirm-delete-api button[name="popup-confirm-cancel"]',
     },
+    confirmLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-ok"]',
+    },
+    cancelLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-cancel"]',
+    },
     apiNameInput: {
       selector: 'input[name="name"]',
     },
@@ -123,8 +129,9 @@ module.exports = {
     },
     assertPopup() {
       return this
-        .waitForElementPresent('@editPageAssert')
-        .waitForElementPresent('@confirmDeleteButton');
+        .waitForElementPresent('@confirmLeaveButton')
+        .waitForElementPresent('@cancelLeaveButton')
+        .click('@confirmLeaveButton');
     },
   }],
 };

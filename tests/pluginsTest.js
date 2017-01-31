@@ -134,6 +134,30 @@ module.exports = {
     client.page.editApiPage().confirmDeleteApis();
     client.page.apisPage().apisList().assertEmptyList(apiName);
   },
+  'add JWT plugin without save test': (client) => {
+    const apiName = faker.name.firstName();
+    const hostName = faker.lorem.words(1);
+
+    client.page.createPage().navigate().createApis({
+      api: apiName,
+      host: hostName,
+      port: '8085',
+      path: 'sadasd/asd',
+    });
+    client.page.apisPage().apisList().assertNewApi(apiName);
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().addPlugins();
+    client.page.pluginsPage().assertPluginsPage().selectPlugins('JWT').enableJWTPluginWithoutSave('vdvtqmbfqu3k244019m8ag3kt8ade9ao');
+    client.page.editApiPage().saveChangesPopupAssert();
+    client.pause(500);
+    client.page.pluginsPage().assertPluginsPopup();
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().assertPluginsEmptyList('jwt');
+    client.page.editApiPage().deleteApis();
+    client.pause(1000);
+    client.page.editApiPage().confirmDeleteApis();
+    client.page.apisPage().apisList().assertEmptyList(apiName);
+  },
   after: (client) => {
     client.end();
   },

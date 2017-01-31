@@ -42,6 +42,7 @@ export default class ConfirmFormChanges extends React.Component {
         active={this.state.showConfirm}
         theme="error"
         confirm="Ok"
+        id="confirm-leave"
         onCancel={() => this.setState({ showConfirm: false })}
         onConfirm={() => this.confirmLocation()}
       >Are you sure want to leave this page?</Confirm>

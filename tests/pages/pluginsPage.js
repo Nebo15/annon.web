@@ -24,6 +24,12 @@ module.exports = {
     selectPluginValidation: {
       selector: '#add-plugin-dropdown li:nth-child(4)',
     },
+    confirmLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-ok"]',
+    },
+    cancelLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-cancel"]',
+    },
     addPluginButton: {
       selector: '#plugins-button-add',
     },
@@ -129,6 +135,14 @@ module.exports = {
         .waitForElementPresent('@addPluginButton')
         .click('@addPluginButton');
     },
+    enableJWTPluginWithoutSave(signature) {
+      return this
+        .waitForElementPresent('@addPluginButton')
+        .click('@addPluginButton')
+        .waitForElementPresent('@addPluginButton')
+        .waitForElementVisible('@addPluginButton')
+        .setValue('@jwtSignatureInput', signature);
+    },
     enableIPPlugin(ip) {
       return this
         .waitForElementPresent('@addPluginButton')
@@ -149,6 +163,12 @@ module.exports = {
       return this
         .waitForElementPresent('@addPluginButton')
         .click('@addPluginButton');
+    },
+    assertPluginsPopup() {
+      return this
+        .waitForElementPresent('@confirmLeaveButton')
+        .waitForElementPresent('@cancelLeaveButton')
+        .click('@confirmLeaveButton');
     },
   }],
 };
