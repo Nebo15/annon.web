@@ -72,6 +72,32 @@ module.exports = {
     client.page.editApiPage().confirmDeleteApis();
     client.page.apisPage().apisList().assertEmptyList(apiName);
   },
+  'add proxy plugin bad params test': (client) => {
+    const apiName = faker.name.firstName();
+    const hostName = faker.lorem.words(1);
+
+    client.page.createPage().navigate().createApis({
+      api: apiName,
+      host: hostName,
+      port: '9091',
+      path: 'test/test',
+    });
+    client.page.apisPage().apisList().assertNewApi(apiName);
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().addPlugins();
+    client.page.pluginsPage().assertPluginsPage().selectPlugins('Proxy').enableProxyPlugin({
+      host: 'saddsadsdasads',
+      port: 'asdads',
+      path: 'asdasd',
+    });
+    client.page.pluginsPage().assertPluginsPage();
+    client.page.apisPage().navigate();
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().deleteApis();
+    client.pause(1000);
+    client.page.editApiPage().confirmDeleteApis();
+    client.page.apisPage().apisList().assertEmptyList(apiName);
+  },
   'add JWT plugin test': (client) => {
     const apiName = faker.name.firstName();
     const hostName = faker.lorem.words(1);
@@ -129,6 +155,30 @@ module.exports = {
     client.keys(client.Keys.TAB).keys('{}');
     client.page.pluginsPage().submitValidationPlugin();
     client.page.editApiPage().assertPluginsInList('validator');
+    client.page.editApiPage().deleteApis();
+    client.pause(1000);
+    client.page.editApiPage().confirmDeleteApis();
+    client.page.apisPage().apisList().assertEmptyList(apiName);
+  },
+  'validation plugin bad JSON shema test': (client) => {
+    const apiName = faker.name.firstName();
+    const hostName = faker.lorem.words(1);
+
+    client.page.createPage().navigate().createApis({
+      api: apiName,
+      host: hostName,
+      port: '9091',
+      path: 'test/test',
+    });
+    client.page.apisPage().apisList().assertNewApi(apiName);
+    client.page.apisPage().editApi(apiName);
+    client.page.editApiPage().addPlugins();
+    client.page.pluginsPage().assertPluginsPage().selectPlugins('Validation').enableValidationPlugin('/');
+    client.keys(client.Keys.TAB).keys('eqweqw');
+    client.page.pluginsPage().submitValidationPlugin();
+    client.page.pluginsPage().assertPluginsPage();
+    client.page.apisPage().navigate();
+    client.page.apisPage().editApi(apiName);
     client.page.editApiPage().deleteApis();
     client.pause(1000);
     client.page.editApiPage().confirmDeleteApis();
