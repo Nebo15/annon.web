@@ -3,6 +3,12 @@ module.exports = {
     editPageAssert: {
       selector: '#api-edit-page',
     },
+    backToMainPage: {
+      selector: '#apis-nav',
+    },
+    mainPageAssert: {
+      selector: '#api-list-page',
+    },
     pluginsTableList: {
       selector: '#api-plugins-table',
     },
@@ -14,6 +20,12 @@ module.exports = {
     },
     cancelDeleteButton: {
       selector: '#confirm-delete-api button[name="popup-confirm-cancel"]',
+    },
+    confirmLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-ok"]',
+    },
+    cancelLeaveButton: {
+      selector: '#confirm-leave button[name="popup-confirm-cancel"]',
     },
     apiNameInput: {
       selector: 'input[name="name"]',
@@ -77,6 +89,19 @@ module.exports = {
         .setValue('@pathInput', path)
         .click('@saveForm');
     },
+    editAPIwithoutSave({ api, host, port, path }) {
+      return this
+        .waitForElementPresent('@saveForm')
+        .click('@saveForm')
+        .waitForElementPresent('@apiNameInput')
+        .clearValue('@apiNameInput')
+        .setValue('@apiNameInput', api)
+        .waitForElementPresent('@apiMethodDelete')
+        .click('@apiMethodDelete')
+        .setValue('@hostInput', host)
+        .setValue('@portInput', port)
+        .setValue('@pathInput', path);
+    },
     assertPluginsInList(plugName) {
       return this
         .waitForElementPresent('@pluginsTableList')
@@ -91,6 +116,22 @@ module.exports = {
       return this
         .waitForElementPresent('@pluginsTableList')
         .expect.element('@pluginsTableList').text.to.not.contain(plugName);
+    },
+    assertErrorCreateApi() {
+      return this
+        .waitForElementPresent('@editPageAssert')
+        .waitForElementNotPresent('@mainPageAssert');
+    },
+    saveChangesPopupAssert() {
+      return this
+        .waitForElementPresent('@backToMainPage')
+        .click('@backToMainPage');
+    },
+    assertPopup() {
+      return this
+        .waitForElementPresent('@confirmLeaveButton')
+        .waitForElementPresent('@cancelLeaveButton')
+        .click('@confirmLeaveButton');
     },
   }],
 };
