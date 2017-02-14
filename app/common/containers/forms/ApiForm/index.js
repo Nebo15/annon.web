@@ -78,13 +78,13 @@ export default class ApiForm extends React.Component {
             <CheckboxGroup
               name="methods"
               options={[
-                { label: 'POST', value: 'post' },
-                { label: 'PUT', value: 'put' },
-                { label: 'GET', value: 'get' },
-                { label: 'DELETE', value: 'delete' },
+                { label: 'POST', value: 'POST' },
+                { label: 'PUT', value: 'PUT' },
+                { label: 'GET', value: 'GET' },
+                { label: 'DELETE', value: 'DELETE' },
               ]}
-              format={value => uniq((value || []).map(i => i.toLowerCase()))}
-              normalize={value => uniq(value.map(i => i.toLowerCase()))}
+              format={value => uniq((value || []).map(i => i.toUpperCase()))}
+              normalize={value => uniq(value.map(i => i.toUpperCase()))}
             />
           </div>
 
