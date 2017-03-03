@@ -1,6 +1,6 @@
 {
   "name": "gateway.web",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "API Gateway web application",
   "repository": "https://github.com/Nebo15/gateway.web.git",
   "scripts": {
