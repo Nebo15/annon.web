@@ -51,7 +51,7 @@ Application supports these environment variables:
 - `PORT` - specify Node JS server's port (default. 8080)
 - `ADMIN_API_HOST` - Annon admin API host (default. http://localhost:4001)
 - `PUBLIC_API_HOST` - Annon public API host (default. http://localhost:4000)
-- `EXTERNAL_DEBUG_URL` - URL will be used in link to external requests debugger (see. #42)
+- `EXTERNAL_DEBUG_URL` - URL will be used in link to external requests debugger (see. https://github.com/Nebo15/gateway.web/issues/42)
 
 ## Workflow
 
