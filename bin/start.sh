@@ -34,6 +34,6 @@ echo "${HOST_NAME}:${HOST_IP}"
 docker run -p 8080:8080 \
       -d --name ${PROJECT_NAME} \
       --add-host=$HOST_NAME:$HOST_IP \
-      --env ADMIN_API_HOST=http://$HOST_NAME:4001 \
-      --env PUBLIC_API_HOST=http://$HOST_NAME:4000 \
+      --env MANAGEMENT_ENDPOINT=http://$HOST_NAME:4001 \
+      --env PUBLIC_ENDPOINT=http://$HOST_NAME:4000 \
       "${PROJECT_NAME}:${PROJECT_VERSION}"

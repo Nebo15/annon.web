@@ -10,7 +10,7 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import Url from 'url';
 
-import { PUBLIC_API_HOST, TRACER_URL } from 'config';
+import { PUBLIC_ENDPOINT, TRACER_URL } from 'config';
 
 import styles from './styles.scss';
 
@@ -37,7 +37,7 @@ const requestToHttp = request =>
   `${JSON.stringify(request.body, null, 2)}\n`;
 
 const requestToCurl = request =>
-  `curl -X ${request.method} ${PUBLIC_API_HOST}${requestToUrl(request)} \\\n` +
+  `curl -X ${request.method} ${PUBLIC_ENDPOINT}${requestToUrl(request)} \\\n` +
   `     ${headersToArray(request.headers).map(({ type, value }) => `-H '${type}: ${value}'`).join(' \\\n     ')} \\\n` +
   `     -d '${JSON.stringify(request.body)}'`;
 

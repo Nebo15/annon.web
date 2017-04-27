@@ -20,14 +20,16 @@ Also you can deploy everything at once via [sample Docker Compose file](docker-c
 
 Application supports these environment variables:
 
-- `PORT` - specify Node JS server's port (default. 8080)
-- `ADMIN_API_HOST` - Annon admin API host (default. http://localhost:4001)
-- `PUBLIC_API_HOST` - Annon public API host (default. http://localhost:4000)
-- `TRACER_URL` - URL will be used in link to external requests tracer (see. https://github.com/Nebo15/gateway.web/issues/42)
+| Environment Variable  | Default Value           | Description |
+| --------------------- | ----------------------- | ----------- |
+| `PORT`                | `8080`                  | Node.js server port. |
+| `MANAGEMENT_ENDPOINT` | `http://localhost:4001` | Annon API Gateway management API endpoint. |
+| `PUBLIC_ENDPOINT`     | `http://localhost:4000` | Annon API Gateway public API endpoint. |
+| `TRACER_URL`          | not set                 | URL will be used in link to external requests tracer (see. [#42](https://github.com/Nebo15/gateway.web/issues/42). |
 
 ## Docs
 
-Dashboard works on top of [Annon API](http://docs.annon.apiary.io/).
+Dashboard works on top of [Annon API Gateway management API](http://docs.annon.apiary.io/).
 
 ## Contribution
 

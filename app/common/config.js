@@ -9,14 +9,14 @@ if (global.__CLIENT__ && window && window.__CONFIG__) {
 
 export const PORT = config.PORT || process.env.PORT || 8080;
 export const HOSTNAME = typeof window !== 'undefined' ? window.location.origin : (config.HOSTNAME || 'http://localhost:8080');
-export const ADMIN_API_HOST = config.ADMIN_API_HOST || process.env.ADMIN_API_HOST || 'http://localhost:4001';
-export const PUBLIC_API_HOST = config.PUBLIC_API_HOST || process.env.PUBLIC_API_HOST || 'http://localhost:4000';
+export const MANAGEMENT_ENDPOINT = config.MANAGEMENT_ENDPOINT || process.env.MANAGEMENT_ENDPOINT || 'http://localhost:4001';
+export const PUBLIC_ENDPOINT = config.PUBLIC_ENDPOINT || process.env.PUBLIC_ENDPOINT || 'http://localhost:4000';
 
 export const TRACER_URL = config.TRACER_URL || process.env.TRACER_URL;
 
-export const ADMIN_API_PROXY_PATH = '/admin/api';
+export const MANAGEMENT_API_PROXY_PATH = '/admin/api';
 export const PUBLIC_API_PROXY_PATH = '/api';
 
 // for internal app usage. for example for XHR requests or server side rendering
-export const ADMIN_API_URL = typeof window !== 'undefined' ? ADMIN_API_PROXY_PATH : ADMIN_API_HOST;
-export const PUBLIC_API_URL = typeof window !== 'undefined' ? PUBLIC_API_PROXY_PATH : PUBLIC_API_HOST;
+export const MANAGEMENT_API_URL = typeof window !== 'undefined' ? MANAGEMENT_API_PROXY_PATH : MANAGEMENT_ENDPOINT;
+export const PUBLIC_API_URL = typeof window !== 'undefined' ? PUBLIC_API_PROXY_PATH : PUBLIC_ENDPOINT;

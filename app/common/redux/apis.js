@@ -1,12 +1,12 @@
 import { handleAction, combineActions } from 'redux-actions';
-import { ADMIN_API_URL } from 'config';
+import { MANAGEMENT_API_URL } from 'config';
 import { normalize, arrayOf } from 'normalizr';
 import { invoke } from 'helpers/api';
 import { createUrl } from 'helpers/url';
 import { apiSchema } from 'schema';
 
 export const fetchApis = options => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -20,7 +20,7 @@ export const fetchApis = options => invoke({
 });
 
 export const fetchApi = (apiId, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -34,7 +34,7 @@ export const fetchApi = (apiId, options) => invoke({
 });
 
 export const createApi = (body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis`, options),
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -49,7 +49,7 @@ export const createApi = (body, options) => invoke({
 });
 
 export const updateApi = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}`, options),
   method: 'PUT',
   headers: {
     'content-type': 'application/json',
@@ -64,7 +64,7 @@ export const updateApi = (apiId, body, options) => invoke({
 });
 
 export const deleteApi = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}`, options),
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
