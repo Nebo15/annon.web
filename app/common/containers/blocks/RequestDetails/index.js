@@ -77,7 +77,7 @@ export default class RequestDetails extends React.Component {
                     to={EXTERNAL_DEBUG_URL.replace('{request_id}', rest.id)}
                     rel="noopener noreferrer"
                     target="__blank"
-                  >Open in Debugger</Button>}
+                  >Trace Request</Button>}
               </ButtonsGroup>
             </div>
           </div>
