@@ -1,12 +1,12 @@
 import { handleActions, combineActions } from 'redux-actions';
-import { ADMIN_API_URL } from 'config';
+import { MANAGEMENT_API_URL } from 'config';
 import { normalize, arrayOf } from 'normalizr';
 import { invoke } from 'helpers/api';
 import { createUrl } from 'helpers/url';
 import { requestSchema } from 'schema';
 
 export const fetchRequests = options => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/requests`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/requests`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -20,7 +20,7 @@ export const fetchRequests = options => invoke({
 });
 
 export const fetchRequest = (requestId, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/requests/${requestId}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/requests/${requestId}`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -34,7 +34,7 @@ export const fetchRequest = (requestId, options) => invoke({
 });
 
 export const deleteRequest = (requestId, body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/requests/${requestId}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/requests/${requestId}`, options),
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',

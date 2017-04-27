@@ -34,8 +34,8 @@ server.locals.CONFIG = escape(JSON.stringify(config));
 
 server.use(cookieParser());
 
-server.use(config.PUBLIC_API_PROXY_PATH, proxy(config.PUBLIC_API_HOST));
-server.use(config.ADMIN_API_PROXY_PATH, proxy(config.ADMIN_API_HOST));
+server.use(config.PUBLIC_API_PROXY_PATH, proxy(config.PUBLIC_ENDPOINT));
+server.use(config.MANAGEMENT_API_PROXY_PATH, proxy(config.MANAGEMENT_ENDPOINT));
 server.use('/static', Express.static(path.join(__dirname, '../../static')));
 server.use('/public', Express.static(path.join(__dirname, '../../public')));
 server.use('/fonts', Express.static(path.join(__dirname, '../../assets/fonts')));

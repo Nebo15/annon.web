@@ -1,12 +1,12 @@
 import { handleAction, combineActions } from 'redux-actions';
-import { ADMIN_API_URL } from 'config';
+import { MANAGEMENT_API_URL } from 'config';
 import { normalize, arrayOf } from 'normalizr';
 import { invoke } from 'helpers/api';
 import { createUrl } from 'helpers/url';
 import { pluginsSchema } from 'schema';
 
 export const fetchPlugins = (apiId, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}/plugins`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -20,7 +20,7 @@ export const fetchPlugins = (apiId, options) => invoke({
 });
 
 export const bindPlugin = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}/plugins`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins`, options),
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -35,7 +35,7 @@ export const bindPlugin = (apiId, body, options) => invoke({
 });
 
 export const updatePlugin = (apiId, name, body, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}/plugins/${name}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins/${name}`, options),
   method: 'PUT',
   headers: {
     'content-type': 'application/json',
@@ -50,7 +50,7 @@ export const updatePlugin = (apiId, name, body, options) => invoke({
 });
 
 export const unbindPlugin = (apiId, name, options) => invoke({
-  endpoint: createUrl(`${ADMIN_API_URL}/apis/${apiId}/plugins/${name}`, options),
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins/${name}`, options),
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
