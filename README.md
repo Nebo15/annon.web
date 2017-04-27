@@ -1,6 +1,6 @@
 # Annon Dashboard
 
-[![Build history](https://buildstats.info/travisci/chart/Nebo15/gateway.web)](https://travis-ci.org/Nebo15/gateway.web)
+[![Build history](https://buildstats.info/travisci/chart/Nebo15/annon.web)](https://travis-ci.org/Nebo15/annon.web)
 
 Annon Dashboard is a management UI for [Annon API Gateway](github.com/nebo15/annon.api). It allows to manage configuration and review requests history.
 
@@ -25,7 +25,7 @@ Application supports these environment variables:
 | `PORT`                | `8080`                  | Node.js server port. |
 | `MANAGEMENT_ENDPOINT` | `http://localhost:4001` | Annon API Gateway management API endpoint. |
 | `PUBLIC_ENDPOINT`     | `http://localhost:4000` | Annon API Gateway public API endpoint. |
-| `TRACER_URL`          | not set                 | URL will be used in link to external requests tracer (see [#42](https://github.com/Nebo15/gateway.web/issues/42)). |
+| `TRACER_URL`          | not set                 | URL will be used in link to external requests tracer (see [#42](https://github.com/Nebo15/annon.web/issues/42)). |
 
 ## Docs
 
@@ -44,7 +44,7 @@ Dashboard works on top of [Annon API Gateway management API](http://docs.annon.a
 
 ### Starting Development Environment
 
-#### Start Dasboard
+#### Start Dashboard
 
 ```
 npm run dev ## run app localy

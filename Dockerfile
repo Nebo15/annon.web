@@ -4,7 +4,7 @@ EXPOSE 8080
 
 ENV NODE_ENV production
 
-WORKDIR /gateway.web
+WORKDIR /annon.web
 RUN npm install -g pm2
 
 COPY . ./

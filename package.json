@@ -1,8 +1,8 @@
 {
-  "name": "gateway.web",
+  "name": "annon.web",
   "version": "1.0.26",
   "description": "API Gateway web application",
-  "repository": "https://github.com/Nebo15/gateway.web.git",
+  "repository": "https://github.com/Nebo15/annon.web.git",
   "scripts": {
     "postinstall": "npm run build",
     "predev": "npm run webpack",
