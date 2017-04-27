@@ -25,7 +25,7 @@ Application supports these environment variables:
 | `PORT`                | `8080`                  | Node.js server port. |
 | `MANAGEMENT_ENDPOINT` | `http://localhost:4001` | Annon API Gateway management API endpoint. |
 | `PUBLIC_ENDPOINT`     | `http://localhost:4000` | Annon API Gateway public API endpoint. |
-| `TRACER_URL`          | not set                 | URL will be used in link to external requests tracer (see. [#42](https://github.com/Nebo15/gateway.web/issues/42). |
+| `TRACER_URL`          | not set                 | URL will be used in link to external requests tracer (see [#42](https://github.com/Nebo15/gateway.web/issues/42)). |
 
 ## Docs
 
