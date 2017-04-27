@@ -10,7 +10,7 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import Url from 'url';
 
-import { PUBLIC_API_HOST, EXTERNAL_DEBUG_URL } from 'config';
+import { PUBLIC_API_HOST, TRACER_URL } from 'config';
 
 import styles from './styles.scss';
 
@@ -71,10 +71,10 @@ export default class RequestDetails extends React.Component {
                 <CopyToClipboard text={curl} onCopy={this.onCopy}>
                   <Button theme="link">{this.state.curlCopied ? 'Copied' : 'Copy CURL'}</Button>
                 </CopyToClipboard>
-                { EXTERNAL_DEBUG_URL &&
+                { TRACER_URL &&
                   <Button
                     theme="link"
-                    to={EXTERNAL_DEBUG_URL.replace('{request_id}', rest.id)}
+                    to={TRACER_URL.replace('{request_id}', rest.id)}
                     rel="noopener noreferrer"
                     target="__blank"
                   >Trace Request</Button>}

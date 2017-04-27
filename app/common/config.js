@@ -12,7 +12,7 @@ export const HOSTNAME = typeof window !== 'undefined' ? window.location.origin :
 export const ADMIN_API_HOST = config.ADMIN_API_HOST || process.env.ADMIN_API_HOST || 'http://localhost:4001';
 export const PUBLIC_API_HOST = config.PUBLIC_API_HOST || process.env.PUBLIC_API_HOST || 'http://localhost:4000';
 
-export const EXTERNAL_DEBUG_URL = config.EXTERNAL_DEBUG_URL || process.env.EXTERNAL_DEBUG_URL;
+export const TRACER_URL = config.TRACER_URL || process.env.TRACER_URL;
 
 export const ADMIN_API_PROXY_PATH = '/admin/api';
 export const PUBLIC_API_PROXY_PATH = '/api';
