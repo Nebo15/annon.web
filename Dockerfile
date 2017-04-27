@@ -1,19 +1,20 @@
-FROM mhart/alpine-node:6.9.1
+FROM nebo15/alpine-node:6.9.5
 
 EXPOSE 8080
 
 ENV NODE_ENV production
 
-WORKDIR /annon.web
-RUN npm install -g pm2
+COPY package.json /tmp/package.json
+RUN cd /tmp && npm install --production --quiet || { exit 1; } && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
-COPY . ./
+WORKDIR /opt/app
 
-RUN npm install --production
+COPY . /opt/app
+
 RUN npm run build
 
 RUN rm -rf ./app/client \
 	rm -rf ./app/common \
 	rm -rf ./node_modules/webpack
 
-CMD pm2 start --no-daemon static/server.js
+CMD ["pm2-docker", "pm2.process.yml"]
