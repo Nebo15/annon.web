@@ -4,9 +4,9 @@
 
 API Gateway Dashboard - manage API Gateway settings, review and replay requests from history.
 
-Docker Container: https://hub.docker.com/r/nebo15/gateway.web/   
-API: https://github.com/Nebo15/os.gateway   
-Docs: http://docs.annon.apiary.io/    
+Docker Container: https://hub.docker.com/r/nebo15/gateway.web/
+API: https://github.com/Nebo15/os.gateway
+Docs: http://docs.annon.apiary.io/
 
 ## Technologies
 
@@ -43,6 +43,15 @@ API is running at:
 http://localhost:4000 - public api
 http://localhost:4001 - management api
 ```
+
+## Configurations
+
+Application supports these environment variables:
+
+- `PORT` - specify Node JS server's port (default. 8080)
+- `ADMIN_API_HOST` - Annon admin API host (default. http://localhost:4001)
+- `PUBLIC_API_HOST` - Annon public API host (default. http://localhost:4000)
+- `TRACER_URL` - URL will be used in link to external requests tracer (see. https://github.com/Nebo15/gateway.web/issues/42)
 
 ## Workflow
 

@@ -4,13 +4,13 @@ import HttpStatusCode from 'http-status-codes';
 import Highlight from 'react-highlight';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import Button from 'components/Button';
+import Button, { ButtonsGroup } from 'components/Button';
 import highlight from 'highlight.js/styles/color-brewer.css';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import Url from 'url';
 
-import { PUBLIC_API_HOST } from 'config';
+import { PUBLIC_API_HOST, TRACER_URL } from 'config';
 
 import styles from './styles.scss';
 
@@ -67,9 +67,18 @@ export default class RequestDetails extends React.Component {
           <div className={styles.column__header}>
             Request
             <div className={styles.column__header__buttons}>
-              <CopyToClipboard text={curl} onCopy={this.onCopy}>
-                <Button theme="link">{this.state.curlCopied ? 'Copied' : 'Copy CURL'}</Button>
-              </CopyToClipboard>
+              <ButtonsGroup>
+                <CopyToClipboard text={curl} onCopy={this.onCopy}>
+                  <Button theme="link">{this.state.curlCopied ? 'Copied' : 'Copy CURL'}</Button>
+                </CopyToClipboard>
+                { TRACER_URL &&
+                  <Button
+                    theme="link"
+                    to={TRACER_URL.replace('{request_id}', rest.id)}
+                    rel="noopener noreferrer"
+                    target="__blank"
+                  >Trace Request</Button>}
+              </ButtonsGroup>
             </div>
           </div>
           <div className={styles.column__body}>
