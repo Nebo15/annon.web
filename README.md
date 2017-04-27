@@ -1,14 +1,37 @@
-# API Gateway Dashboard
+# Annon Dashboard
 
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/gateway.web)](https://travis-ci.org/Nebo15/gateway.web)
 
-API Gateway Dashboard - manage API Gateway settings, review and replay requests from history.
+Annon Dashboard is a management UI for [Annon API Gateway](github.com/nebo15/annon.api). It allows to manage configuration and review requests history.
 
-Docker Container: https://hub.docker.com/r/nebo15/gateway.web/
-API: https://github.com/Nebo15/os.gateway
-Docs: http://docs.annon.apiary.io/
+## Installation
 
-## Technologies
+### Heroku One-Click Deployment
+
+TBD.
+
+### Docker
+
+Dashboard can be deployed as a single container from [nebo15/annon.web](https://hub.docker.com/r/nebo15/annon.web/) Docker Hub.
+
+Also you can deploy everything at once via [sample Docker Compose file](docker-compose.yml).
+
+## Configurations
+
+Application supports these environment variables:
+
+- `PORT` - specify Node JS server's port (default. 8080)
+- `ADMIN_API_HOST` - Annon admin API host (default. http://localhost:4001)
+- `PUBLIC_API_HOST` - Annon public API host (default. http://localhost:4000)
+- `TRACER_URL` - URL will be used in link to external requests tracer (see. https://github.com/Nebo15/gateway.web/issues/42)
+
+## Docs
+
+Dashboard works on top of [Annon API](http://docs.annon.apiary.io/).
+
+## Contribution
+
+### Technologies
 
 - React
 - Redux
@@ -17,15 +40,15 @@ Docs: http://docs.annon.apiary.io/
 - Karma
 - Nightwatch
 
-## Development
+### Starting Development Environment
 
-### Run web
+#### Start Dasboard
 
 ```
 npm run dev ## run app localy
 ```
 
-### Run API:
+#### Start Annon Gateway (API)
 
 ```
 docker-compose up
@@ -44,23 +67,14 @@ http://localhost:4000 - public api
 http://localhost:4001 - management api
 ```
 
-## Configurations
+### Workflow
 
-Application supports these environment variables:
-
-- `PORT` - specify Node JS server's port (default. 8080)
-- `ADMIN_API_HOST` - Annon admin API host (default. http://localhost:4001)
-- `PUBLIC_API_HOST` - Annon public API host (default. http://localhost:4000)
-- `TRACER_URL` - URL will be used in link to external requests tracer (see. https://github.com/Nebo15/gateway.web/issues/42)
-
-## Workflow
-
-### Git flow
+#### Git flow
 
 Every task should start a new branch. Branch should be named as task number what its corresponding.
 After finish work on a task, you need to create PR.
 
-### Testing
+#### Testing
 
 To contribute to the repository be ready to write some tests.
 
@@ -68,6 +82,10 @@ To contribute to the repository be ready to write some tests.
 - Integration tests for UI components (we use Enzyme)
 - Acceptance tests for user stories (we use Nightwatch)
 
-### PR
+#### Pull Requests
 
 Every task finishes with PR. Eslint, Stylelint, and tests are blocking PRs. To simplify PR review, we deploy every PR's branch automatically on Heroku.
+
+## License
+
+See [LICENSE.md](LICENSE.md).
