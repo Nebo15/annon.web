@@ -12,9 +12,11 @@ Annon Dashboard is a management UI for [Annon API Gateway](github.com/nebo15/ann
 
 ### Docker
 
+## Deployment
+
 Dashboard can be deployed as a single container from [nebo15/annon.web](https://hub.docker.com/r/nebo15/annon.web/) Docker Hub.
 
-Also you can deploy everything at once via [sample Docker Compose file](docker-compose.yml).
+More information you can find in [Annon Infrastructure](https://github.com/Nebo15/annon.infra).
 
 ## Configurations
 
