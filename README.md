@@ -4,6 +4,10 @@
 
 Annon Dashboard is a management UI for [Annon API Gateway](github.com/nebo15/annon.api). It allows to manage configuration and review requests history.
 
+## Demo
+
+![UI Screenshow](https://github.com/Nebo15/annon.web/raw/master/docs/images/ui-animated.gif)
+
 ## Installation
 
 ### Heroku One-Click Deployment
