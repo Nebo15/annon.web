@@ -9,6 +9,7 @@ import uniq from 'lodash/uniq';
 import FieldInput from 'components/reduxForm/FieldInput';
 import { CheckboxGroup } from 'components/reduxForm/FieldCheckboxGroup';
 import FiledSelect from 'components/reduxForm/FieldSelect';
+import FieldCheckbox from 'components/reduxForm/FieldCheckbox';
 
 import Button from 'components/Button';
 import Line from 'components/Line';
@@ -78,16 +79,48 @@ export default class ApiForm extends React.Component {
         <Line width="280" />
 
         <div className={classnames(styles.row, styles['row--name'])}>
-          <div className={styles.row__field}><Field name="name" labelText="Name" component={FieldInput} /></div>
+          <div className={styles.row__field}><Field name="name" labelText="Name *" component={FieldInput} /></div>
           <div className={styles.row__field}><Field name="description" labelText="Description" component={FieldInput} /></div>
         </div>
+
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="docs_url"
+            labelText="Documentation URL"
+            placeholder="eg. https://docs.annon.apiary.io"
+            component={FieldInput}
+          />
+        </div>
+        <Line width="280" />
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="health"
+            labelText="API Health Status"
+            component={FiledSelect}
+            placeholder="Select health status"
+            options={[
+              { name: 'operational', title: 'Operational' },
+              { name: 'degradated_perfomance', title: 'Degradated perfomance' },
+              { name: 'partial_outage', title: 'Partial outage' },
+              { name: 'major_outage', title: 'Major outage' },
+            ]}
+          />
+        </div>
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="disclose_status"
+            labelText="Disclose API status"
+            component={FieldCheckbox}
+          />
+        </div>
+        <Line width="280" />
 
         <H3>Request</H3>
 
         <Line width="280" />
 
         <div style={{ marginBottom: 10 }}>
-          Methods
+          Methods *
         </div>
 
         <FormSection name="request">
@@ -108,7 +141,7 @@ export default class ApiForm extends React.Component {
           <div className={styles.columns}>
             <div>
               <Field
-                labelText="Scheme"
+                labelText="Scheme *"
                 name="scheme"
                 component={FiledSelect}
                 options={[
@@ -118,16 +151,16 @@ export default class ApiForm extends React.Component {
               />
             </div>
             <div>
-              <Field labelText="Host" name="host" component={FieldInput} />
+              <Field labelText="Host *" name="host" component={FieldInput} />
             </div>
           </div>
 
           <div className={styles.columns}>
             <div>
-              <Field labelText="Port" name="port" component={FieldInput} />
+              <Field labelText="Port *" name="port" component={FieldInput} />
             </div>
             <div>
-              <Field labelText="Path" name="path" component={FieldInput} />
+              <Field labelText="Path *" name="path" component={FieldInput} />
             </div>
           </div>
         </FormSection>

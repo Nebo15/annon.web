@@ -6,6 +6,10 @@
 .row {
   margin-bottom: 30px;
 
+  &--small {
+    max-width: 280px;
+  }
+
   &--name {
     max-width: 600px;
     margin-left: -20px;
