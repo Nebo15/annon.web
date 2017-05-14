@@ -4,12 +4,8 @@ import { createApi } from 'redux/apis';
 
 import { mapServerErrorsToClient } from 'services/validate';
 
-export const onSubmitCreate = ({ name, request }) => dispatch => dispatch(
-  createApi({
-    name,
-    request,
-  })
-).then((action) => {
+export const onSubmitCreate = values => dispatch =>
+dispatch(createApi(values)).then((action) => {
   if (action.error) {
     const errors = mapServerErrorsToClient(action.payload.response.error);
     throw new SubmissionError(errors);

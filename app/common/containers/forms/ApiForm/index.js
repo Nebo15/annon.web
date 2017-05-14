@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
@@ -76,8 +77,9 @@ export default class ApiForm extends React.Component {
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Line width="280" />
 
-        <div style={{ maxWidth: '280px' }} className={styles.row}>
-          <Field name="name" labelText="Name" component={FieldInput} />
+        <div className={classnames(styles.row, styles['row--name'])}>
+          <div className={styles.row__field}><Field name="name" labelText="Name" component={FieldInput} /></div>
+          <div className={styles.row__field}><Field name="description" labelText="Description" component={FieldInput} /></div>
         </div>
 
         <H3>Request</H3>
