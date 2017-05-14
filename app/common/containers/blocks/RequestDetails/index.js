@@ -24,7 +24,7 @@ const headersToArray = headers => headers.map(i => ({
 const responseToHttp = response =>
   `HTTP/1.1 ${response.status_code} ${HttpStatusCode.getStatusText(response.status_code)}\n` +
   `${headersToArray(response.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${JSON.stringify(JSON.parse(response.body), null, 2)}\n`;
+  `${response.body}\n`;
 
 const requestToUrl = request => Url.format({
   pathname: request.uri,
@@ -39,7 +39,7 @@ const requestToHttp = request =>
 const requestToCurl = request =>
   `curl -X ${request.method} ${PUBLIC_ENDPOINT}${requestToUrl(request)} \\\n` +
   `     ${headersToArray(request.headers).map(({ type, value }) => `-H '${type}: ${value}'`).join(' \\\n     ')} \\\n` +
-  `     -d '${JSON.stringify(request.body)}'`;
+  `     -d '${request.body}'`;
 
 @withStyles(highlight)
 @withStyles(styles)
