@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import { reduxForm, Field, formValueSelector, getFormValues } from 'redux-form';
 
+import pickFn from 'lodash/pick';
+
 import FieldCheckbox from 'components/reduxForm/FieldCheckbox';
 import FiledSelect from 'components/reduxForm/FieldSelect';
 
@@ -13,11 +15,10 @@ import { H3 } from 'components/Title';
 import { reduxFormValidate } from 'react-nebo15-validate';
 
 import PluginProxyForm from 'containers/forms/PluginProxyForm';
-import PluginJWTForm from 'containers/forms/PluginJWTForm';
 import PluginACLForm from 'containers/forms/PluginACLForm';
 import PluginIPRestrictionForm from 'containers/forms/PluginIPRestrictionForm';
 import PluginValidatorForm from 'containers/forms/PluginValidatorForm';
-import PluginScopesResolverForm from 'containers/forms/PluginScopesResolverForm';
+import PluginAuthenticationForm from 'containers/forms/PluginAuthenticationForm';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
@@ -27,11 +28,10 @@ const selector = formValueSelector('plugin-form');
 
 const pluginsComponentMap = {
   proxy: PluginProxyForm,
-  jwt: PluginJWTForm,
   acl: PluginACLForm,
   ip_restriction: PluginIPRestrictionForm,
   validator: PluginValidatorForm,
-  scopes: PluginScopesResolverForm,
+  auth: PluginAuthenticationForm,
   idempotency: null,
 };
 
@@ -74,13 +74,13 @@ export default class PluginForm extends React.Component {
         ...this.props.values,
       });
 
-      return;
+      return null;
     }
 
     this.pluginForm.submit();
 
     if (!this.pluginForm.valid) {
-      return;
+      return null;
     }
 
     this.setState({ submitting: true });
@@ -96,8 +96,20 @@ export default class PluginForm extends React.Component {
         schema: typeof i.schema === 'string' ? JSON.parse(i.schema) : i.schema,
       }));
     }
+    if (this.props.values.name === 'auth') {
+      pluginValues = JSON.parse(JSON.stringify(pluginValues));
+      if (pluginValues.settings.strategy === 'oauth') {
+        pluginValues.settings = pickFn(pluginValues.settings, ['strategy', 'url_template']);
+      } else if (pluginValues.settings.strategy === 'jwt') {
+        pluginValues.settings = pickFn(pluginValues.settings, ['strategy', 'third_party_resolver', 'secret', 'algorithm']);
 
-    this.props.onSubmit({
+        if (pluginValues.settings.third_party_resolver) {
+          pluginValues.settings.url_template = this.pluginForm.values.settings.url_template;
+        }
+      }
+    }
+
+    return this.props.onSubmit({
       ...this.props.values,
       ...pluginValues,
       ...{ is_enabled },
@@ -151,12 +163,11 @@ export default class PluginForm extends React.Component {
     const { isEdit, name, existingPlugins = [] } = this.props;
     const pluginsSelectOptions = [
       { name: 'proxy', title: 'Proxy' },
-      { name: 'jwt', title: 'JWT Authorization' },
       { name: 'acl', title: 'ACL' },
       { name: 'validator', title: 'Validator' },
       { name: 'idempotency', title: 'Idempotency' },
       { name: 'ip_restriction', title: 'IP Restriction' },
-      { name: 'scopes', title: 'Scopes Resolver' },
+      { name: 'auth', title: 'Authentication' },
     ].filter(i => availablePlugins.indexOf(i.name) > -1)
     .map(item => ({
       ...item,
