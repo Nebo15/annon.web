@@ -8,3 +8,4 @@ tests
 .git
 .dockerignore
 Dockerfile
+docs/

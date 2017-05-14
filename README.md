@@ -4,17 +4,23 @@
 
 Annon Dashboard is a management UI for [Annon API Gateway](github.com/nebo15/annon.api). It allows to manage configuration and review requests history.
 
+## Demo
+
+![UI Screenshow](https://github.com/Nebo15/annon.web/raw/master/docs/images/ui-animated.gif)
+
 ## Installation
 
 ### Heroku One-Click Deployment
 
-TBD.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nebo15/annon.web)
 
 ### Docker
 
+## Deployment
+
 Dashboard can be deployed as a single container from [nebo15/annon.web](https://hub.docker.com/r/nebo15/annon.web/) Docker Hub.
 
-Also you can deploy everything at once via [sample Docker Compose file](docker-compose.yml).
+More information you can find in [Annon Infrastructure](https://github.com/Nebo15/annon.infra).
 
 ## Configurations
 
