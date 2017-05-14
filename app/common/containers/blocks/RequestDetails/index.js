@@ -16,6 +16,21 @@ import styles from './styles.scss';
 
 const capitalize = str => `${str[0].toUpperCase()}${str.slice(1)}`;
 
+const formateResponse = (string) => {
+  try {
+    return JSON.stringify(JSON.parse(string), null, 2);
+  } catch (e) {
+    return string.length > 255 ? `${string.substring(0, 255)}...` : string;
+  }
+};
+const formatIfJson = (obj, ...args) => {
+  try {
+    return JSON.stringify(obj, ...args);
+  } catch (e) {
+    return obj;
+  }
+};
+
 const headersToArray = headers => headers.map(i => ({
   type: capitalize(Object.keys(i)[0]),
   value: Object.values(i)[0],
@@ -24,7 +39,7 @@ const headersToArray = headers => headers.map(i => ({
 const responseToHttp = response =>
   `HTTP/1.1 ${response.status_code} ${HttpStatusCode.getStatusText(response.status_code)}\n` +
   `${headersToArray(response.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${JSON.stringify(JSON.parse(response.body), null, 2)}\n`;
+  `${formateResponse(response.body)}\n`;
 
 const requestToUrl = request => Url.format({
   pathname: request.uri,
@@ -34,12 +49,12 @@ const requestToUrl = request => Url.format({
 const requestToHttp = request =>
   `${request.method} ${requestToUrl(request)} HTTP/1.1\n` +
   `${headersToArray(request.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${JSON.stringify(request.body, null, 2)}\n`;
+  `${formatIfJson(request.body)}\n`;
 
 const requestToCurl = request =>
   `curl -X ${request.method} ${PUBLIC_ENDPOINT}${requestToUrl(request)} \\\n` +
   `     ${headersToArray(request.headers).map(({ type, value }) => `-H '${type}: ${value}'`).join(' \\\n     ')} \\\n` +
-  `     -d '${JSON.stringify(request.body)}'`;
+  `     -d '${formatIfJson(request.body, null, 2)}'`;
 
 @withStyles(highlight)
 @withStyles(styles)

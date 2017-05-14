@@ -151,7 +151,7 @@ export default class ApiForm extends React.Component {
               />
             </div>
             <div>
-              <Field labelText="Host *" name="host" component={FieldInput} />
+              <Field labelText="Host *" name="host" placeholder="% - all hosts" component={FieldInput} />
             </div>
           </div>
 
