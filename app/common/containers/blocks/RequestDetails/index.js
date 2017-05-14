@@ -102,9 +102,7 @@ export default class RequestDetails extends React.Component {
           <div className={styles.column__body}>
             <p><b>Gateway</b>: {latencies.gateway}μs</p>
             <p><b>Upstream</b>: {latencies.upstream ? `${latencies.upstream}μs` : '–'}</p>
-            <p><b>Client request:</b>: {
-              {latencies.client_request}
-            }μs</p>
+            <p><b>Client request:</b>: {latencies.client_request}μs</p>
           </div>
         </div>
         <div className={classnames(styles.column)}>

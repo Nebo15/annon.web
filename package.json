@@ -114,6 +114,7 @@
     "react-nebo15-validate": "~0.1.10",
     "react-redux": "4.4.5",
     "react-router": "2.6.0",
+    "react-router-redial": "^0.3.5",
     "react-router-redux": "^4.0.6",
     "react-svg-loader": "^1.1.1",
     "react-svg-sprite-icon": "0.0.11",

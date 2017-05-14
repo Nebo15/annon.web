@@ -31,6 +31,9 @@ import styles from './styles.scss';
     name: {
       required: true,
     },
+    'request.methods': {
+      required: true,
+    },
     'request.host': {
       required: true,
     },
@@ -43,22 +46,34 @@ import styles from './styles.scss';
   values: getFormValues('api-form')(state),
 }))
 export default class ApiForm extends React.Component {
-  state = {
-    isConfirmed: false,
-    showConfirm: false,
-    location: null,
-  };
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      saved: props.initialValues,
+      isConfirmed: false,
+      showConfirm: false,
+      location: null,
+    };
+  }
+  onSubmit() {
+    return this.props.onSubmit(this.props.values).then(() => {
+      this.setState({
+        saved: this.props.values,
+      });
+    });
+  }
 
   get isChanged() {
-    const { values = {}, initialValues = {} } = this.props;
-    return JSON.stringify(values) !== JSON.stringify(initialValues);
+    const { values = {} } = this.props;
+    return JSON.stringify(values) !== JSON.stringify(this.state.saved);
   }
 
   render() {
-    const { handleSubmit, onSubmit, onDelete, isEdit, children, submitting } = this.props;
+    const { handleSubmit, onDelete, isEdit, children, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Line width="280" />
 
         <div style={{ maxWidth: '280px' }} className={styles.row}>
@@ -121,13 +136,13 @@ export default class ApiForm extends React.Component {
           </div>
         }
 
-        <Button type="submit" disabled={!this.isChanged}>
-          {isEdit ? 'Save API' : 'Create API'}
-        </Button>
-
-        <div style={{ float: 'right' }}>
-          {isEdit && <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>}
-        </div>
+        {isEdit && <Button type="submit" disabled={!this.isChanged}>
+          {submitting ? 'Saving...' : (this.isChanged ? 'Save API' : 'Saved')}
+        </Button>}
+        {!isEdit && <Button type="submit" disabled={!this.isChanged}>Create API</Button>}
+        {isEdit && <div style={{ float: 'right' }}>
+          <Button id="delete-template-button" type="button" onClick={onDelete} color="red">Delete API</Button>
+        </div>}
 
         <ConfirmFormChanges submitting={submitting} isChanged={this.isChanged} />
       </form>

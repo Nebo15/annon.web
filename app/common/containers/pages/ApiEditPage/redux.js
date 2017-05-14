@@ -15,7 +15,7 @@ export const onSubmitEdit = (apiId, { name, request }) => dispatch =>
       throw new SubmissionError(errors);
     }
 
-    return dispatch(push('/apis'));
+    return action;
   });
 
 export const onDelete = apiId => dispatch => dispatch(deleteApi(apiId))

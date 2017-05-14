@@ -15,7 +15,7 @@ export const onSubmitCreate = ({ name, request }) => dispatch => dispatch(
     throw new SubmissionError(errors);
   }
 
-  return dispatch(push('/apis'));
+  return dispatch(push(`/apis/${action.payload.result}`));
 });
 
 export default (state = {}) => state;

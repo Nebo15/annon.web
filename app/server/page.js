@@ -1,4 +1,4 @@
-import { trigger } from 'redial';
+import { triggerHooks } from 'react-router-redial';
 import Helmet from 'react-helmet';
 
 import Cookies from 'cookies';
@@ -63,44 +63,37 @@ export default () => (req, res, next) => {
       return res.status(404).send('Not found');
     }
 
-    // Get array of route handler components:
-    const { components } = renderProps;
-
     // Define locals to be provided to all lifecycle hooks:
     const locals = {
-      path: renderProps.location.pathname,
-      query: renderProps.location.query,
-      params: renderProps.params,
-
       // Allow lifecycle hooks to dispatch Redux actions:
       dispatch,
       getState,
     };
-    // Wait for async data fetching to complete, then render:
-    return Promise.all([
-      trigger('fetch', components, locals),
-      trigger('server', components, locals),
-    ])
-      .then(() => {
-        const reduxState = escape(JSON.stringify(getState()));
-        const css = new Set();
-        /* eslint-disable no-underscore-dangle */
-        const html = ReactDOMServer.renderToString(
-          <WithStylesContext onInsertCss={(styles) => { css.add(styles._getCss()); }}>
-            <Provider store={store}>
-              { <RouterContext {...renderProps} />}
-            </Provider>
-          </WithStylesContext>
-        );
-        const head = Helmet.rewind();
-        res.render('index', {
-          html,
-          reduxState,
-          inlineCss: arrayFrom(css).join(''),
-          head,
-          isMobile,
-        });
-      })
-      .catch(err => next(err));
+
+    return triggerHooks({
+      renderProps,
+      locals,
+      hooks: ['fetch', 'server', 'done'],
+    }).then(() => {
+      const reduxState = escape(JSON.stringify(getState()));
+      const css = new Set();
+      /* eslint-disable no-underscore-dangle */
+      const html = ReactDOMServer.renderToString(
+        <WithStylesContext onInsertCss={(styles) => { css.add(styles._getCss()); }}>
+          <Provider store={store}>
+            { <RouterContext {...renderProps} />}
+          </Provider>
+        </WithStylesContext>
+      );
+      const head = Helmet.rewind();
+      res.render('index', {
+        html,
+        reduxState,
+        inlineCss: arrayFrom(css).join(''),
+        head,
+        isMobile,
+      });
+    })
+    .catch(err => next(err));
   });
 };
