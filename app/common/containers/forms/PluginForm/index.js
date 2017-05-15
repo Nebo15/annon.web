@@ -20,6 +20,7 @@ import PluginIPRestrictionForm from 'containers/forms/PluginIPRestrictionForm';
 import PluginValidatorForm from 'containers/forms/PluginValidatorForm';
 import PluginAuthenticationForm from 'containers/forms/PluginAuthenticationForm';
 import PluginIdempotencyForm from 'containers/forms/PluginIdempotencyForm';
+import PluginUserAgentRestrictionForm from 'containers/forms/PluginUserAgentRestrictionForm';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
@@ -31,6 +32,7 @@ const pluginsComponentMap = {
   proxy: PluginProxyForm,
   acl: PluginACLForm,
   ip_restriction: PluginIPRestrictionForm,
+  ua_restriction: PluginUserAgentRestrictionForm,
   validator: PluginValidatorForm,
   auth: PluginAuthenticationForm,
   idempotency: PluginIdempotencyForm,
@@ -168,6 +170,7 @@ export default class PluginForm extends React.Component {
       { name: 'validator', title: 'Validator' },
       { name: 'idempotency', title: 'Idempotency' },
       { name: 'ip_restriction', title: 'IP Restriction' },
+      { name: 'ua_restriction', title: 'User Agent Restriction' },
       { name: 'auth', title: 'Authentication' },
     ].filter(i => availablePlugins.indexOf(i.name) > -1)
     .map(item => ({
