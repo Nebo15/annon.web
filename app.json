@@ -16,6 +16,7 @@
     },
     "TRACER_URL": {
       "description": "URL to external logs manager. You can use {request_id} variable in URL. eg. https://example.com/logs/{request_id}.",
+      "required": false,
       "value": ""
     }
   },
