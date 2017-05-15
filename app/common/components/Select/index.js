@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
+import { ErrorMessages } from 'react-nebo15-validate';
 
 import Icon from 'components/Icon';
 import OuterClick from 'components/OuterClick';
@@ -82,6 +83,8 @@ class Select extends React.Component {
       placeholder,
       disabled,
       labelText,
+      error,
+      children,
     } = this.props;
 
     const activeItem = this.state.active || {};
@@ -90,6 +93,7 @@ class Select extends React.Component {
       this.state.open && styles[this.position],
       this.state.open && styles.open,
       disabled && styles.disabled,
+      error && styles.error
     );
 
     return (
@@ -102,6 +106,11 @@ class Select extends React.Component {
               {activeItem && activeItem.title}
             </span>
             <span className={styles.arrow} />
+            { error &&
+              <div className={styles['error-label']}>
+                { typeof error === 'string' ? error : <ErrorMessages error={error}>{children}</ErrorMessages> }
+              </div>
+            }
           </div>
           <ul ref={ref => (this.listNode = ref)} className={styles.list}>
             {

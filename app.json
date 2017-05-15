@@ -6,12 +6,12 @@
   "env": {
     "MANAGEMENT_ENDPOINT": {
       "description": "Annon API Gateway management API host and port",
-      "required": true,
+      "required": false,
       "value": ""
     },
     "PUBLIC_ENDPOINT": {
       "description": "Annon API Gateway public API host and port",
-      "required": true,
+      "required": false,
       "value": ""
     },
     "TRACER_URL": {

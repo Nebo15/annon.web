@@ -107,7 +107,7 @@ export default class PluginAuthenticationForm extends React.Component {
     );
   }
   render() {
-    const { handleSubmit, values } = this.props;
+    const { values, handleSubmit } = this.props;
     const strategy = getFn(values, 'settings.strategy');
     return (
       <form onSubmit={handleSubmit} id="plugin-authentication-form">

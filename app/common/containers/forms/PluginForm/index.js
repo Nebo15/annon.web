@@ -19,6 +19,7 @@ import PluginACLForm from 'containers/forms/PluginACLForm';
 import PluginIPRestrictionForm from 'containers/forms/PluginIPRestrictionForm';
 import PluginValidatorForm from 'containers/forms/PluginValidatorForm';
 import PluginAuthenticationForm from 'containers/forms/PluginAuthenticationForm';
+import PluginIdempotencyForm from 'containers/forms/PluginIdempotencyForm';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
@@ -32,7 +33,7 @@ const pluginsComponentMap = {
   ip_restriction: PluginIPRestrictionForm,
   validator: PluginValidatorForm,
   auth: PluginAuthenticationForm,
-  idempotency: null,
+  idempotency: PluginIdempotencyForm,
 };
 
 const availablePlugins = Object.keys(pluginsComponentMap);

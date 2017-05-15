@@ -23,6 +23,7 @@ export const onUnbind = (apiId, name) => dispatch => dispatch(unbindPlugin(apiId
     if (action.error) {
       return false;
     }
+    console.log('delete', apiId);
 
     return dispatch(push(`/apis/${apiId}`));
   });

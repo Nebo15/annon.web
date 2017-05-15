@@ -59,10 +59,12 @@ export default class ApiForm extends React.Component {
     };
   }
   onSubmit() {
-    return this.props.onSubmit(this.props.values).then(() => {
+    return this.props.onSubmit(this.props.values).then((action) => {
+      if (action.error) return action;
       this.setState({
         saved: this.props.values,
       });
+      return action;
     });
   }
 
