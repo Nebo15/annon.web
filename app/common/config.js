@@ -14,7 +14,7 @@ export const PUBLIC_ENDPOINT = config.PUBLIC_ENDPOINT || process.env.PUBLIC_ENDP
 
 export const TRACER_URL = config.TRACER_URL || process.env.TRACER_URL;
 
-export const MANAGEMENT_API_PROXY_PATH = '/admin/api';
+export const MANAGEMENT_API_PROXY_PATH = '/api.admin';
 export const PUBLIC_API_PROXY_PATH = '/api';
 
 // for internal app usage. for example for XHR requests or server side rendering
