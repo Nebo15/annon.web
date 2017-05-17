@@ -178,7 +178,7 @@ export default class ApiForm extends React.Component {
         </Button>}
         {!isEdit && <Button type="submit" disabled={!this.isChanged}>Create API</Button>}
         {isEdit && <div style={{ float: 'right' }}>
-          <Button id="delete-template-button" type="button" onClick={onDelete} color="red">Delete API</Button>
+          <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>
         </div>}
 
         <ConfirmFormChanges submitting={submitting} isChanged={this.isChanged} />

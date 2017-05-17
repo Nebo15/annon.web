@@ -42,7 +42,7 @@ export default class ApiListPage extends React.Component {
               </div>,
               host: <span style={{ wordBreak: 'break-all' }}>{`${i.request.scheme}://${i.request.host}:${i.request.port}${i.request.path}`}</span>,
               methods: i.request.methods.join(', ').toUpperCase(),
-              action: (<Button id={`edit-api-button-${i.name}`} theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
+              action: (<Button data-edit-api-button={i.name} theme="link" to={`apis/${i.id}`}>Edit&nbsp;API</Button>),
             }))}
           />
           {

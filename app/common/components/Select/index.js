@@ -121,6 +121,7 @@ class Select extends React.Component {
                     item.name === activeItem.name && styles.active,
                     item.disabled && styles.disabled
                   )}
+                  data-select-name={item.name}
                   key={item.name}
                 >
                   {item.title}

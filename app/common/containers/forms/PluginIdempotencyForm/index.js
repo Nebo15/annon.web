@@ -12,7 +12,10 @@ import styles from './styles.scss';
   form: 'plugin-settings-form',
   validate: reduxFormValidate({
     'settings.key_ttl': {
-      required: true,
+      required: {
+        // TODO: move to react-nebo15-validate
+        validate: (props, value) => !(typeof value !== 'undefined' && value !== null && value !== ''),
+      },
       numeric: true,
       min: 0,
     },
