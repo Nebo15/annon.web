@@ -14,8 +14,6 @@ import { PUBLIC_ENDPOINT, TRACER_URL } from 'config';
 
 import styles from './styles.scss';
 
-const capitalize = str => `${str[0].toUpperCase()}${str.slice(1)}`;
-
 const formateResponse = (string) => {
   try {
     return JSON.stringify(JSON.parse(string), null, 2);
@@ -31,9 +29,9 @@ const formatIfJson = (obj, ...args) => {
   }
 };
 
-const headersToArray = headers => headers.map(i => ({
-  type: capitalize(Object.keys(i)[0]),
-  value: Object.values(i)[0],
+const headersToArray = headers => Object.entries(headers).map(([type, value]) => ({
+  type,
+  value,
 }));
 
 const responseToHttp = response =>
@@ -49,7 +47,7 @@ const requestToUrl = request => Url.format({
 const requestToHttp = request =>
   `${request.method} ${requestToUrl(request)} HTTP/1.1\n` +
   `${headersToArray(request.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${formatIfJson(request.body)}\n`;
+  `${formateResponse(request.body)}\n`;
 
 const requestToCurl = request =>
   `curl -X ${request.method} ${PUBLIC_ENDPOINT}${requestToUrl(request)} \\\n` +
