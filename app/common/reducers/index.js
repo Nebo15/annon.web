@@ -11,6 +11,8 @@ import PluginCreatePage from 'containers/pages/PluginCreatePage/redux';
 
 import RequestListPage from 'containers/pages/RequestListPage/redux';
 
+import StatusPage from 'containers/pages/StatusPage/redux';
+
 import Aside from 'containers/blocks/Aside/redux';
 
 
@@ -31,6 +33,7 @@ const pages = combineReducers({
   PluginEditPage,
   PluginCreatePage,
   RequestListPage,
+  StatusPage,
 });
 
 const blocks = combineReducers({
