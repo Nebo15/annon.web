@@ -22,6 +22,7 @@ import PluginAuthenticationForm from 'containers/forms/PluginAuthenticationForm'
 import PluginIdempotencyForm from 'containers/forms/PluginIdempotencyForm';
 import PluginUserAgentRestrictionForm from 'containers/forms/PluginUserAgentRestrictionForm';
 import PluginCORSForm from 'containers/forms/PluginCORSForm';
+import PluginRateLimitForm from 'containers/forms/PluginRateLimitForm';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
@@ -38,6 +39,7 @@ const pluginsComponentMap = {
   auth: PluginAuthenticationForm,
   idempotency: PluginIdempotencyForm,
   cors: PluginCORSForm,
+  rate_limit: PluginRateLimitForm,
 };
 
 const availablePlugins = Object.keys(pluginsComponentMap);
@@ -175,6 +177,7 @@ export default class PluginForm extends React.Component {
       { name: 'ua_restriction', title: 'User Agent Restriction' },
       { name: 'auth', title: 'Authentication' },
       { name: 'cors', title: 'CORS' },
+      // { name: 'rate_limit', title: 'Rate Limit' },
     ].filter(i => availablePlugins.indexOf(i.name) > -1)
     .map(item => ({
       ...item,
