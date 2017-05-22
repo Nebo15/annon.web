@@ -20,12 +20,14 @@ export const fetchPlugins = (apiId, options) => invoke({
 });
 
 export const bindPlugin = (apiId, body, options) => invoke({
-  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins`, options),
-  method: 'POST',
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${apiId}/plugins/${body.name}`, options),
+  method: 'PUT',
   headers: {
     'content-type': 'application/json',
   },
-  body,
+  body: {
+    plugin: body,
+  },
   types: ['plugins/BIND_REQUEST', {
     type: 'plugins/BIND_SUCCESS',
     payload: (action, state, res) => res.json().then(
@@ -40,7 +42,9 @@ export const updatePlugin = (apiId, name, body, options) => invoke({
   headers: {
     'content-type': 'application/json',
   },
-  body,
+  body: {
+    plugin: body,
+  },
   types: ['plugins/UPDATE_REQUEST', {
     type: 'plugins/UPDATE_SUCCESS',
     payload: (action, state, res) => res.json().then(
