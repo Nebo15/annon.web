@@ -5,6 +5,24 @@
 
 .row {
   margin-bottom: 30px;
+
+  &--small {
+    max-width: 280px;
+  }
+
+  &--name {
+    max-width: 600px;
+    margin-left: -20px;
+    margin-top: -10px;
+  }
+}
+
+.row__field {
+  display: inline-block;
+  max-width: 280px;
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 .columns {

@@ -14,17 +14,30 @@ import { PUBLIC_ENDPOINT, TRACER_URL } from 'config';
 
 import styles from './styles.scss';
 
-const capitalize = str => `${str[0].toUpperCase()}${str.slice(1)}`;
+const formateResponse = (string) => {
+  try {
+    return JSON.stringify(JSON.parse(string), null, 2);
+  } catch (e) {
+    return string.length > 255 ? `${string.substring(0, 255)}...` : string;
+  }
+};
+const formatIfJson = (obj, ...args) => {
+  try {
+    return JSON.stringify(obj, ...args);
+  } catch (e) {
+    return obj;
+  }
+};
 
-const headersToArray = headers => headers.map(i => ({
-  type: capitalize(Object.keys(i)[0]),
-  value: Object.values(i)[0],
+const headersToArray = headers => Object.entries(headers).map(([type, value]) => ({
+  type,
+  value,
 }));
 
 const responseToHttp = response =>
   `HTTP/1.1 ${response.status_code} ${HttpStatusCode.getStatusText(response.status_code)}\n` +
   `${headersToArray(response.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${JSON.stringify(JSON.parse(response.body), null, 2)}\n`;
+  `${formateResponse(response.body)}\n`;
 
 const requestToUrl = request => Url.format({
   pathname: request.uri,
@@ -34,12 +47,12 @@ const requestToUrl = request => Url.format({
 const requestToHttp = request =>
   `${request.method} ${requestToUrl(request)} HTTP/1.1\n` +
   `${headersToArray(request.headers).map(({ type, value }) => `${type}: ${value}`).join('\n')}\n\n` +
-  `${JSON.stringify(request.body, null, 2)}\n`;
+  `${formateResponse(request.body)}\n`;
 
 const requestToCurl = request =>
   `curl -X ${request.method} ${PUBLIC_ENDPOINT}${requestToUrl(request)} \\\n` +
   `     ${headersToArray(request.headers).map(({ type, value }) => `-H '${type}: ${value}'`).join(' \\\n     ')} \\\n` +
-  `     -d '${JSON.stringify(request.body)}'`;
+  `     -d '${formatIfJson(request.body, null, 2)}'`;
 
 @withStyles(highlight)
 @withStyles(styles)
@@ -102,9 +115,7 @@ export default class RequestDetails extends React.Component {
           <div className={styles.column__body}>
             <p><b>Gateway</b>: {latencies.gateway}μs</p>
             <p><b>Upstream</b>: {latencies.upstream ? `${latencies.upstream}μs` : '–'}</p>
-            <p><b>Client request:</b>: {
-              {latencies.client_request}
-            }μs</p>
+            <p><b>Client request:</b>: {latencies.client_request}μs</p>
           </div>
         </div>
         <div className={classnames(styles.column)}>

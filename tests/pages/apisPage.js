@@ -23,8 +23,8 @@ module.exports = {
     },
     editApi(apiName) {
       return this
-        .waitForElementPresent(`#edit-api-button-${apiName}`)
-        .click(`#edit-api-button-${apiName}`);
+        .waitForElementPresent(`[data-edit-api-button="${apiName}"]`)
+        .click(`[data-edit-api-button="${apiName}"]`);
     },
     assertEmptyList(apiName) {
       return this

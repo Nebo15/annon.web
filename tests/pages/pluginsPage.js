@@ -7,22 +7,22 @@ module.exports = {
       selector: '#add-plugin-dropdown',
     },
     selectPluginIdempotency: {
-      selector: '#add-plugin-dropdown li:nth-child(5)',
+      selector: '#add-plugin-dropdown li[data-select-name="idempotency"]',
     },
     selectPluginACL: {
-      selector: '#add-plugin-dropdown li:nth-child(3)',
+      selector: '#add-plugin-dropdown li[data-select-name="acl"]',
     },
     selectPluginProxy: {
-      selector: '#add-plugin-dropdown li:nth-child(1)',
+      selector: '#add-plugin-dropdown li[data-select-name="proxy"]',
     },
     selectPluginJWT: {
-      selector: '#add-plugin-dropdown li:nth-child(2)',
+      selector: '#add-plugin-dropdown li[data-select-name="jwt"]',
     },
     selectPluginIPrestriction: {
-      selector: '#add-plugin-dropdown li:nth-child(6)',
+      selector: '#add-plugin-dropdown li[data-select-name="ip_restriction"]',
     },
     selectPluginValidation: {
-      selector: '#add-plugin-dropdown li:nth-child(4)',
+      selector: '#add-plugin-dropdown li[data-select-name="validator"]',
     },
     confirmLeaveButton: {
       selector: '#confirm-leave button[name="popup-confirm-ok"]',

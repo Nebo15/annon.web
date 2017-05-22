@@ -6,16 +6,17 @@
   "env": {
     "MANAGEMENT_ENDPOINT": {
       "description": "Annon API Gateway management API host and port",
-      "required": true,
+      "required": false,
       "value": ""
     },
     "PUBLIC_ENDPOINT": {
       "description": "Annon API Gateway public API host and port",
-      "required": true,
+      "required": false,
       "value": ""
     },
     "TRACER_URL": {
       "description": "URL to external logs manager. You can use {request_id} variable in URL. eg. https://example.com/logs/{request_id}.",
+      "required": false,
       "value": ""
     }
   },

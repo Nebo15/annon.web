@@ -7,15 +7,15 @@ import { fetchPlugins, updatePlugin } from 'redux/plugins';
 
 import { mapServerErrorsToClient } from 'services/validate';
 
-export const onSubmitEdit = (apiId, { name, request }) => dispatch =>
-  dispatch(updateApi(apiId, { name, request }))
+export const onSubmitEdit = (apiId, values) => dispatch =>
+  dispatch(updateApi(apiId, values))
   .then((action) => {
     if (action.error) {
       const errors = mapServerErrorsToClient(action.payload.response.error);
       throw new SubmissionError(errors);
     }
 
-    return dispatch(push('/apis'));
+    return action;
   });
 
 export const onDelete = apiId => dispatch => dispatch(deleteApi(apiId))

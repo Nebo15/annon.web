@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
@@ -8,6 +9,7 @@ import uniq from 'lodash/uniq';
 import FieldInput from 'components/reduxForm/FieldInput';
 import { CheckboxGroup } from 'components/reduxForm/FieldCheckboxGroup';
 import FiledSelect from 'components/reduxForm/FieldSelect';
+import FieldCheckbox from 'components/reduxForm/FieldCheckbox';
 
 import Button from 'components/Button';
 import Line from 'components/Line';
@@ -31,6 +33,9 @@ import styles from './styles.scss';
     name: {
       required: true,
     },
+    'request.methods': {
+      required: true,
+    },
     'request.host': {
       required: true,
     },
@@ -43,34 +48,81 @@ import styles from './styles.scss';
   values: getFormValues('api-form')(state),
 }))
 export default class ApiForm extends React.Component {
-  state = {
-    isConfirmed: false,
-    showConfirm: false,
-    location: null,
-  };
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      saved: props.initialValues,
+      isConfirmed: false,
+      showConfirm: false,
+      location: null,
+    };
+  }
+  onSubmit() {
+    return this.props.onSubmit(this.props.values).then((action) => {
+      if (action.error) return action;
+      this.setState({
+        saved: this.props.values,
+      });
+      return action;
+    });
+  }
 
   get isChanged() {
-    const { values = {}, initialValues = {} } = this.props;
-    return JSON.stringify(values) !== JSON.stringify(initialValues);
+    const { values = {} } = this.props;
+    return JSON.stringify(values) !== JSON.stringify(this.state.saved);
   }
 
   render() {
-    const { handleSubmit, onSubmit, onDelete, isEdit, children, submitting } = this.props;
+    const { handleSubmit, onDelete, isEdit, children, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Line width="280" />
 
-        <div style={{ maxWidth: '280px' }} className={styles.row}>
-          <Field name="name" labelText="Name" component={FieldInput} />
+        <div className={classnames(styles.row, styles['row--name'])}>
+          <div className={styles.row__field}><Field name="name" labelText="Name *" component={FieldInput} /></div>
+          <div className={styles.row__field}><Field name="description" labelText="Description" component={FieldInput} /></div>
         </div>
+
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="docs_url"
+            labelText="Documentation URL"
+            placeholder="eg. https://docs.annon.apiary.io"
+            component={FieldInput}
+          />
+        </div>
+        <Line width="280" />
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="health"
+            labelText="API Health Status"
+            component={FiledSelect}
+            placeholder="Select health status"
+            options={[
+              { name: 'operational', title: 'Operational' },
+              { name: 'degradated_perfomance', title: 'Degradated perfomance' },
+              { name: 'partial_outage', title: 'Partial outage' },
+              { name: 'major_outage', title: 'Major outage' },
+            ]}
+          />
+        </div>
+        <div className={classnames(styles.row, styles['row--small'])}>
+          <Field
+            name="disclose_status"
+            labelText="Disclose API status"
+            component={FieldCheckbox}
+          />
+        </div>
+        <Line width="280" />
 
         <H3>Request</H3>
 
         <Line width="280" />
 
         <div style={{ marginBottom: 10 }}>
-          Methods
+          Methods *
         </div>
 
         <FormSection name="request">
@@ -91,7 +143,7 @@ export default class ApiForm extends React.Component {
           <div className={styles.columns}>
             <div>
               <Field
-                labelText="Scheme"
+                labelText="Scheme *"
                 name="scheme"
                 component={FiledSelect}
                 options={[
@@ -101,16 +153,16 @@ export default class ApiForm extends React.Component {
               />
             </div>
             <div>
-              <Field labelText="Host" name="host" component={FieldInput} />
+              <Field labelText="Host *" name="host" placeholder="% - all hosts" component={FieldInput} />
             </div>
           </div>
 
           <div className={styles.columns}>
             <div>
-              <Field labelText="Port" name="port" component={FieldInput} />
+              <Field labelText="Port *" name="port" component={FieldInput} />
             </div>
             <div>
-              <Field labelText="Path" name="path" component={FieldInput} />
+              <Field labelText="Path *" name="path" component={FieldInput} />
             </div>
           </div>
         </FormSection>
@@ -121,13 +173,13 @@ export default class ApiForm extends React.Component {
           </div>
         }
 
-        <Button type="submit" disabled={!this.isChanged}>
-          {isEdit ? 'Save API' : 'Create API'}
-        </Button>
-
-        <div style={{ float: 'right' }}>
-          {isEdit && <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>}
-        </div>
+        {isEdit && <Button type="submit" disabled={!this.isChanged}>
+          {submitting ? 'Saving...' : (this.isChanged ? 'Save API' : 'Saved')}
+        </Button>}
+        {!isEdit && <Button type="submit" disabled={!this.isChanged}>Create API</Button>}
+        {isEdit && <div style={{ float: 'right' }}>
+          <Button id="delete-api-button" type="button" onClick={onDelete} color="red">Delete API</Button>
+        </div>}
 
         <ConfirmFormChanges submitting={submitting} isChanged={this.isChanged} />
       </form>

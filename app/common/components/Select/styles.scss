@@ -3,6 +3,7 @@ $placeholder-color: #999;
 $hovered-bg: #f5f5f5;
 $active-color: #11d8fb;
 $disabled-bg: #f5f5f5;
+$errored: #ff1f44;
 
 .select {
   position: relative;
@@ -21,12 +22,15 @@ $disabled-bg: #f5f5f5;
     pointer-events: none;
   }
 
+  &.error .control {
+    box-shadow: 0 0 0 1px $errored;
+  }
+
   .control {
     position: relative;
     width: 100%;
     min-width: 120px;
     min-height: 35px;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     padding: 10px 30px 10px 10px;
@@ -156,7 +160,7 @@ $disabled-bg: #f5f5f5;
       top: auto;
       left: 0;
       right: 0;
-      z-index: 2;
+      z-index: 3;
     }
 
     .arrow {
@@ -179,4 +183,16 @@ $disabled-bg: #f5f5f5;
   z-index: 2;
   transition: transform 0.2s ease;
   will-change: transform;
+}
+
+.error-label {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding: 8px 15px 7px 13px;
+  color: #fff;
+  background-color: $errored;
+  font-size: 10px;
+  line-height: 1.4;
+  z-index: 0;
 }

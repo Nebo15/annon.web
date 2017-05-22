@@ -4,6 +4,7 @@ import { normalize, arrayOf } from 'normalizr';
 import { invoke } from 'helpers/api';
 import { createUrl } from 'helpers/url';
 import { apiSchema } from 'schema';
+import uuidV4 from 'uuid/v4';
 
 export const fetchApis = options => invoke({
   endpoint: createUrl(`${MANAGEMENT_API_URL}/apis`, options),
@@ -34,8 +35,8 @@ export const fetchApi = (apiId, options) => invoke({
 });
 
 export const createApi = (body, options) => invoke({
-  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis`, options),
-  method: 'POST',
+  endpoint: createUrl(`${MANAGEMENT_API_URL}/apis/${uuidV4()}`, options),
+  method: 'PUT',
   headers: {
     'content-type': 'application/json',
   },

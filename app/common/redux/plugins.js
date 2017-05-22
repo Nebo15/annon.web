@@ -55,12 +55,11 @@ export const unbindPlugin = (apiId, name, options) => invoke({
   headers: {
     'content-type': 'application/json',
   },
-  types: ['plugins/DELETE_REQUEST', {
-    type: 'plugins/DELETE_SUCCESS',
-    payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, pluginsSchema)
-    ),
-  }, 'plugins/DELETE_FAILURE'],
+  types: [
+    'plugins/DELETE_REQUEST',
+    'plugins/DELETE_SUCCESS',
+    'plugins/DELETE_FAILURE',
+  ],
 });
 
 export default handleAction(
