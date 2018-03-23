@@ -28,7 +28,7 @@ import styles from './styles.scss';
     request: {
       scheme: 'http',
     },
-    matching_priority: '1'
+    matching_priority: '1',
   },
   validate: reduxFormValidate({
     name: {
@@ -89,7 +89,7 @@ export default class ApiForm extends React.Component {
         <Line width="280" />
 
         <div className={classnames(styles.row, styles['row--name'])}>
-          <div className={styles.row__field}><Field name="docs_url" labelText="Documentation URL" placeholder="eg. https://docs.annon.apiary.io" component={FieldInput}/></div>
+          <div className={styles.row__field}><Field name="docs_url" labelText="Documentation URL" placeholder="eg. https://docs.annon.apiary.io" component={FieldInput} /></div>
           <div className={styles.row__field}><Field name="description" labelText="Description" component={FieldInput} /></div>
         </div>
 
